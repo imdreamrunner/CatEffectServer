@@ -18,4 +18,14 @@ public class LoginSession extends Model {
     private Date createTime;
     private Date refreshTime;
     private String authCode;
+
+    public LoginSession(int theMid) {
+        mid = theMid;
+        createTime = refreshTime = new Date();
+        authCode = (new AuthCode()).toString();
+    }
+
+    public String getAuthCode() {
+        return authCode;
+    }
 }

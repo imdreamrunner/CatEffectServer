@@ -19,19 +19,27 @@ public class Manager extends Model {
     private int type;
     private int sid;
 
+    public static Finder<Long, Manager> find = new Finder<Long, Manager>(
+            Long.class, Manager.class
+    );
+
+    public int getMid() {
+        return mid;
+    }
+
     public void setPassword(String pw) {
         password = pw;
     }
 
     public boolean verifyPassword(String pw) {
-        return password == pw;
+        return password.equals(pw);
     }
 
     public static boolean checkUsername(String newUsername) {
         if (newUsername == null) {
             return false;
         }
-        int numOfUsers = Manager.find.where("username = '" + newUsername + "'").findRowCount();
+        int numOfUsers = find.where(String.format("username = '%s'", newUsername)).findRowCount();
         return numOfUsers == 0;
     }
 
@@ -54,7 +62,20 @@ public class Manager extends Model {
         return newManager;
     }
 
-    public static Finder<Long, Manager> find = new Finder<Long, Manager>(
-            Long.class, Manager.class
-    );
+    public static LoginSession login(String username, String password) throws CatException {
+        if (username == null) {
+            throw new CatException(1, "User is not registered.");
+        }
+        Manager manager = find.where(String.format("username = '%s'", username)).findUnique();
+        if (manager == null) {
+            throw new CatException(1, "User is not registered.");
+        }
+        if (!manager.verifyPassword(password)) {
+            throw new CatException(2, "Password is not correct.");
+        }
+        LoginSession loginSession = new LoginSession(manager.getMid());
+        loginSession.save();
+        return loginSession;
+    }
+
 }
