@@ -1,14 +1,26 @@
 package controllers;
 
-import models.*;
+import java.lang.annotation.*;
+
 import play.data.*;
-import utils.*;
 import play.mvc.*;
 
-import java.util.*;
+import models.*;
+import utils.*;
 
+public class OFS extends Controller {
+    @With(Authentication.class)
+    @Target({ElementType.TYPE, ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface requireAuthentication {
+        boolean value() default true;
+    }
 
-public class ManageManager extends Controller {
+    @requireAuthentication
+    public static Result test() {
+        return ok("test");
+    }
+
     public static Result add() {
         Result result;
         DynamicForm data = Form.form().bindFromRequest();

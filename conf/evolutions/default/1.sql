@@ -3,21 +3,13 @@
 
 # --- !Ups
 
-create table login_session (
-  lsid                      integer auto_increment not null,
-  mid                       integer,
-  create_time               datetime,
-  refresh_time              datetime,
-  auth_code                 varchar(255),
-  constraint pk_login_session primary key (lsid))
-;
-
 create table manager (
   mid                       integer auto_increment not null,
-  username                  varchar(255),
+  username                  varchar(255) not null,
   password                  varchar(255),
   type                      integer,
   sid                       integer,
+  constraint uq_manager_username unique (username),
   constraint pk_manager primary key (mid))
 ;
 
@@ -27,8 +19,6 @@ create table manager (
 # --- !Downs
 
 SET FOREIGN_KEY_CHECKS=0;
-
-drop table login_session;
 
 drop table manager;
 

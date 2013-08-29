@@ -13,17 +13,23 @@ import utils.*;
 @Entity
 public class Manager extends Model {
     @Id
-    private int mid;
-    private String username;
-    private String password;
-    private int type;
-    private int sid;
+    private Integer mid;
 
-    public static Finder<Long, Manager> find = new Finder<Long, Manager>(
-            Long.class, Manager.class
+    @Basic(optional = false)
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+    private Integer type;
+
+    private Integer sid;
+
+    public static Finder<Integer, Manager> find = new Finder<Integer, Manager>(
+        Integer.class, Manager.class
     );
 
-    public int getMid() {
+    public Integer getMid() {
         return mid;
     }
 
@@ -39,11 +45,11 @@ public class Manager extends Model {
         if (newUsername == null) {
             return false;
         }
-        int numOfUsers = find.where(String.format("username = '%s'", newUsername)).findRowCount();
+        Integer numOfUsers = find.where(String.format("username = '%s'", newUsername)).findRowCount();
         return numOfUsers == 0;
     }
 
-    public static Manager add(String username, String password, int type, int sid) throws CatException {
+    public static Manager add(String username, String password, Integer type, Integer sid) throws CatException {
         if (username == null || username.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");
         }
@@ -62,7 +68,7 @@ public class Manager extends Model {
         return newManager;
     }
 
-    public static LoginSession login(String username, String password) throws CatException {
+    public static Manager verifyManager(String username, String password) throws CatException {
         if (username == null) {
             throw new CatException(1, "User is not registered.");
         }
@@ -73,9 +79,7 @@ public class Manager extends Model {
         if (!manager.verifyPassword(password)) {
             throw new CatException(2, "Password is not correct.");
         }
-        LoginSession loginSession = new LoginSession(manager.getMid());
-        loginSession.save();
-        return loginSession;
+        return manager;
     }
 
 }

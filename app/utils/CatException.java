@@ -1,20 +1,20 @@
 package utils;
 
 public class CatException extends Exception {
-    private int code;
+    private Integer code;
     private String message;
 
-    public CatException(int errorCode) {
+    public CatException(Integer errorCode) {
         code = errorCode;
         message = "";
     }
 
-    public CatException(int errorCode, String errorMessage) {
+    public CatException(Integer errorCode, String errorMessage) {
         code = errorCode;
         message = errorMessage;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
