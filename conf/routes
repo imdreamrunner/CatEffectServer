@@ -8,13 +8,15 @@ GET         /                               controllers.Application.index()
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 
-# AuthAction Module
+####################
+# SystemController #
+####################
+# Authentication
+POST        /system/auth                       controllers.SystemController.auth()
 
-# OFS APIs
-POST        /ofs/managers/add               controllers.OFS.add()
-POST        /ofs/managers/:id/edit          controllers.OFS.edit(id: Int)
-POST        /ofs/managers/:id/delete        controllers.OFS.delete(id: Int)
-POST        /ofs/managets/:id               controllers.OFS.show(id: Int)
-POST        /ofs/managers/list              controllers.OFS.list()
-
-POST        /ofs/test                       controllers.OFS.test()
+# Manage Managers
+POST        /system/managers/add               controllers.SystemController.addManager()
+POST        /system/managers/:id/edit          controllers.SystemController.editManager(id: Int)
+POST        /system/managers/:id/delete        controllers.SystemController.deleteManager(id: Int)
+POST        /system/managets/:id               controllers.SystemController.showManager(id: Int)
+POST        /system/managers/list              controllers.SystemController.listManager()

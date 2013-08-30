@@ -2,13 +2,15 @@ package controllers;
 
 import java.lang.annotation.*;
 
+import org.codehaus.jackson.node.ObjectNode;
 import play.data.*;
+import play.libs.*;
 import play.mvc.*;
 
 import models.*;
 import utils.*;
 
-public class OFS extends Controller {
+public class SystemController extends Controller {
     @With(Authentication.class)
     @Target({ElementType.TYPE, ElementType.METHOD})
     @Retention(RetentionPolicy.RUNTIME)
@@ -17,12 +19,15 @@ public class OFS extends Controller {
     }
 
     @requireAuthentication
-    public static Result test() {
-        return ok("test");
+    public static Result auth() {
+        ObjectNode result = Json.newObject();
+        result.put("error", 0);
+        return ok(result);
     }
 
-    public static Result add() {
-        Result result;
+    @requireAuthentication
+    public static Result addManager() {
+        ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
         String username = data.get("username");
         String password = data.get("password");
@@ -42,26 +47,27 @@ public class OFS extends Controller {
         }
         try {
             Manager newManager = Manager.add(username, password, type, sid);
-            result = ok("ok");
+            result.put("error", 0);
         } catch (CatException e) {
-            result = ok(e.getMessage());
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
         }
-        return result;
+        return ok(result);
     }
 
-    public static Result edit(int mid) {
+    public static Result editManager(int mid) {
         return ok("something");
     }
 
-    public static Result delete(int mid) {
+    public static Result deleteManager(int mid) {
         return ok("something");
     }
 
-    public static Result show(int mid) {
+    public static Result showManager(int mid) {
         return ok("something");
     }
 
-    public static Result list() {
+    public static Result listManager() {
         return ok("something");
     }
 }

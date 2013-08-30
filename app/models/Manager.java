@@ -70,14 +70,14 @@ public class Manager extends Model {
 
     public static Manager verifyManager(String username, String password) throws CatException {
         if (username == null) {
-            throw new CatException(1, "User is not registered.");
+            throw new CatException(1001, "Username cannot be empty.");
         }
         Manager manager = find.where(String.format("username = '%s'", username)).findUnique();
         if (manager == null) {
-            throw new CatException(1, "User is not registered.");
+            throw new CatException(1002, "User is not registered.");
         }
         if (!manager.verifyPassword(password)) {
-            throw new CatException(2, "Password is not correct.");
+            throw new CatException(1003, "Password is not correct.");
         }
         return manager;
     }
