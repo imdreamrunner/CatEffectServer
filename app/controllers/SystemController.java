@@ -10,17 +10,17 @@ import play.mvc.*;
 import models.*;
 import utils.*;
 
+@Authentication
 public class SystemController extends Controller {
 
-    @Authentication
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
+        result.put("manager", ctx().args.get("manager").toString());
         result.put("message", "Success.");
         return ok(result);
     }
 
-    @Authentication
     public static Result addManager() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
