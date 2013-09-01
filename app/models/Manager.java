@@ -1,6 +1,5 @@
 package models;
 
-
 import java.util.*;
 import javax.persistence.*;
 
@@ -13,7 +12,7 @@ import utils.*;
 @Entity
 public class Manager extends Model {
     @Id
-    private Integer mid;
+    private Integer managerId;
 
     @Basic(optional = false)
     @Column(unique = true)
@@ -21,20 +20,28 @@ public class Manager extends Model {
 
     private String password;
 
-    private Integer type;
+    private Integer type; // 0 for stall staffs, 1 for OFS.
 
-    private Integer sid;
+    private Integer stallId;
 
     public static Finder<Integer, Manager> find = new Finder<Integer, Manager>(
         Integer.class, Manager.class
     );
 
-    public Integer getMid() {
-        return mid;
+    public Integer getId() {
+        return managerId;
+    }
+
+    public void setUsername(String un) {
+        username  = un;
     }
 
     public void setPassword(String pw) {
         password = pw;
+    }
+
+    public void setType(Integer t) {
+        type = t;
     }
 
     public boolean verifyPassword(String pw) {
@@ -49,7 +56,7 @@ public class Manager extends Model {
         return numOfUsers == 0;
     }
 
-    public static Manager add(String username, String password, Integer type, Integer sid) throws CatException {
+    public static Manager add(String username, String password, Integer type, Integer stallId) throws CatException {
         if (username == null || username.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");
         }
@@ -62,8 +69,16 @@ public class Manager extends Model {
         Manager newManager = new Manager();
         newManager.username = username;
         newManager.setPassword(password);
-        newManager.type = type;
-        newManager.sid = sid;
+        if (stallId != null) {
+            newManager.stallId = stallId;
+        } else {
+            newManager.stallId = 0;
+        }
+        if (type == null) {
+            newManager.type = 0;
+        } else {
+            newManager.type = type;
+        }
         newManager.save();
         return newManager;
     }

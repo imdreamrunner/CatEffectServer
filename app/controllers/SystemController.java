@@ -31,22 +31,15 @@ public class SystemController extends Controller {
         DynamicForm data = Form.form().bindFromRequest();
         String username = data.get("username");
         String password = data.get("password");
-        int type, sid;
+        Integer type = null, stallId = null;
         if (data.get("type") != null) {
             type = Integer.parseInt(data.get("type"));
-        } else {
-            type = 0;
         }
-        if (data.get("sid") != null) {
-            sid = Integer.parseInt(data.get("sid"));
-            if (sid != 0) {
-                type = 1;
-            }
-        } else {
-            sid = 0;
+        if (data.get("stallId") != null) {
+            stallId = Integer.parseInt(data.get("stallId"));
         }
         try {
-            Manager newManager = Manager.add(username, password, type, sid);
+            Manager newManager = Manager.add(username, password, type, stallId);
             result.put("error", 0);
         } catch (CatException e) {
             result.put("error", e.getCode());

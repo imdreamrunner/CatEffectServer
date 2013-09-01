@@ -1,0 +1,8 @@
+# Managers
+
+managers:
+
+    - !!models.Manager
+        username:   admin
+        password:   admin
+        type:       1
