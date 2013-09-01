@@ -11,21 +11,16 @@ import models.*;
 import utils.*;
 
 public class SystemController extends Controller {
-    @With(Authentication.class)
-    @Target({ElementType.TYPE, ElementType.METHOD})
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface requireAuthentication {
-        boolean value() default true;
-    }
 
-    @requireAuthentication
+    @Authentication
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
+        result.put("message", "Success.");
         return ok(result);
     }
 
-    @requireAuthentication
+    @Authentication
     public static Result addManager() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();

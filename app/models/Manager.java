@@ -40,6 +40,10 @@ public class Manager extends Model {
         password = pw;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
     public void setType(Integer t) {
         type = t;
     }
