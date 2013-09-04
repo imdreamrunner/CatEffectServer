@@ -20,4 +20,32 @@ public class Account extends Model {
 
     private Date lastUsedTime;
 
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer t) {
+        type = t;
+    }
+
+    public Integer getRelevantId() {
+        return relevantId;
+    }
+
+    public void setRelevantId(Integer rid) {
+        relevantId = rid;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer b) {
+        balance = b;
+    }
+
 }

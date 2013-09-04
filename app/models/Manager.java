@@ -28,7 +28,7 @@ public class Manager extends Model {
         Integer.class, Manager.class
     );
 
-    public Integer getId() {
+    public Integer getManagerId() {
         return managerId;
     }
 

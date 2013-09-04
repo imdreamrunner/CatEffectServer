@@ -11,4 +11,24 @@ public class Canteen extends Model {
     private String name;
 
     private Integer sort = 0;
+
+    public Integer getCanteenId() {
+        return canteenId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer s) {
+        sort = s;
+    }
 }
