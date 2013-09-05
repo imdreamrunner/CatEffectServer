@@ -25,6 +25,8 @@ public class Order extends Model {
 
     private Integer transactionId;
 
+    private Integer status;
+
     private Date createTime;
 
     private Date serveTime;

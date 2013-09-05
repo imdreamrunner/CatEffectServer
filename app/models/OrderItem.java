@@ -16,9 +16,13 @@ public class OrderItem extends Model {
 
     private Integer orderId;
 
+    private Integer dishId;
+
     private Integer listPrice;
 
     private Integer price;
 
     private Integer quantity;
+
+    private String note;
 }

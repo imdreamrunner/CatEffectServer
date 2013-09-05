@@ -32,4 +32,6 @@ public class Dish extends Model {
     private Integer price;
 
     private Boolean allowDiscount = true; // Whether join other stall's discounts.
+
+    private String options;
 }
