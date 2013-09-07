@@ -32,6 +32,10 @@ public class Manager extends Model {
         return managerId;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setUsername(String un) {
         username  = un;
     }
@@ -46,6 +50,14 @@ public class Manager extends Model {
 
     public void setType(Integer t) {
         type = t;
+    }
+
+    public Integer getStallId() {
+        return  stallId;
+    }
+
+    public void setStallId(Integer sid) {
+        stallId = sid;
     }
 
     public boolean verifyPassword(String pw) {
@@ -100,5 +112,4 @@ public class Manager extends Model {
         }
         return manager;
     }
-
 }

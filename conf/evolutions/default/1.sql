@@ -40,6 +40,7 @@ create table dish (
   list_price                integer,
   price                     integer,
   allow_discount            tinyint(1) default 0,
+  options                   varchar(255),
   constraint pk_dish primary key (dish_id))
 ;
 
@@ -60,6 +61,7 @@ create table order_detail (
   discount                  integer,
   subtotal                  integer,
   transaction_id            integer,
+  status                    integer,
   create_time               datetime,
   serve_time                datetime,
   constraint pk_order_detail primary key (order_id))
@@ -68,9 +70,11 @@ create table order_detail (
 create table order_item (
   order_item_id             integer auto_increment not null,
   order_id                  integer,
+  dish_id                   integer,
   list_price                integer,
   price                     integer,
   quantity                  integer,
+  note                      varchar(255),
   constraint pk_order_item primary key (order_item_id))
 ;
 

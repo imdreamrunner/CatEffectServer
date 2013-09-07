@@ -14,7 +14,7 @@ public class SystemController extends Controller {
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
-        result.put("manager", ctx().args.get("manager").toString());
+        result.put("manager", Json.toJson(ctx().args.get("manager")));
         result.put("message", "Success.");
         return ok(result);
     }
