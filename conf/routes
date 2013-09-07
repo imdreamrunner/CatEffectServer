@@ -16,7 +16,17 @@ POST        /system/auth                       controllers.SystemController.auth
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()
-POST        /system/managers/:id/edit          controllers.SystemController.editManager(id: Int)
-POST        /system/managers/:id/delete        controllers.SystemController.deleteManager(id: Int)
-POST        /system/managets/:id               controllers.SystemController.showManager(id: Int)
+POST        /system/managers/edit/:id          controllers.SystemController.editManager(id: Int)
+POST        /system/managers/delete/:id        controllers.SystemController.deleteManager(id: Int)
+POST        /system/managets/getOne/:id        controllers.SystemController.getOneManager(id: Int)
+POST        /system/managets/getAll            controllers.SystemController.getAllManagers()
 POST        /system/managers/list              controllers.SystemController.listManager()
+
+###################
+# StallController #
+###################
+
+
+###################
+# OrderController #
+###################

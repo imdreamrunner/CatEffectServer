@@ -49,7 +49,11 @@ public class SystemController extends Controller {
         return ok("something");
     }
 
-    public static Result showManager(int mid) {
+    public static Result getOneManager(int mid) {
+        return ok("something");
+    }
+
+    public static Result getAllManagers() {
         return ok("something");
     }
 
