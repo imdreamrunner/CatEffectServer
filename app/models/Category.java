@@ -22,7 +22,11 @@ public class Category extends Model {
 
     private Integer sort = 0;
 
-    public Category(String newName, Integer newStallId) {
+    public static Finder<Integer, Stall> find = new Finder<Integer, Stall>(
+            Integer.class, Stall.class
+    );
+
+    public Category(String newName, Integer newStallId) throws CatException {
     	if (newStallId == null) {
     		throw new CatException(5001, "must input stallId");
     	}
