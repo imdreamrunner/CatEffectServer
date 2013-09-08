@@ -77,15 +77,3 @@ public class StallContoller extends Controller {
 	getAllOrder*/
 
 }
-
-
-
-
-
-
-
-
-
-
-
-}

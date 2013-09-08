@@ -22,6 +22,10 @@ public class Stall extends Model {
 
     private Integer discount = 0;
 
+    public static Finder<Integer, Stall> find = new Finder<Integer, Stall>(
+            Integer.class, Stall.class
+    );
+
     public Integer getStallId() {
         return stallId;
     }
@@ -81,20 +85,36 @@ public class Stall extends Model {
         if (newStallName == null) {
             return false;
         }
-        Integer numOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
-        return (numOfStalls == 0);
+        Integer numberOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
+        return (numberOfStalls == 0);
+    }
+
+<<<<<<< HEAD
+    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) throws CatException {
+
+=======
+    public static boolean checkCanteenId(Integer newCanteenId) {
+    	if (newCanteenId == null) {
+    		return false;
+    	}
+    	//要查的是canteen的table而不是stall的table？
+    	Integer numberOfCanteens = find.where(String.format("canteenIdId = '%d'", newCanteenId)).findRowCount();
+    	return (numberOfCanteens > 0);
+>>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
     }
 
     public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) {
-
+    	if (!checkStallName(newStallName )) {
+            throw new CatException(2, "Stall name has been taken.");
+        }
+        if (!checkCanteenId(newCanteenId)) {
+        	throw new CatException(4,"Canteen does not exist.");
+        }
+        if (newStallName != null)name = newStallName;
+        if (newDescription != null) description = newDescription;
+        if (newImage != null ) image = newImage
+        if (newCanteenId != null) canteenId = newCanteenId;
+        save();
     }
-}
 
-
-
-
-
-
-
-
-
+ }
