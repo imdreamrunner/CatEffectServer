@@ -90,9 +90,12 @@ public class Stall extends Model {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) throws CatException {
 
 =======
+=======
+>>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
     public static boolean checkCanteenId(Integer newCanteenId) {
     	if (newCanteenId == null) {
     		return false;
@@ -100,6 +103,9 @@ public class Stall extends Model {
     	//要查的是canteen的table而不是stall的table？
     	Integer numberOfCanteens = find.where(String.format("canteenIdId = '%d'", newCanteenId)).findRowCount();
     	return (numberOfCanteens > 0);
+<<<<<<< HEAD
+>>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
+=======
 >>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
     }
 
@@ -117,4 +123,8 @@ public class Stall extends Model {
         save();
     }
 
+<<<<<<< HEAD
  }
+=======
+ }
+>>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
