@@ -89,27 +89,20 @@ public class Stall extends Model {
         return (numberOfStalls == 0);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) throws CatException {
-
-=======
-=======
->>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
     public static boolean checkCanteenId(Integer newCanteenId) {
+        /*
     	if (newCanteenId == null) {
     		return false;
     	}
     	//要查的是canteen的table而不是stall的table？
     	Integer numberOfCanteens = find.where(String.format("canteenIdId = '%d'", newCanteenId)).findRowCount();
     	return (numberOfCanteens > 0);
-<<<<<<< HEAD
->>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
-=======
->>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
+    	*/
+
+        return true;
     }
 
-    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) {
+    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) throws CatException {
     	if (!checkStallName(newStallName )) {
             throw new CatException(2, "Stall name has been taken.");
         }
@@ -118,13 +111,8 @@ public class Stall extends Model {
         }
         if (newStallName != null)name = newStallName;
         if (newDescription != null) description = newDescription;
-        if (newImage != null ) image = newImage
+        if (newImage != null ) image = newImage;
         if (newCanteenId != null) canteenId = newCanteenId;
         save();
     }
-
-<<<<<<< HEAD
- }
-=======
- }
->>>>>>> 4b0c8012221607d6f9e6181f28120580beb1c19d
+}

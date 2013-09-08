@@ -46,6 +46,7 @@ public class StallContoller extends Controller {
     	//find the row by id
     	//form to get new information
     	//check what information has been changed
+        return ok("TODO");
     }
 
     /*pulbic static Result addCategory() {
