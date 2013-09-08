@@ -8,7 +8,9 @@ import play.mvc.*;
 import models.*;
 import utils.*;
 
-@Authentication
+import java.util.List;
+
+@Authentication(requireSystem = true)
 public class SystemController extends Controller {
 
     public static Result auth() {
@@ -42,27 +44,55 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
-    public static Result editManager(int mid) {
+    public static Result editManager(int managerId) {
         return ok("something");
     }
 
-    public static Result deleteManager(int mid) {
+    public static Result deleteManager(int managerId) {
         return ok("something");
     }
 
-    public static Result getOneManager(int mid) {
+    public static Result getOneManager(int managerId) {
         ObjectNode result = Json.newObject();
-        Manager manager = Manager.find.byId(mid);
+        Manager manager = Manager.find.byId(managerId);
         result.put("error", manager == null ? 1 : 0);
         result.put("manager", Json.toJson(manager));
         return ok(result);
     }
 
     public static Result getAllManagers() {
-        return ok("something");
+        ObjectNode result = Json.newObject();
+        List<Manager> managerList = Manager.find.all();
+        result.put("error", 0);
+        result.put("managerslist", Json.toJson(managerList));
+        return ok(result);
     }
 
-    public static Result listManager() {
-        return ok("something");
+    public static Result addStall() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        String newStallName = data.get("stallName");
+        String newDescription = data.get("description");
+        String newImage = data.get("image");
+        Integer newCanteenId = null;
+        if (data.get("canteenId") != null) {
+            newCanteenId = Integer.parseInt(data.get("canteenId"));
+        }
+        try {
+            Stall newStall = new Stall(newStallName, newDescription, newImage, newCanteenId);
+            result.put("error", 0);
+            result.put("newStall", Json.toJson(newStall));
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    public static Result editStall(Integer stallId) {
+        //find the row by id
+        //form to get new information
+        //check what information has been changed
+        return ok("TODO");
     }
 }

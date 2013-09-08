@@ -3,10 +3,12 @@
 # ~~~~
 
 # Home page
-GET         /                               controllers.Application.index()
+GET         /                                  controllers.Application.index()
 
-# Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                   controllers.Assets.at(path="/public", file)
+# Map static resources from the /public folder to the /stylesheets URL path
+GET         /assets/*file                      controllers.Assets.at(path="/public", file)
+
+GET         /system                            controllers.Application.system()
 
 ####################
 # SystemController #
@@ -19,8 +21,12 @@ POST        /system/managers/add               controllers.SystemController.addM
 POST        /system/managers/edit/:id          controllers.SystemController.editManager(id: Int)
 POST        /system/managers/delete/:id        controllers.SystemController.deleteManager(id: Int)
 POST        /system/managers/getOne/:id        controllers.SystemController.getOneManager(id: Int)
-POST        /system/managets/getAll            controllers.SystemController.getAllManagers()
-POST        /system/managers/list              controllers.SystemController.listManager()
+POST        /system/managers/getAll            controllers.SystemController.getAllManagers()
+
+# Manage Stalls
+POST        /system/stalls/add                 controllers.SystemController.addStall()
+POST        /system/stalls/edit                controllers.SystemController.editStall(id: Int)
+
 
 ###################
 # StallController #

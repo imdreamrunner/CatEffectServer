@@ -56,12 +56,12 @@ public class Manager extends Model {
         return  stallId;
     }
 
-    public void setStallId(Integer sid) {
-        stallId = sid;
+    public void setStallId(Integer newStallId) {
+        stallId = newStallId;
     }
 
-    public boolean verifyPassword(String pw) {
-        return password.equals(pw);
+    public boolean verifyPassword(String newPassword) {
+        return password.equals(newPassword);
     }
 
     public static boolean checkUsername(String newUsername) {
@@ -72,25 +72,25 @@ public class Manager extends Model {
         return numOfUsers == 0;
     }
 
-    public Manager(String un, String pw, Integer t, Integer sid) throws CatException {
-        if (un == null || un.length() < 5) {
+    public Manager(String newUsername, String newPassword, Integer newType, Integer newStallId) throws CatException {
+        if (newUsername == null || newUsername.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");
         }
-        if (!checkUsername(un)) {
+        if (!checkUsername(newUsername)) {
             throw new CatException(2, "Username has been taken.");
         }
-        if (pw == null || pw.length() < 5) {
+        if (newPassword == null || newPassword.length() < 5) {
             throw new CatException(3, "Password must contain at least 5 characters.");
         }
-        username = un;
-        setPassword(pw);
-        if (sid != null) {
-            stallId = sid;
+        username = newUsername;
+        setPassword(newPassword);
+        if (newStallId != null) {
+            stallId = newStallId;
         } else {
             stallId = 0;
         }
-        if (t != null) {
-            type = t;
+        if (newType != null) {
+            type = newType;
         } else {
             type = 0;
         }
