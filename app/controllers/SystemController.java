@@ -1,17 +1,24 @@
 package controllers;
 
+import models.Manager;
+import models.Stall;
 import org.codehaus.jackson.node.ObjectNode;
-import play.data.*;
-import play.libs.*;
-import play.mvc.*;
-
-import models.*;
-import utils.*;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+import utils.CatException;
+import views.html.system.managerslist;
 
 import java.util.List;
 
-@Authentication(requireSystem = true)
+// @Authentication(requireSystem = true)
 public class SystemController extends Controller {
+
+    public static Result managers() {
+        return ok(managerslist.render());
+    }
 
     public static Result auth() {
         ObjectNode result = Json.newObject();

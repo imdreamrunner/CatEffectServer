@@ -8,7 +8,7 @@ GET         /                                  controllers.Application.index()
 # Map static resources from the /public folder to the /stylesheets URL path
 GET         /assets/*file                      controllers.Assets.at(path="/public", file)
 
-GET         /system                            controllers.Application.system()
+GET         /system/managers                   controllers.SystemController.managers()
 
 ####################
 # SystemController #
