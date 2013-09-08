@@ -76,4 +76,25 @@ public class Stall extends Model {
         }
         discount = d;
     }
+
+    public static boolean checkStallName(String newStallName) {
+        if (newStallName == null) {
+            return false;
+        }
+        Integer numOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
+        return (numOfStalls == 0);
+    }
+
+    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) {
+
+    }
 }
+
+
+
+
+
+
+
+
+
