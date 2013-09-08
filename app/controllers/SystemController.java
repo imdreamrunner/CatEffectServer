@@ -14,7 +14,7 @@ public class SystemController extends Controller {
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
-        result.put("manager", Json.toJson(ctx().args.get("manager")));
+        result.put("currentManager", Json.toJson(ctx().args.get("manager")));
         result.put("message", "Success.");
         return ok(result);
     }
@@ -32,8 +32,9 @@ public class SystemController extends Controller {
             stallId = Integer.parseInt(data.get("stallId"));
         }
         try {
-            Manager newManager = Manager.add(username, password, type, stallId);
+            Manager newManager = new Manager(username, password, type, stallId);
             result.put("error", 0);
+            result.put("newManager", Json.toJson(newManager));
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());
@@ -50,7 +51,11 @@ public class SystemController extends Controller {
     }
 
     public static Result getOneManager(int mid) {
-        return ok("something");
+        ObjectNode result = Json.newObject();
+        Manager manager = Manager.find.byId(mid);
+        result.put("error", manager == null ? 1 : 0);
+        result.put("manager", Json.toJson(manager));
+        return ok(result);
     }
 
     public static Result getAllManagers() {

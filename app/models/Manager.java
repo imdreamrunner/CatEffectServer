@@ -72,31 +72,29 @@ public class Manager extends Model {
         return numOfUsers == 0;
     }
 
-    public static Manager add(String username, String password, Integer type, Integer stallId) throws CatException {
-        if (username == null || username.length() < 5) {
+    public Manager(String un, String pw, Integer t, Integer sid) throws CatException {
+        if (un == null || un.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");
         }
-        if (!checkUsername(username)) {
+        if (!checkUsername(un)) {
             throw new CatException(2, "Username has been taken.");
         }
-        if (password == null || password.length() < 5) {
+        if (pw == null || pw.length() < 5) {
             throw new CatException(3, "Password must contain at least 5 characters.");
         }
-        Manager newManager = new Manager();
-        newManager.username = username;
-        newManager.setPassword(password);
-        if (stallId != null) {
-            newManager.stallId = stallId;
+        username = un;
+        setPassword(pw);
+        if (sid != null) {
+            stallId = sid;
         } else {
-            newManager.stallId = 0;
+            stallId = 0;
         }
-        if (type == null) {
-            newManager.type = 0;
+        if (t != null) {
+            type = t;
         } else {
-            newManager.type = type;
+            type = 0;
         }
-        newManager.save();
-        return newManager;
+        save();
     }
 
     public static Manager verifyManager(String username, String password) throws CatException {
