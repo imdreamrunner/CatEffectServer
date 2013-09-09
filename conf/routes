@@ -8,13 +8,15 @@ GET         /                                  controllers.Application.index()
 # Map static resources from the /public folder to the /stylesheets URL path
 GET         /assets/*file                      controllers.Assets.at(path="/public", file)
 
-GET         /system/managers                   controllers.SystemController.managers()
 
 ####################
 # SystemController #
 ####################
 # Authentication
 POST        /system/auth                       controllers.SystemController.auth()
+
+# HTML
+GET         /system/managers                   controllers.SystemController.managers()
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()

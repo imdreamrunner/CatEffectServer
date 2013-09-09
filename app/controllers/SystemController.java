@@ -8,16 +8,17 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utils.Authentication;
 import utils.CatException;
-import views.html.system.managerslist;
+import views.html.system.managers;
 
 import java.util.List;
 
-// @Authentication(requireSystem = true)
+@Authentication(requireSystem = true)
 public class SystemController extends Controller {
 
     public static Result managers() {
-        return ok(managerslist.render());
+        return ok(managers.render());
     }
 
     public static Result auth() {
