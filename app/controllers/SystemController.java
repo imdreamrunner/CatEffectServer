@@ -72,7 +72,7 @@ public class SystemController extends Controller {
         ObjectNode result = Json.newObject();
         List<Manager> managerList = Manager.find.all();
         result.put("error", 0);
-        result.put("managerslist", Json.toJson(managerList));
+        result.put("managers", Json.toJson(managerList));
         return ok(result);
     }
 

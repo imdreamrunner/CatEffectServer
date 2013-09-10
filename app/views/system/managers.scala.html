@@ -5,13 +5,13 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-    <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
-    <script src="/assets/javascripts/bootstrap.min.js"></script>
-    <script src="/assets/javascripts/underscore-min.js"></script>
-    <script src="/assets/javascripts/main.js"></script>
-    <script src="/assets/javascripts/managers.js"></script>
+
     <script>
-        var java = {};
+        window.java = {};
+        window.auth = {
+            username: '@ctx().args.get("auth_username")',
+            password: '@ctx().args.get("auth_password")'
+        };
     </script>
 </head>
 <body>
@@ -27,19 +27,26 @@
             <td>Operation</td>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>admin</td>
-            <td>
-                System
-            </td>
-            <td>
-                <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-                <a href="#"><span class="glyphicon glyphicon-remove"></span>Delete</a>
-            </td>
-        </tr>
+    <tbody id="managers-tbody">
     </tbody>
 </table>
+<script type="text/html" id="manager-row">
+    <tr>
+        <td><%= managerId %></td>
+        <td><%= username %></td>
+        <td>
+            System
+        </td>
+        <td>
+            <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+            <a href="#"><span class="glyphicon glyphicon-remove"></span>Delete</a>
+        </td>
+    </tr>
+</script>
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/main.js"></script>
+<script src="/assets/javascripts/managers.js"></script>
 </body>
 </html>

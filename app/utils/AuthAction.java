@@ -17,6 +17,8 @@ public class AuthAction extends Action<Authentication> {
                 }
             }
             ctx.args.put("manager", manager);
+            ctx.args.put("auth_username", data.get("auth_username"));
+            ctx.args.put("auth_password", data.get("auth_password"));
             return delegate.call(ctx);
         } catch (CatException e) {
             ObjectNode result = Json.newObject();
