@@ -2,16 +2,44 @@
 <html>
 <head>
     <title>Manage Managers</title>
-    <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+    <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
     <script src="/assets/javascripts/bootstrap.min.js"></script>
+    <script src="/assets/javascripts/underscore-min.js"></script>
+    <script src="/assets/javascripts/main.js"></script>
+    <script src="/assets/javascripts/managers.js"></script>
     <script>
         var java = {};
     </script>
 </head>
 <body>
 <h1>Manage Managers</h1>
-<a href="#" onclick="java.exit();">Click</a>
+<a href="#" onclick="java.exit();">Exit</a>
+<h2>Manager List</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Username</td>
+            <td>Type</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>admin</td>
+            <td>
+                System
+            </td>
+            <td>
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+                <a href="#"><span class="glyphicon glyphicon-remove"></span>Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>
