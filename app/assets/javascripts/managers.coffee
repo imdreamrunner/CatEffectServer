@@ -12,7 +12,7 @@ ajaxLoadManagers =
   dataType:   "json"
   success:    (data) ->
     # console.log data
-    if data['error']?
+    if (!data['error'])
       loadManagers data['managers']
   error:      () ->
     console.log "error"
