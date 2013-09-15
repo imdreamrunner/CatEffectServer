@@ -30,4 +30,8 @@ public class Order extends Model {
     private Date createTime;
 
     private Date serveTime;
+
+    public static Finder<Integer, Order> find = new Finder<Integer, Order>(
+            Integer.class, Order.class
+    );
 }

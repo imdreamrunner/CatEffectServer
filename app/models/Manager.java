@@ -72,6 +72,7 @@ public class Manager extends Model {
         return numOfUsers == 0;
     }
 
+//限制应该写在setter里面
     public Manager(String newUsername, String newPassword, Integer newType, Integer newStallId) throws CatException {
         if (newUsername == null || newUsername.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");

@@ -22,8 +22,44 @@ public class Category extends Model {
 
     private Integer sort = 0;
 
-    public static Finder<Integer, Stall> find = new Finder<Integer, Stall>(
-            Integer.class, Stall.class
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public String getName() {
+        return name; 
+    }
+
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public Integer getStallId() {
+        return stallId;
+    }
+
+    public void setStallId(Integer newStallId) {
+        stallId = newStallId;
+    }
+
+    public Integer getDisplayOption() {
+        return displayOption;
+    }
+
+    public void setDisplayOption(Integer newDisplayOption)  {
+        displayOption = newDisplayOption;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer newSort) {
+        sort = newSort;
+    }
+
+    public static Finder<Integer, Category> find = new Finder<Integer, Category>(
+            Integer.class, Category.class
     );
 
     public Category(String newName, Integer newStallId) throws CatException {
@@ -42,5 +78,6 @@ public class Category extends Model {
     	}
     	name = newName;
     	stallId = newStallId;
+        save();
     }
 }
