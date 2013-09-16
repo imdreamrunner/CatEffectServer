@@ -16,20 +16,85 @@
 </head>
 <body>
 <h1>Manage Managers</h1>
-<a href="#" onclick="java.exit();">Exit</a>
-<h2>Manager List</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>#</td>
-            <td>Username</td>
-            <td>Type</td>
-            <td>Operation</td>
-        </tr>
-    </thead>
-    <tbody id="managers-tbody">
-    </tbody>
-</table>
+<div id="tabs">
+    <a href="#" class="current">Lists</a>
+    <a href="#">Add Managers</a>
+    <a href="#" onclick="java.exit();">Exit</a>
+</div>
+<div id="contents">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </span>
+                    <h3>Title</h3>
+                </div>
+                <div class="content">
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </span>
+                    <h3>Title</h3>
+                </div>
+                <div class="content">
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                    <p>This is the content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </span>
+                    <h3>Title</h3>
+                </div>
+                <div class="content">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Username</td>
+                            <td>Type</td>
+                            <td>Operation</td>
+                        </tr>
+                        </thead>
+                        <tbody id="managers-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="copyright">
+    <p>&copy; 2013 VCBank</p>
+    <p class="small">* Information displayed in this page is only for authorized administrators.</p>
+</div>
 <script type="text/html" id="manager-row">
     <tr>
         <td><%= managerId %></td>
