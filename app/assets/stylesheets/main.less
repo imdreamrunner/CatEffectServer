@@ -75,6 +75,14 @@ h1 {
     padding: 12px 15px;
     border-bottom: 1px solid #cdcdcd;
   }
+
+  .content-loader {
+    height: 50px;
+    background: url('/assets/images/ajax-loader.gif') center no-repeat;
+    & > * {
+      display: none;
+    }
+  }
 }
 
 .table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
