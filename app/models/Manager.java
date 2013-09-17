@@ -36,6 +36,14 @@ public class Manager extends Model {
     public Integer getType() { return type; }
     public Integer getStallId() { return  stallId; }
 
+    public Stall getStall() {
+        if (type == 1) {
+            return null;
+        }
+        Stall stall = Stall.find.byId(stallId);
+        return stall;
+    }
+
     public void setUsername(String newUsername) throws CatException {
         if (newUsername == null || newUsername.length() < 5) {
             throw new CatException(1, "Username must contain at least 5 characters.");

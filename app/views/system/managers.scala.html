@@ -99,8 +99,16 @@
     <tr>
         <td><%= managerId %></td>
         <td><%= username %></td>
-        <td>
-            System
+        <td><%
+            if (type == 1) print('System');
+            else {
+                if (stall !== null) {
+                    print(stall['name']);
+                } else {
+                    print('invalid stall id ' + stallId);
+                }
+            }
+            %>
         </td>
         <td>
             <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
