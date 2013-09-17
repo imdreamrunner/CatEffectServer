@@ -1,78 +1,43 @@
 package models;
 
-import javax.persistence.*;
-import play.db.ebean.*;
+import play.db.ebean.Model;
 import utils.CatException;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Stall extends Model {
     @Id
     private Integer stallId;
-
     private String name;
-
     private Integer sort = 0;
-
     @Lob
     private String description;
-
     private String image;
-
     private Integer canteenId;
-
     private Integer discount = 0;
+    @OneToMany(mappedBy = "stall", cascade = CascadeType.ALL)
+    private List<Manager> managers;
 
     public static Finder<Integer, Stall> find = new Finder<Integer, Stall>(
             Integer.class, Stall.class
     );
 
-    public Integer getStallId() {
-        return stallId;
-    }
+    public Integer getStallId() { return stallId; }
+    public String getName() { return name; }
+    public String getDescription() {return description; }
+    public Integer getSort() { return sort; }
+    public String getImage() { return image; }
+    public Integer getCanteenId() { return canteenId; }
+    public Integer getDiscount() { return discount; }
+    // public List<Manager> getManagers() { return managers; }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String n) {
-        name = n;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer s) {
-        sort = s;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String d) {
-        description = d;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String i) {
-        image = i;
-    }
-
-    public Integer getCanteenId() {
-        return canteenId;
-    }
-
-    public void setCanteenId(Integer cid) {
-        canteenId = cid;
-    }
-
-    public Integer getDiscount() {
-        return discount;
-    }
+    public void setStallId(Integer newStallId) { stallId = newStallId; }
+    public void setName(String n) { name = n; }
+    public void setSort(Integer s) {sort = s;}
+    public void setDescription(String d) { description = d; }
+    public void setImage(String i) { image = i; }
+    public void setCanteenId(Integer cid) { canteenId = cid; }
 
     public void setDiscount(Integer d) throws CatException {
         if (d < 0 && d > 100) {

@@ -18,7 +18,8 @@ public class Global extends GlobalSettings {
         public static void insert(Application app) {
             if(Ebean.find(Manager.class).findRowCount() == 0) {
                 Map<String,List<Object>> all = (Map<String,List<Object>>)Yaml.load("initial_data.yml");
-                // Insert managers
+
+                Ebean.save(all.get("stalls"));
                 Ebean.save(all.get("managers"));
             }
         }

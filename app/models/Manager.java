@@ -3,10 +3,7 @@ package models;
 import play.db.ebean.Model;
 import utils.CatException;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Manager extends Model {
@@ -16,33 +13,19 @@ public class Manager extends Model {
     @Column(unique = true)
     private String username;
     private String password;
-    private Integer type; // 0 for stall staffs, 1 for OFS.
-    private Integer stallId;
+    private Integer type = 0; // 0 for stall staffs, 1 for OFS.
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "stall_id")
+    private Stall stall;
 
     public static Finder<Integer, Manager> find = new Finder<Integer, Manager>(
         Integer.class, Manager.class
     );
 
-    public Manager(String newUsername, String newPassword, Integer newType, Integer newStallId) throws CatException {
-        setUsername(newUsername);
-        setPassword(newPassword);
-        setStallId(newStallId == null ? 0 : newStallId);
-        setType(newType == null? 0 : newType);
-        save();
-    }
-
     public Integer getManagerId() { return managerId; }
     public String getUsername() { return username; }
     public Integer getType() { return type; }
-    public Integer getStallId() { return  stallId; }
-
-    public Stall getStall() {
-        if (type == 1) {
-            return null;
-        }
-        Stall stall = Stall.find.byId(stallId);
-        return stall;
-    }
+    public Stall getStall() { return  stall; }
 
     public void setUsername(String newUsername) throws CatException {
         if (newUsername == null || newUsername.length() < 5) {
@@ -62,12 +45,21 @@ public class Manager extends Model {
     }
 
 
-    public void setType(Integer t) {
-        type = t;
+    public void setType(Integer newType) {
+        if (newType != null) {
+            type = newType;
+        }
     }
 
-    public void setStallId(Integer newStallId) {
-        stallId = newStallId;
+    public void setStall(Stall newStall) {
+        stall = newStall;
+    }
+
+    public void setStallById(Integer newStallId) {
+        Stall newStall = Stall.find.byId(newStallId);
+        if (newStall != null) {
+            stall = newStall;
+        }
     }
 
     public boolean verifyPassword(String newPassword) {

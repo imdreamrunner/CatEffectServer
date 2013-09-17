@@ -99,6 +99,8 @@ create table transaction (
   constraint pk_transaction primary key (transaction_id))
 ;
 
+alter table manager add constraint fk_manager_stall_1 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
+create index ix_manager_stall_1 on manager (stall_id);
 
 
 

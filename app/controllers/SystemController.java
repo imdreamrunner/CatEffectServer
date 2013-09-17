@@ -31,18 +31,23 @@ public class SystemController extends Controller {
 
     public static Result addManager() {
         ObjectNode result = Json.newObject();
-        DynamicForm data = Form.form().bindFromRequest();
-        String username = data.get("username");
-        String password = data.get("password");
-        Integer type = null, stallId = null;
-        if (data.get("type") != null) {
-            type = Integer.parseInt(data.get("type"));
-        }
-        if (data.get("stallId") != null) {
-            stallId = Integer.parseInt(data.get("stallId"));
-        }
         try {
-            Manager newManager = new Manager(username, password, type, stallId);
+            DynamicForm data = Form.form().bindFromRequest();
+            String username = data.get("username");
+            String password = data.get("password");
+            Integer type = null, stallId = null;
+            if (data.get("type") != null) {
+                type = Integer.parseInt(data.get("type"));
+            }
+            if (data.get("stallId") != null) {
+                stallId = Integer.parseInt(data.get("stallId"));
+            }
+            Manager newManager = new Manager();
+            newManager.setUsername(username);
+            newManager.setPassword(password);
+            newManager.setType(type);
+            newManager.setStallById(stallId);
+            newManager.save();
             result.put("error", 0);
             result.put("newManager", Json.toJson(newManager));
         } catch (CatException e) {

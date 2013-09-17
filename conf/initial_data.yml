@@ -1,8 +1,44 @@
 # Managers
 
+stalls:
+
+  - !!models.Stall
+    stallId:  1
+    name:     Stall 1
+
+  - !!models.Stall
+    stallId:  2
+    name:     Stall 2
+
+  - !!models.Stall
+    stallId:  3
+    name:     Stall 3
+
+
 managers:
 
-    - !!models.Manager
-        username:   admin
-        password:   admin
-        type:       1
+  - !!models.Manager
+    username:   admin
+    password:   admin
+    type:       1
+
+  - !!models.Manager
+    username:   stall1
+    password:   stall1
+    type:       0
+    stall:      !!models.Stall
+                  stallId: 1
+
+  - !!models.Manager
+    username:   stall2
+    password:   stall2
+    type:       0
+    stall:      !!models.Stall
+                  stallId: 2
+
+  - !!models.Manager
+    username:   stall2_2
+    password:   stall2
+    type:       0
+    stall:      !!models.Stall
+                  stallId: 2
