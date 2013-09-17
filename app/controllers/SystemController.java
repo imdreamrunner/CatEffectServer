@@ -46,7 +46,7 @@ public class SystemController extends Controller {
             newManager.setUsername(username);
             newManager.setPassword(password);
             newManager.setType(type);
-            newManager.setStallById(stallId);
+            newManager.setStall(stallId);
             newManager.save();
             result.put("error", 0);
             result.put("newManager", Json.toJson(newManager));
@@ -92,7 +92,11 @@ public class SystemController extends Controller {
             newCanteenId = Integer.parseInt(data.get("canteenId"));
         }
         try {
-            Stall newStall = new Stall(newStallName, newDescription, newImage, newCanteenId);
+            Stall newStall = new Stall();
+            newStall.setName(newStallName);
+            newStall.setDescription(newDescription);
+            newStall.setImage(newImage);
+            newStall.setCanteen(newCanteenId);
             result.put("error", 0);
             result.put("newStall", Json.toJson(newStall));
         } catch (CatException e) {

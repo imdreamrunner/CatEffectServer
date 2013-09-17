@@ -49,9 +49,9 @@ public class StallContoller extends Controller {
             Category category = Category.find.byId(categoryId);
             if (category == null) throw new CatException(4001, "CategoryId does not exist.");
             if (data.get("name") != null) category.setName(data.get("name"));
-            if (data.get("stallId") != null) category.setStallId(Integer.parseInt(data.get("stallId")));
-            if (data.get("displayOption") != null) category.setStallId(Integer.parseInt(data.get("displayOption")));
-            if (data.get("sort") != null) category.setStallId(Integer.parseInt(data.get("sort")));
+            if (data.get("stallId") != null) category.setStall(Integer.parseInt(data.get("stallId")));
+            if (data.get("displayOption") != null) category.setDisplayOption(Integer.parseInt(data.get("displayOption")));
+            if (data.get("sort") != null) category.setSort(Integer.parseInt(data.get("sort")));
             category.save();
         } catch (CatException e) {
             result.put("error", e.getCode());
@@ -89,25 +89,33 @@ public class StallContoller extends Controller {
 	public static Result addDish() {
 		ObjectNode result = Json.newObject();
     	DynamicForm data = Form.form().bindFromRequest();
-    	String newName = data.get("name");
+    	String newName  = data.get("name");
     	String newImage = data.get("image");
     	String newDescription = data.get("description");
-    	//if (data.get("stallId") != null) {
-            Integer newStallId = Integer.parseInt(data.get("stallId"));
-        //}
-        //if (data.get("categoryId") != null) {
-            Integer newCategoryId = Integer.parseInt(data.get("categoryId"));
-        //}
-        //if (data.get("listPrice") != null) {
-            Integer newListPrice = Integer.parseInt(data.get("listPrice"));
-        //}
-        //if (data.get("price") != null) {
-            Integer newPrice = Integer.parseInt(data.get("price"));
-        //}
+        Integer newCategoryId = null,
+                newListPrice  = null,
+                newPrice      = null;
+
+        if (data.get("categoryId") != null) {
+            newCategoryId = Integer.parseInt(data.get("categoryId"));
+        }
+        if (data.get("listPrice") != null) {
+            newListPrice = Integer.parseInt(data.get("listPrice"));
+        }
+        if (data.get("price") != null) {
+            newPrice = Integer.parseInt(data.get("price"));
+        }
         String newOptions = data.get("options");
         try {
-            Dish newDish = new Dish(newName, newImage, newDescription, newStallId, newCategoryId, 
-        						 newListPrice, newPrice, newOptions);
+            Dish newDish = new Dish();
+            newDish.setName(newName);
+            newDish.setDescription(newDescription);
+            newDish.setImage(newImage);
+            newDish.setListPrice(newListPrice);
+            newDish.setPrice(newPrice);
+            newDish.setOptions(newOptions);
+            newDish.setCategory(newCategoryId);
+            newDish.save();
             result.put("error", 0);
             result.put("newDish", Json.toJson(newDish));
         } catch (CatException e) {

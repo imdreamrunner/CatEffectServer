@@ -34,12 +34,10 @@ create table dish (
   name                      varchar(255),
   image                     varchar(255),
   description               longtext,
-  stall_id                  integer,
   category_id               integer,
   sort                      integer,
   list_price                integer,
   price                     integer,
-  allow_discount            tinyint(1) default 0,
   options                   varchar(255),
   constraint pk_dish primary key (dish_id))
 ;
@@ -57,8 +55,6 @@ create table manager (
 create table order_detail (
   order_id                  integer auto_increment not null,
   account_id                integer,
-  original_subtotal         integer,
-  discount                  integer,
   subtotal                  integer,
   transaction_id            integer,
   status                    integer,
@@ -85,7 +81,6 @@ create table stall (
   description               longtext,
   image                     varchar(255),
   canteen_id                integer,
-  discount                  integer,
   constraint pk_stall primary key (stall_id))
 ;
 
@@ -99,8 +94,26 @@ create table transaction (
   constraint pk_transaction primary key (transaction_id))
 ;
 
-alter table manager add constraint fk_manager_stall_1 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
-create index ix_manager_stall_1 on manager (stall_id);
+alter table category add constraint fk_category_stall_1 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
+create index ix_category_stall_1 on category (stall_id);
+alter table dish add constraint fk_dish_category_2 foreign key (category_id) references category (category_id) on delete restrict on update restrict;
+create index ix_dish_category_2 on dish (category_id);
+alter table manager add constraint fk_manager_stall_3 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
+create index ix_manager_stall_3 on manager (stall_id);
+alter table order_detail add constraint fk_order_detail_account_4 foreign key (account_id) references account (account_id) on delete restrict on update restrict;
+create index ix_order_detail_account_4 on order_detail (account_id);
+alter table order_detail add constraint fk_order_detail_transaction_5 foreign key (transaction_id) references transaction (transaction_id) on delete restrict on update restrict;
+create index ix_order_detail_transaction_5 on order_detail (transaction_id);
+alter table order_item add constraint fk_order_item_order_6 foreign key (order_id) references order_detail (order_id) on delete restrict on update restrict;
+create index ix_order_item_order_6 on order_item (order_id);
+alter table order_item add constraint fk_order_item_dish_7 foreign key (dish_id) references dish (dish_id) on delete restrict on update restrict;
+create index ix_order_item_dish_7 on order_item (dish_id);
+alter table stall add constraint fk_stall_canteen_8 foreign key (canteen_id) references canteen (canteen_id) on delete restrict on update restrict;
+create index ix_stall_canteen_8 on stall (canteen_id);
+alter table transaction add constraint fk_transaction_account_9 foreign key (account_id) references account (account_id) on delete restrict on update restrict;
+create index ix_transaction_account_9 on transaction (account_id);
+alter table transaction add constraint fk_transaction_manager_10 foreign key (manager_id) references manager (manager_id) on delete restrict on update restrict;
+create index ix_transaction_manager_10 on transaction (manager_id);
 
 
 

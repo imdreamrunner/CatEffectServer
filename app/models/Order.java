@@ -1,35 +1,28 @@
 package models;
 
-import java.util.*;
+import play.db.ebean.Model;
+
 import javax.persistence.*;
-
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import utils.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="order_detail")
 public class Order extends Model {
     @Id
     private Integer orderId;
-
-    private Integer accountId;
-
-    private Integer originalSubtotal;
-
-    private Integer discount = 0;
-
-    private Integer subtotal; // Discounted subtotal.
-
-    private Integer transactionId;
-
+    @ManyToOne
+    @JoinColumn(name="account_id")
+    private Account account;
+    private Integer subtotal;
+    @OneToOne
+    @JoinColumn(name = "transaction_id")
+    private Transaction transaction;
     private Integer status;
-
     private Date createTime;
-
     private Date serveTime;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
 
     public static Finder<Integer, Order> find = new Finder<Integer, Order>(
             Integer.class, Order.class

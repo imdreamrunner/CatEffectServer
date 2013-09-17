@@ -1,28 +1,24 @@
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import play.db.ebean.Model;
 
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import utils.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderItem extends Model {
     @Id
     private Integer orderItemId;
-
-    private Integer orderId;
-
-    private Integer dishId;
-
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+    @ManyToOne
+    @JoinColumn(name = "dish_id")
+    private Dish dish;
     private Integer listPrice;
-
     private Integer price;
-
     private Integer quantity;
-
     private String note;
 }

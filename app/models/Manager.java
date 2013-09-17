@@ -14,7 +14,7 @@ public class Manager extends Model {
     private String username;
     private String password;
     private Integer type = 0; // 0 for stall staffs, 1 for OFS.
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JoinColumn(name = "stall_id")
     private Stall stall;
 
@@ -55,11 +55,12 @@ public class Manager extends Model {
         stall = newStall;
     }
 
-    public void setStallById(Integer newStallId) {
+    public void setStall(Integer newStallId) throws CatException {
         Stall newStall = Stall.find.byId(newStallId);
         if (newStall != null) {
-            stall = newStall;
+            throw new CatException(5001, "Stall does not exist");
         }
+        setStall(newStall);
     }
 
     public boolean verifyPassword(String newPassword) {

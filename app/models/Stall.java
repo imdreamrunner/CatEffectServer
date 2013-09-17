@@ -14,10 +14,13 @@ public class Stall extends Model {
     @Lob
     private String description;
     private String image;
-    private Integer canteenId;
-    private Integer discount = 0;
-    @OneToMany(mappedBy = "stall", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name="canteen_id")
+    private Canteen canteen;
+    @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)
     private List<Manager> managers;
+    @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)
+    private List<Category> categories;
 
     public static Finder<Integer, Stall> find = new Finder<Integer, Stall>(
             Integer.class, Stall.class
@@ -28,8 +31,7 @@ public class Stall extends Model {
     public String getDescription() {return description; }
     public Integer getSort() { return sort; }
     public String getImage() { return image; }
-    public Integer getCanteenId() { return canteenId; }
-    public Integer getDiscount() { return discount; }
+    public Canteen getCanteen() { return canteen; }
     // public List<Manager> getManagers() { return managers; }
 
     public void setStallId(Integer newStallId) { stallId = newStallId; }
@@ -37,13 +39,13 @@ public class Stall extends Model {
     public void setSort(Integer s) {sort = s;}
     public void setDescription(String d) { description = d; }
     public void setImage(String i) { image = i; }
-    public void setCanteenId(Integer cid) { canteenId = cid; }
-
-    public void setDiscount(Integer d) throws CatException {
-        if (d < 0 && d > 100) {
-            throw new CatException(3001, "Value out of range");
+    public void setCanteen(Canteen newCanteen) { canteen = newCanteen; }
+    public void setCanteen(Integer newCanteenId) throws CatException {
+        Canteen newCanteen = Canteen.find.byId(newCanteenId);
+        if (newCanteen == null) {
+            throw new CatException(5001, "Canteen does not exist.");
         }
-        discount = d;
+        setCanteen(newCanteen);
     }
 
     public static boolean checkStallName(String newStallName) {
@@ -52,32 +54,5 @@ public class Stall extends Model {
         }
         Integer numberOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
         return (numberOfStalls == 0);
-    }
-
-    public static boolean checkCanteenId(Integer newCanteenId) {
-        /*
-    	if (newCanteenId == null) {
-    		return false;
-    	}
-    	//要查的是canteen的table而不是stall的table？
-    	Integer numberOfCanteens = find.where(String.format("canteenIdId = '%d'", newCanteenId)).findRowCount();
-    	return (numberOfCanteens > 0);
-    	*/
-
-        return true;
-    }
-
-    public Stall(String newStallName, String newDescription, String newImage, Integer newCanteenId) throws CatException {
-    	if (!checkStallName(newStallName )) {
-            throw new CatException(2, "Stall name has been taken.");
-        }
-        if (!checkCanteenId(newCanteenId)) {
-        	throw new CatException(4,"Canteen does not exist.");
-        }
-        if (newStallName != null)name = newStallName;
-        if (newDescription != null) description = newDescription;
-        if (newImage != null ) image = newImage;
-        if (newCanteenId != null) canteenId = newCanteenId;
-        save();
     }
 }

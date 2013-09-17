@@ -1,26 +1,23 @@
 package models;
 
-import java.util.*;
+import play.db.ebean.Model;
+import utils.CatException;
+
 import javax.persistence.*;
-
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import utils.*;
+import java.util.List;
 
 @Entity
 public class Category extends Model {
     @Id
     private Integer categoryId;
-
     private String name;
-
-    private Integer stallId;
-
+    @ManyToOne
+    @JoinColumn(name="stall_id")
+    private Stall stall;
     private Integer displayOption = 0;
-
     private Integer sort = 0;
+    @OneToMany(mappedBy = "category")
+    private List<Dish> dishes;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -34,12 +31,20 @@ public class Category extends Model {
         name = newName;
     }
 
-    public Integer getStallId() {
-        return stallId;
+    public Stall getStall() {
+        return stall;
     }
 
-    public void setStallId(Integer newStallId) {
-        stallId = newStallId;
+    public void setStall(Stall newStall) {
+        stall = newStall;
+    }
+
+    public void setStall(Integer newStallId) throws CatException {
+        Stall newStall = Stall.find.byId(newStallId);
+        if (newStall == null) {
+            throw new CatException(5001, "Stall not found");
+        }
+        setStall(newStall);
     }
 
     public Integer getDisplayOption() {
@@ -69,7 +74,7 @@ public class Category extends Model {
     	if (newName == null) {
     		throw new CatException(5002, "must input name of the category");
     	}
-    	
+
     	//check is this stall already has this category name
     	//stallID && categoryName
     	Boolean nonDuplicate = (find.where(String.format("stallId = ‘%d’ && name = '%s'", newStallId,newName)).findRowCount() == 0);
@@ -77,7 +82,7 @@ public class Category extends Model {
     		throw new CatException(5003, "the stall already has this category");
     	}
     	name = newName;
-    	stallId = newStallId;
+        setStall(newStallId);
         save();
     }
 }
