@@ -38,6 +38,7 @@ create table dish (
   sort                      integer,
   list_price                integer,
   price                     integer,
+  academic_price            integer,
   options                   varchar(255),
   constraint pk_dish primary key (dish_id))
 ;

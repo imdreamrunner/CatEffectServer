@@ -1,5 +1,6 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
 import javax.persistence.*;
@@ -32,7 +33,8 @@ public class Stall extends Model {
     public Integer getSort() { return sort; }
     public String getImage() { return image; }
     public Canteen getCanteen() { return canteen; }
-    // public List<Manager> getManagers() { return managers; }
+    @JsonIgnore
+    public List<Manager> getManagers() { return managers; }
 
     public void setStallId(Integer newStallId) { stallId = newStallId; }
     public void setName(String n) { name = n; }

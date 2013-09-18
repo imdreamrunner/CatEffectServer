@@ -19,6 +19,7 @@ public class Dish extends Model {
     private Integer sort = 0;
     private Integer listPrice;
     private Integer price;
+    private Integer academicPrice;
     private String options;
 
     public static Finder<Integer, Dish> find = new Finder<Integer, Dish>(
@@ -33,6 +34,7 @@ public class Dish extends Model {
     public Integer getSort() { return sort; }
     public Integer getListPrice() { return listPrice; }
     public Integer getPrice() { return price; }
+    public Integer getAcademicPrice() { return academicPrice; }
     public String getOptions() { return options; }
 
     public void setName(String newName) { name = newName;}
@@ -49,6 +51,7 @@ public class Dish extends Model {
     public void setSort(Integer newSort) { sort = newSort;}
     public void setListPrice(Integer newListPrice) { listPrice = newListPrice;}
     public void setPrice(Integer newPrice) { price = newPrice;}
+    public void setAcademicPrice(Integer newAcademicPrice) { academicPrice = newAcademicPrice;}
     public void setOptions(String newOptions) { options = newOptions;}
 
 

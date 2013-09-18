@@ -58,6 +58,7 @@ public class SystemController extends Controller {
     }
 
     public static Result editManager(int managerId) {
+        ObjectNode result = Json.newObject();
         return ok("something");
     }
 
