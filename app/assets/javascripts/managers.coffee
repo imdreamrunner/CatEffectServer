@@ -1,5 +1,5 @@
 auth = this.auth
-this.managerList = managerList = {}
+managerList = {}
 
 loadManagers = () ->
   table = _.template $("#manager-row").html()
@@ -22,5 +22,10 @@ ajaxLoadManagers =
 
 $.ajax ajaxLoadManagers
 
+findManager = (managerId) ->
+  for manager in managerList
+    if manager['managerId'] == managerId
+      return manager
+
 this.editManager = (managerId) ->
-  this.showPopUp("#pop-up-manager", {}, 500, 400)
+  this.showPopUp("#pop-up-manager", findManager(managerId), 500, 400)
