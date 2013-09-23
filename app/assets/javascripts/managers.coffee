@@ -1,6 +1,7 @@
 auth = this.auth
+this.managerList = managerList = {}
 
-loadManagers = (managerList) ->
+loadManagers = () ->
   table = _.template $("#manager-row").html()
   for manager in managerList
     $("#managers-tbody").append(table(manager))
@@ -14,8 +15,12 @@ ajaxLoadManagers =
   success:    (data) ->
     # console.log data
     if (!data['error'])
-      loadManagers data['managers']
+      managerList = data['managers']
+      loadManagers()
   error:      () ->
     console.log "error"
 
 $.ajax ajaxLoadManagers
+
+this.editManager = (managerId) ->
+  this.showPopUp("#pop-up-manager", {}, 500, 400)

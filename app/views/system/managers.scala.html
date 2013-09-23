@@ -73,7 +73,7 @@
             <div class="widget">
                 <div class="title">
                     <span class="icon">
-                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span class="glyphicon glyphicon-cog"></span>
                     </span>
                     <h3>Title</h3>
                 </div>
@@ -95,11 +95,11 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
-<div class="pop-up">
+<script type="text/html" id="pop-up-manager">
     <div class="widget">
         <div class="title">
                     <span class="icon">
-                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span class="glyphicon glyphicon-cog"></span>
                     </span>
             <h3>Title</h3>
         </div>
@@ -113,7 +113,7 @@
             <p>This is the content.</p>
         </div>
     </div>
-</div>
+</script>
 <script type="text/html" id="manager-row">
     <tr>
         <td><%= managerId %></td>
@@ -130,8 +130,12 @@
             %>
         </td>
         <td>
-            <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-            <a href="#"><span class="glyphicon glyphicon-remove"></span>Delete</a>
+            <a href="javascript:" onclick="editManager(<%= managerId %>)">
+                <span class="glyphicon glyphicon-pencil"></span>Edit
+            </a>
+            <a href="javascript:">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </a>
         </td>
     </tr>
 </script>
