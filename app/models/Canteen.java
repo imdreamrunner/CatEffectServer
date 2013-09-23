@@ -20,6 +20,10 @@ public class Canteen extends Model {
             Integer.class, Canteen.class
     );
 
+    public void setCanteenId(Integer newCanteenId) {
+        canteenId = newCanteenId;
+    }
+
     public Integer getCanteenId() {
         return canteenId;
     }

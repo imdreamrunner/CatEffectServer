@@ -1,18 +1,71 @@
 # Managers
 
+canteens:
+
+  - !!models.Canteen
+    canteenId:  1
+    name:       Canteen 1
+    sort:       1
+
+  - !!models.Canteen
+    canteenId:  2
+    name:       Canteen 2
+    sort:       2
+
+  - !!models.Canteen
+    canteenId:  3
+    name:       Canteen 3
+    sort:       3
+
+  - !!models.Canteen
+    canteenId:  4
+    name:       Canteen 4
+    sort:       4
+
+  - !!models.Canteen
+    canteenId:  5
+    name:       Canteen 5
+    sort:       5
+
+  - !!models.Canteen
+    canteenId:  6
+    name:       Canteen 6
+    sort:       6
+
+  - !!models.Canteen
+    canteenId:  7
+    name:       Canteen 7
+    sort:       7
+
+  - !!models.Canteen
+    canteenId:  8
+    name:       Canteen 8
+    sort:       8
+
+  - !!models.Canteen
+    canteenId:  9
+    name:       Canteen 9
+    sort:       9
+
 stalls:
 
   - !!models.Stall
     stallId:  1
     name:     Stall 1
+    canteen:  !!models.Canteen
+                canteenId: 1
 
   - !!models.Stall
     stallId:  2
     name:     Stall 2
+    canteen:  !!models.Canteen
+                canteenId: 1
 
   - !!models.Stall
     stallId:  3
     name:     Stall 3
+    canteen:  !!models.Canteen
+                canteenId: 1
 
 
 managers:
