@@ -2,18 +2,22 @@ auth = this.auth
 stallList = {}
 managerList = {}
 
+# Add managerList to Table
 loadManagers = () ->
   table = _.template $("#manager-row").html()
   for manager in managerList
     $("#managers-tbody").append(table(manager))
   $('#manager-list').find('.content-loader').removeClass('content-loader');
 
+#################
+# Ajax Packages #
+#################
+
 ajaxLoadStalls =
   url:        "/public/stalls/getAll"
   type:       "get"
   dataType:   "json"
   success:    (data) ->
-    # console.log data
     if (!data['error'])
       stallList = data['stalls']
       $.ajax ajaxLoadManagers
@@ -26,7 +30,6 @@ ajaxLoadManagers =
   type:       "post"
   dataType:   "json"
   success:    (data) ->
-    # console.log data
     if (!data['error'])
       managerList = data['managers']
       loadManagers()
