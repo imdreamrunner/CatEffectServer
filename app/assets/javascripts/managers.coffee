@@ -1,4 +1,5 @@
 auth = this.auth
+stallList = {}
 managerList = {}
 
 loadManagers = () ->
@@ -6,6 +7,18 @@ loadManagers = () ->
   for manager in managerList
     $("#managers-tbody").append(table(manager))
   $('#manager-list').find('.content-loader').removeClass('content-loader');
+
+ajaxLoadStalls =
+  url:        "/public/stalls/getAll"
+  type:       "get"
+  dataType:   "json"
+  success:    (data) ->
+    # console.log data
+    if (!data['error'])
+      stallList = data['stalls']
+      $.ajax ajaxLoadManagers
+  error:      () ->
+    console.log "error"
 
 ajaxLoadManagers =
   url:        "/system/managers/getAll"
@@ -20,12 +33,22 @@ ajaxLoadManagers =
   error:      () ->
     console.log "error"
 
-$.ajax ajaxLoadManagers
-
 findManager = (managerId) ->
   for manager in managerList
     if manager['managerId'] == managerId
       return manager
 
 this.editManager = (managerId) ->
-  this.showPopUp("#pop-up-manager", findManager(managerId), 500, 400)
+  manager = findManager(managerId)
+  manager.stallList = stallList
+  this.showPopUp("#pop-up-manager", manager, 400, 400)
+
+this.changeManagerType = () ->
+  $stallList = $(".pop-up").find(".stall-list")
+  if parseInt($(".pop-up").find("#inputType").val()) == 1
+    $stallList.addClass "hidden"
+  else
+    $stallList.removeClass "hidden"
+
+$(document).ready () ->
+  $.ajax ajaxLoadStalls

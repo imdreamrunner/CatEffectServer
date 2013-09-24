@@ -37,7 +37,7 @@
                         <tr>
                             <td>#</td>
                             <td>Username</td>
-                            <td>Type</td>
+                            <td>Privilege</td>
                             <td>Operation</td>
                         </tr>
                         </thead>
@@ -116,7 +116,45 @@
             </span>
         </div>
         <div class="content">
-            <p>username: <%= username %></p>
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input class="form-control" id="inputUsername" value="<%= username %>">
+                </div>
+                <div class="form-group">
+                    <label for="inputType">Privilege</label>
+                    <select id="inputType" class="form-control" onchange="changeManagerType()">
+                        <% if (type === 0) { %>
+                        <option value="1">System</option>
+                        <option selected="selected" value="0">Stall Manager</option>
+                        <% } else { %>
+                        <option selected="selected" value="1">System</option>
+                        <option value="0">Stall Manager</option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group stall-list <% if (type!==0){ %> hidden<% } %>">
+                    <select id="inputStall" class="form-control">
+                        <% for (var i in stallList) {
+                            if (stall !== null && stallList[i]['stallId'] == stall['stallId']) {
+                        %>
+                        <option value="<%= stallList[i]['stallId'] %>" selected="selected">
+                        <% } else { %>
+                        <option value="<%= stallList[i]['stallId'] %>">
+                        <% } %>
+                            <%= stallList[i]['canteen']['name'] %>
+                            -
+                            <%= stallList[i]['name'] %>
+                        </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input class="form-control" id="inputPassword" placeholder="not change password">
+                    <p class="help-block">Leave it blank for not changing.</p>
+                </div>
+            </form>
         </div>
     </div>
 </script>
@@ -128,6 +166,9 @@
             if (type == 1) print('System');
             else {
                 if (stall !== null) {
+                    if (stall['canteen'] !== null) {
+                        print(stall['canteen']['name']+" - ");
+                    }
                     print(stall['name']);
                 } else {
                     print('invalid stall id ' + stallId);
