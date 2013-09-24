@@ -76,6 +76,16 @@ managers:
     type:       1
 
   - !!models.Manager
+    username:   alice
+    password:   iamalice
+    type:       1
+
+  - !!models.Manager
+    username:   bob
+    password:   iambob
+    type:       1
+
+  - !!models.Manager
     username:   stall1
     password:   stall1
     type:       0

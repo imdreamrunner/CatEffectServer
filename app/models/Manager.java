@@ -32,8 +32,8 @@ public class Manager extends Model {
     }
 
     public void setUsername(String newUsername) throws CatException {
-        if (newUsername == null || newUsername.length() < 5) {
-            throw new CatException(1, "Username must contain at least 5 characters.");
+        if (newUsername == null || newUsername.length() < 3) {
+            throw new CatException(1, "Username must contain at least 3 characters.");
         }
         if (!checkUsername(newUsername)) {
             throw new CatException(2, "Username has been taken.");

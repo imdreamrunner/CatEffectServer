@@ -1,5 +1,4 @@
 auth = this.auth
-stallList = {}
 managerList = {}
 
 # Add managerList to Table
@@ -9,24 +8,12 @@ loadManagers = () ->
     $("#managers-tbody").append(table(manager))
   $('#manager-list').find('.content-loader').removeClass('content-loader');
 
-#################
-# Ajax Packages #
-#################
-
-ajaxLoadStalls =
-  url:        "/public/stalls/getAll"
-  type:       "get"
-  dataType:   "json"
-  success:    (data) ->
-    if (!data['error'])
-      stallList = data['stalls']
-      $.ajax ajaxLoadManagers
-  error:      () ->
-    console.log "error"
-
 ajaxLoadManagers =
   url:        "/system/managers/getAll"
-  data:       {auth_username: auth['username'], auth_password: auth['password']}
+  data:
+              auth_username: auth['username']
+              auth_password: auth['password']
+              type:          1
   type:       "post"
   dataType:   "json"
   success:    (data) ->
@@ -43,15 +30,7 @@ findManager = (managerId) ->
 
 this.editManager = (managerId) ->
   manager = findManager(managerId)
-  manager.stallList = stallList
-  this.showPopUp("#pop-up-manager", manager, 400, 400)
-
-this.changeManagerType = () ->
-  $stallList = $(".pop-up").find(".stall-list")
-  if parseInt($(".pop-up").find("#inputType").val()) == 1
-    $stallList.addClass "hidden"
-  else
-    $stallList.removeClass "hidden"
+  this.showPopUp("#pop-up-manager", manager, 400, 270)
 
 $(document).ready () ->
-  $.ajax ajaxLoadStalls
+  $.ajax ajaxLoadManagers

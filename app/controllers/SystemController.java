@@ -76,7 +76,15 @@ public class SystemController extends Controller {
 
     public static Result getAllManagers() {
         ObjectNode result = Json.newObject();
-        List<Manager> managerList = Manager.find.all();
+        DynamicForm data = Form.form().bindFromRequest();
+        String strType = data.get("type");
+        List<Manager> managerList;
+        if (strType == null) {
+            managerList = Manager.find.all();
+        } else {
+            Integer type = Integer.parseInt(strType);
+            managerList = Manager.find.where("type = " + type).findList();
+        }
         result.put("error", 0);
         result.put("managers", Json.toJson(managerList));
         return ok(result);
