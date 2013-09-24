@@ -12,6 +12,11 @@ this.showPopUp = showPopUp = (template, data, width, height) ->
     height:     height
     marginLeft: - width / 2
     marginTop:  - height / 2
+    display:    "none"
   popUpDiv.css css
   $("body").append popUpDiv
+  popUpDiv.show(400)
 
+this.closePopUp = closePopUp = () ->
+  $('.pop-up')
+    .hide(400, () -> $(this).remove())

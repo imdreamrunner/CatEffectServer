@@ -98,10 +98,22 @@
 <script type="text/html" id="pop-up-manager">
     <div class="widget">
         <div class="title">
-                    <span class="icon">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </span>
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
             <h3>Edit Manager</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopUp()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopUp()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Save
+                </a>
+            </span>
         </div>
         <div class="content">
             <p>username: <%= username %></p>
