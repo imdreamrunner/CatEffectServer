@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Manage Managers</title>
+    <title>Stalls</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
@@ -15,33 +15,36 @@
     </script>
 </head>
 <body>
-<h1>Manage Stalls</h1>
+<h1>Stalls</h1>
 <div id="tabs">
     <a href="#" class="current">Lists</a>
-    <a href="#">Add Managers</a>
-    <a href="#" onclick="java.exit();">Exit</a>
+    <a href="#">New Stall</a>
 </div>
 <div id="contents">
     <div class="row">
         <div class="col-xs-12">
-            <div id="manager-list" class="widget">
+            <div id="stall-list" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                    <h3>All Managers</h3>
+                    <h3>Stalls</h3>
+                    <span class="button">
+                        <a href="javascript:" onclick="closePopUp()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            New Stall
+                        </a>
+                    </span>
                 </div>
                 <div class="content content-loader">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <td>#</td>
-                            <td>Username</td>
-                            <td>Privilege</td>
+                            <td>Stall</td>
                             <td>Operation</td>
                         </tr>
                         </thead>
-                        <tbody id="managers-tbody">
+                        <tbody id="stalls-tbody">
                         </tbody>
                     </table>
                 </div>
@@ -53,13 +56,13 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
-<script type="text/html" id="pop-up-manager">
+<script type="text/html" id="pop-up-stall">
     <div class="widget">
         <div class="title">
             <span class="icon">
                 <span class="glyphicon glyphicon-cog"></span>
             </span>
-            <h3>Edit Manager</h3>
+            <h3>Edit stall</h3>
             <span class="button">
                 <a href="javascript:" onclick="closePopUp()">
                     <span class="glyphicon glyphicon-remove"></span>
@@ -74,68 +77,14 @@
             </span>
         </div>
         <div class="content">
-            <form role="form">
-                <div class="form-group">
-                    <label for="inputUsername">Username</label>
-                    <input class="form-control" id="inputUsername" value="<%= username %>">
-                </div>
-                <div class="form-group">
-                    <label for="inputType">Privilege</label>
-                    <select id="inputType" class="form-control" onchange="changeManagerType()">
-                        <% if (type === 0) { %>
-                        <option value="1">System</option>
-                        <option selected="selected" value="0">Stall Manager</option>
-                        <% } else { %>
-                        <option selected="selected" value="1">System</option>
-                        <option value="0">Stall Manager</option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="form-group stall-list <% if (type!==0){ %> hidden<% } %>">
-                    <select id="inputStall" class="form-control">
-                        <% for (var i in stallList) {
-                            if (stall !== null && stallList[i]['stallId'] == stall['stallId']) {
-                        %>
-                        <option value="<%= stallList[i]['stallId'] %>" selected="selected">
-                        <% } else { %>
-                        <option value="<%= stallList[i]['stallId'] %>">
-                        <% } %>
-                            <%= stallList[i]['canteen']['name'] %>
-                            -
-                            <%= stallList[i]['name'] %>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input class="form-control" id="inputPassword" placeholder="not change password">
-                    <p class="help-block">Leave it blank for not changing.</p>
-                </div>
-            </form>
         </div>
     </div>
 </script>
-<script type="text/html" id="manager-row">
+<script type="text/html" id="stall-row">
     <tr>
-        <td><%= managerId %></td>
-        <td><%= username %></td>
-        <td><%
-            if (type == 1) print('System');
-            else {
-                if (stall !== null) {
-                    if (stall['canteen'] !== null) {
-                        print(stall['canteen']['name']+" - ");
-                    }
-                    print(stall['name']);
-                } else {
-                    print('invalid stall id ' + stallId);
-                }
-            }
-            %>
-        </td>
+        <td><%= name %></td>
         <td>
-            <a href="javascript:" onclick="editManager(<%= managerId %>)">
+            <a href="javascript:" onclick="viewStall(<%= stallId %>)">
                 <span class="glyphicon glyphicon-pencil"></span>Edit
             </a>
             <a href="javascript:">
@@ -148,6 +97,6 @@
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>
 <script src="/assets/javascripts/main.js"></script>
-<script src="/assets/javascripts/managers.js"></script>
+<script src="/assets/javascripts/stalls.js"></script>
 </body>
 </html>

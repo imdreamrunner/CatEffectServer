@@ -11,15 +11,29 @@ import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
 import views.html.system.managers;
+import views.html.system.stalls;
 
 import java.util.List;
 
 @Authentication(requireSystem = true)
 public class SystemController extends Controller {
 
+    /*
+     * HTML Methods.
+     */
+
     public static Result managers() {
         return ok(managers.render());
     }
+
+    public static Result stalls() {
+        return ok(stalls.render());
+    }
+
+    /*
+     * JSON Methods.
+     */
+
 
     public static Result auth() {
         ObjectNode result = Json.newObject();
