@@ -17,8 +17,9 @@
 <body>
 <h1>Stalls</h1>
 <div id="tabs">
-    <a href="#" class="current">Lists</a>
-    <a href="#">New Stall</a>
+    <span id="canteen-list">
+    </span>
+    <a href="#">Manage Canteens</a>
 </div>
 <div id="contents">
     <div class="row">
@@ -28,7 +29,7 @@
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                    <h3>Stalls</h3>
+                    <h3 id="canteen-name">Loading</h3>
                     <span class="button">
                         <a href="javascript:" onclick="closePopUp()">
                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -80,6 +81,13 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="canteen-button">
+    <a href="javascript:"
+       id="canteen-button-<%= canteenId %>"
+       class="canteen-button"
+       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
+</script>
+
 <script type="text/html" id="stall-row">
     <tr>
         <td><%= name %></td>

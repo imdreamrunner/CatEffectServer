@@ -34,7 +34,6 @@ public class SystemController extends Controller {
      * JSON Methods.
      */
 
-
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
