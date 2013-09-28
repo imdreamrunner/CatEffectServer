@@ -11,6 +11,8 @@ import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
 import views.html.system.managers;
+import views.html.system.sidebar;
+import views.html.system.stall;
 import views.html.system.stalls;
 
 import java.util.List;
@@ -22,12 +24,20 @@ public class SystemController extends Controller {
      * HTML Methods.
      */
 
+    public static Result sidebar() {
+        return ok(sidebar.render());
+    }
+
     public static Result managers() {
         return ok(managers.render());
     }
 
     public static Result stalls() {
         return ok(stalls.render());
+    }
+
+    public static Result stall() {
+        return ok(stall.render());
     }
 
     /*

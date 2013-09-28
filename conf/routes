@@ -23,8 +23,10 @@ GET         /public/stalls/getAll              controllers.PublicController.getA
 POST        /system/auth                       controllers.SystemController.auth()
 
 # HTML
+GET         /system/sidebar                   controllers.SystemController.sidebar()
 GET         /system/managers                   controllers.SystemController.managers()
 GET         /system/stalls                     controllers.SystemController.stalls()
+GET         /system/stall                      controllers.SystemController.stall()
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()

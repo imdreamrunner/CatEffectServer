@@ -7,7 +7,6 @@
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
 
     <script>
-        window.java = {};
         window.auth = {
             username: '@ctx().args.get("auth_username")',
             password: '@ctx().args.get("auth_password")'
@@ -31,7 +30,7 @@
                     </span>
                     <h3 id="canteen-name">Loading</h3>
                     <span class="button">
-                        <a href="javascript:" onclick="closePopUp()">
+                        <a href="javascript:" onclick="">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                             New Stall
                         </a>
@@ -92,7 +91,7 @@
     <tr>
         <td><%= name %></td>
         <td>
-            <a href="javascript:" onclick="viewStall(<%= stallId %>)">
+            <a href="javascript:" onclick="java.open('/system/stall?auth_username=admin&auth_password=admin')">
                 <span class="glyphicon glyphicon-pencil"></span>Edit
             </a>
             <a href="javascript:">

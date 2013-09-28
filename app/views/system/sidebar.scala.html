@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Side Bar</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/sidebar.css" rel="stylesheet" media="screen">
+    <script>
+        window.java = {};
+        window.auth = {
+            username: '@ctx().args.get("auth_username")',
+            password: '@ctx().args.get("auth_password")'
+        };
+    </script>
+</head>
+<body>
+<ul id="menu">
+    <li>
+        <a class="active" href="javascript:" id="menu-dashboard">
+            <span class="glyphicon glyphicon-home"></span>
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:" id="menu-accounts">
+            <span class="glyphicon glyphicon-hdd"></span>
+            <span>Accounts</span>
+            <span class="label">7</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:">
+            <span class="glyphicon glyphicon-hdd"></span>
+            <span>Funding projects</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:">
+            <span class="glyphicon glyphicon-hdd"></span>
+            <span>Volunteer projects</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:">
+            <span class="glyphicon glyphicon-hdd"></span>
+            <span>Historical records</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:">
+            <span class="glyphicon glyphicon-hand-right"></span>
+            <span>Help centre</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:" onclick="java.exit();">
+            <span class="glyphicon glyphicon-log-out"></span>
+            <span>Log out</span>
+        </a>
+    </li>
+</ul>
+</body>

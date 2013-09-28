@@ -1,0 +1,53 @@
+body {
+  background: #4d4d4d;
+}
+
+#menu {
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  border-top: 1px solid #414141;
+  border-bottom: 1px solid #585858;
+
+  li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #585858;
+    border-bottom: 1px solid #414141;
+    height: 40px;
+    box-sizing: content-box;
+
+    a {
+      opacity: 0.6;
+      display: block;
+      width: 220px;
+      height: 40px;
+      color: #FFF;
+      line-height: 40px;
+      width: 219px;
+      span {
+        margin-left: 10px;
+      }
+      span.glyphicon {
+        margin-left: 20px;
+      }
+      span.label {
+        margin: 9px 20px 0 0;
+        float: right;
+        padding: 4px 6px;
+        background: #333;
+      }
+      &:hover {
+        opacity: 1;
+        text-decoration: none;
+        background: #555;
+      }
+      &.active {
+        opacity: 1;
+        width: 220px;
+        background: url('/assets/images/admin-menu-active.png');
+      }
+    }
+  }
+}
