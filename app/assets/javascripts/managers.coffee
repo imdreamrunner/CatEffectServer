@@ -8,21 +8,6 @@ loadManagers = () ->
     $("#managers-tbody").append(table(manager))
   $('#manager-list').find('.content-loader').removeClass('content-loader');
 
-ajaxLoadManagers =
-  url:        "/system/managers/getAll"
-  data:
-              auth_username: auth['username']
-              auth_password: auth['password']
-              type:          1
-  type:       "post"
-  dataType:   "json"
-  success:    (data) ->
-    if (!data['error'])
-      managerList = data['managers']
-      loadManagers()
-  error:      () ->
-    console.log "error"
-
 findManager = (managerId) ->
   for manager in managerList
     if manager['managerId'] == managerId
@@ -30,7 +15,22 @@ findManager = (managerId) ->
 
 this.editManager = (managerId) ->
   manager = findManager(managerId)
-  this.showPopUp("#pop-up-manager", manager, 400, 270)
+  this.showPopBox("#pop-up-manager", manager, 400, 270)
 
-$(document).ready () ->
+this.pageLoad ->
+  ajaxLoadManagers =
+    url:        "/system/managers/getAll"
+    data:
+      auth_username: auth.getUsername()
+      auth_password: auth.getPassword()
+      type:          1
+    type:       "post"
+    dataType:   "json"
+    success:    (data) ->
+      if (!data['error'])
+        managerList = data['managers']
+        loadManagers()
+    error:      () ->
+      console.log "error"
+
   $.ajax ajaxLoadManagers

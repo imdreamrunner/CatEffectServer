@@ -55,6 +55,6 @@ ajaxLoadStalls =
     console.log "error"
 
 
-$(document).ready () ->
+this.pageLoad ->
   $.ajax ajaxLoadCanteens
   $.ajax ajaxLoadStalls

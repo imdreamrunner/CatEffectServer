@@ -5,13 +5,6 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-
-    <script>
-        window.auth = {
-            username: '@ctx().args.get("auth_username")',
-            password: '@ctx().args.get("auth_password")'
-        };
-    </script>
 </head>
 <body>
 <h1>Managers</h1>
@@ -21,6 +14,8 @@
     <a href="#" onclick="java.setFullScreen(true);">Full Screen</a>
     <a href="#" onclick="java.open('/');">Pop Up</a>
     <a href="#" onclick="java.exit();">Exit</a>
+    <a href="#" onclick="alert('xxx');">Alert</a>
+    <a href="#" onclick="alert(auth.getUsername());">Username</a>
 </div>
 <div id="contents">
     <div class="row">
@@ -61,13 +56,13 @@
             </span>
             <h3>Edit Manager</h3>
             <span class="button">
-                <a href="javascript:" onclick="closePopUp()">
+                <a href="javascript:" onclick="closePopBox()">
                     <span class="glyphicon glyphicon-remove"></span>
                     Cancel
                 </a>
             </span>
             <span class="button">
-                <a href="javascript:" onclick="closePopUp()">
+                <a href="javascript:" onclick="closePopBox()">
                     <span class="glyphicon glyphicon-ok"></span>
                     Save
                 </a>
@@ -105,6 +100,7 @@
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
 <script src="/assets/javascripts/main.js"></script>
 <script src="/assets/javascripts/managers.js"></script>
 </body>
