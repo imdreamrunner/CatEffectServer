@@ -7,7 +7,6 @@ this.pageLoad = pageLoad = (handler)->
   pageLoadHandlers.push(handler)
 
 this.javaPageLoad = javaPageLoad = ->
-  alert(pageLoadHandlers.length)
   while pageLoadHandlers.length > 0
     pageLoadHandlers.shift().call(this)
 
