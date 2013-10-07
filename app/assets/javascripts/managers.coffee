@@ -18,6 +18,9 @@ this.editManager = (managerId) ->
   this.showPopBox("#pop-up-manager", manager, 400, 270)
 
 this.pageLoad ->
+  if this.javaMode()
+    this.java.setMenu(6)
+
   ajaxLoadManagers =
     url:        "/system/managers/getAll"
     data:

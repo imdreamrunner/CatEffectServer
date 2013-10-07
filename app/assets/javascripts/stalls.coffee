@@ -56,5 +56,7 @@ ajaxLoadStalls =
 
 
 this.pageLoad ->
+  if this.javaMode()
+    this.java.setMenu(2)
   $.ajax ajaxLoadCanteens
   $.ajax ajaxLoadStalls

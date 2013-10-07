@@ -24,6 +24,7 @@ POST        /system/auth                       controllers.SystemController.auth
 
 # HTML
 GET         /system/sidebar                    controllers.SystemController.sidebar()
+GET         /system/dashboard                  controllers.SystemController.dashboard()
 GET         /system/managers                   controllers.SystemController.managers()
 GET         /system/stalls                     controllers.SystemController.stalls()
 GET         /system/stall                      controllers.SystemController.stall()
