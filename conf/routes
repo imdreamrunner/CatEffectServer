@@ -45,6 +45,8 @@ POST        /system/stalls/edit                controllers.SystemController.edit
 # StallController #
 ###################
 
+# Manage Categories
+POST        /stall/categories/add              controllers.StallController.addCategory()
 
 ###################
 # OrderController #
