@@ -15,7 +15,7 @@ import utils.CatException;
 import java.util.List;
 
 @Authentication
-public class StallContoller extends Controller {
+public class StallController extends Controller {
 
 	public static Result auth() {
         ObjectNode result = Json.newObject();
