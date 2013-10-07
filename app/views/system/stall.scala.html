@@ -5,13 +5,6 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-
-    <script>
-        window.auth = {
-            username: '@ctx().args.get("auth_username")',
-            password: '@ctx().args.get("auth_password")'
-        };
-    </script>
 </head>
 <body>
 <h1>Stall</h1>
@@ -23,11 +16,25 @@
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                    <h3 id="canteen-name">Loading</h3>
+                    <h3>Information</h3>
+                </div>
+                <div class="content content-loader">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Managers</h3>
                     <span class="button">
-                        <a href="javascript:" onclick="closePopUp()">
+                        <a href="javascript:">
                             <span class="glyphicon glyphicon-plus-sign"></span>
-                            New Stall
+                            New Manager
                         </a>
                     </span>
                 </div>

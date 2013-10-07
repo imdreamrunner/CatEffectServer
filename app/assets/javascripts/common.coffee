@@ -3,7 +3,6 @@ auth = this.auth = {}
 pageLoadHandlers = []
 
 this.pageLoad = pageLoad = (handler)->
-  alert "add handler"
   pageLoadHandlers.push(handler)
 
 this.javaPageLoad = javaPageLoad = ->
@@ -50,13 +49,21 @@ this.closePopBox = closePopBox = () ->
     .hide(400, () -> $(this).remove())
 
 
-# Util functions
+# URL Router
+
+this.params = params = {}
+
+$(this).ready ->
+  query = document.URL.split("#")[1]
+  data = query.split('&')
+  for item in data
+    params[item.split('=')[0]] = item.split('=')[1]
 
 _javamode = "undetected"
 
 this.javaMode = javaMode = ->
   if _javamode == "undetected"
-    _javamode = document.URL.split("#")[1] != "browser"
+    _javamode = params['browser'] != "true"
     if _javamode
       alert "enter java mode"
     else

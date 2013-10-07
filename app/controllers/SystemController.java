@@ -17,7 +17,6 @@ import views.html.system.stalls;
 
 import java.util.List;
 
-@Authentication(requireSystem = true)
 public class SystemController extends Controller {
 
     /*
@@ -44,6 +43,7 @@ public class SystemController extends Controller {
      * JSON Methods.
      */
 
+    @Authentication(requireSystem = true)
     public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
@@ -52,6 +52,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
     public static Result addManager() {
         ObjectNode result = Json.newObject();
         try {
@@ -80,15 +81,18 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
     public static Result editManager(int managerId) {
         ObjectNode result = Json.newObject();
         return ok("something");
     }
 
+    @Authentication(requireSystem = true)
     public static Result deleteManager(int managerId) {
         return ok("something");
     }
 
+    @Authentication(requireSystem = true)
     public static Result getOneManager(int managerId) {
         ObjectNode result = Json.newObject();
         Manager manager = Manager.find.byId(managerId);
@@ -97,6 +101,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
     public static Result getAllManagers() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
@@ -113,6 +118,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
     public static Result addStall() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
@@ -138,6 +144,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
     public static Result editStall(Integer stallId) {
         //find the row by id
         //form to get new information
