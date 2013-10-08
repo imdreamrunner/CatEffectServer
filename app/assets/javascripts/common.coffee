@@ -29,6 +29,7 @@ auth.getPassword = ->
 # Pop up
 
 this.showPopBox = showPopBox = (template, data, width, height) ->
+  closePopBox();
   if data == undefined
     data = {}
   tmpl = _.template $(template).html()

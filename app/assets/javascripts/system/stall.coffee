@@ -61,3 +61,16 @@ this.saveStall = ->
           that.java.close(true)
       else
         $("#stall-info-ajax").html data['message']
+
+
+findManager = (managerId) ->
+  for manager in managerList
+    if manager['managerId'] == managerId
+      return manager
+
+this.editManager = (managerId) ->
+  manager = findManager(managerId)
+  this.showPopBox("#pop-up-manager", manager, 400, 270)
+
+this.newManager = () ->
+  this.showPopBox("#pop-up-new-manager", {}, 400, 270)
