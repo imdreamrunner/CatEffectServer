@@ -109,12 +109,16 @@ public class SystemController extends Controller {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
         String strType = data.get("type");
+        String strStallId = data.get("stallId");
         List<Manager> managerList;
-        if (strType == null) {
-            managerList = Manager.find.all();
-        } else {
+        if (strType != null) {
             Integer type = Integer.parseInt(strType);
             managerList = Manager.find.where("type = " + type).findList();
+        } if (strStallId != null) {
+            Integer stallId = Integer.parseInt(strStallId);
+            managerList = Manager.find.where("stall_id = " + stallId).findList();
+        } else {
+            managerList = Manager.find.all();
         }
         result.put("error", 0);
         result.put("managers", Json.toJson(managerList));

@@ -1,3 +1,13 @@
+managerList = []
+
+# Add managerList to Table
+loadManagers = () ->
+  table = _.template $("#manager-row").html()
+  for manager in managerList
+    $("#managers-tbody").append(table(manager))
+  $('#manager-list').find('.content-loader').removeClass('content-loader');
+
+
 this.pageLoad ->
   this.stallId = stallId = this.params['stallId']
   stallInfoTemplate = _.template $("#stall-info-template").html()
@@ -13,6 +23,24 @@ this.pageLoad ->
         $("#stall-info").html stallInfoTemplate(stall)
     error: ->
       console.log "errer"
+
+  $.ajax
+    url:        "/system/managers/getAll"
+    data:
+      auth_username: this.auth.getUsername()
+      auth_password: this.auth.getPassword()
+      stallId:       this.stallId
+    type:       "post"
+    dataType:   "json"
+    success:    (data) ->
+      if (!data['error'])
+        managerList = data['managers']
+        loadManagers()
+      else
+        console.log "error!!!"
+    error:      () ->
+      console.log "error"
+
 
 this.saveStall = ->
   that = this

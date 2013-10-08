@@ -11,7 +11,7 @@
 <div id="contents">
     <div class="row">
         <div class="col-xs-12">
-            <div class="widget">
+            <div id="stall" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
@@ -19,7 +19,7 @@
                     <h3>Information</h3>
                     <span id="stall-info-save" class="button">
                         <a href="javascript:" onclick="saveStall()">
-                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
                             Save
                         </a>
                     </span>
@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="widget">
+            <div id="manager-list" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
@@ -49,6 +49,16 @@
                     </span>
                 </div>
                 <div class="content content-loader">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>Username</td>
+                            <td>Operation</td>
+                        </tr>
+                        </thead>
+                        <tbody id="managers-tbody">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -89,6 +99,20 @@
         <input type="text" class="form-control" id="inputCanteenId" name="CanteenId"
                placeholder="Canteen Id" value="<%= canteenId %>">
     </div>
+</script>
+
+<script type="text/html" id="manager-row">
+    <tr>
+        <td><%= username %></td>
+        <td>
+            <a href="javascript:" onclick="editManager(<%= managerId %>)">
+                <span class="glyphicon glyphicon-pencil"></span>Edit
+            </a>
+            <a href="javascript:">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </a>
+        </td>
+    </tr>
 </script>
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
