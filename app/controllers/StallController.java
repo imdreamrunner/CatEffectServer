@@ -11,20 +11,34 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
+import views.html.stall.sidebar;
 
 import java.util.List;
 
-@Authentication
 public class StallController extends Controller {
 
+    /*
+     * HTML Methods.
+     */
+
+    public static Result sidebar() {
+        return ok(sidebar.render());
+    }
+
+    /*
+     * JSON Methods.
+     */
+
+    @Authentication
 	public static Result auth() {
         ObjectNode result = Json.newObject();
         result.put("error", 0);
-        result.put("stall", ctx().args.get("stall").toString());
+        result.put("currentManager", Json.toJson(ctx().args.get("manager")));
         result.put("message", "Success.");
         return ok(result);
     }
 
+    @Authentication
     public static Result addCategory() {
     	ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
@@ -42,6 +56,7 @@ public class StallController extends Controller {
         return ok(result);
     }
 
+    @Authentication
 	public static Result editCategory(Integer categoryId) {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();

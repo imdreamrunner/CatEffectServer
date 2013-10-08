@@ -40,10 +40,15 @@ POST        /system/managers/getAll            controllers.SystemController.getA
 POST        /system/stalls/add                 controllers.SystemController.addStall()
 POST        /system/stalls/edit                controllers.SystemController.editStall(id: Int)
 
-
 ###################
 # StallController #
 ###################
+
+# Authentication
+POST        /stall/auth                        controllers.StallController.auth()
+
+# HTML
+GET         /stall/sidebar                     controllers.StallController.sidebar()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()
@@ -51,3 +56,6 @@ POST        /stall/categories/add              controllers.StallController.addCa
 ###################
 # OrderController #
 ###################
+
+# Feedback
+GET         /order/feedback                    controllers.OrderController.feedback()

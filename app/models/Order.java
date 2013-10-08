@@ -24,6 +24,9 @@ public class Order extends Model {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
 
+    private Integer feedback1, feedback2, feedback3;
+    // value could be 1, 2 or 3.
+
     public static Finder<Integer, Order> find = new Finder<Integer, Order>(
             Integer.class, Order.class
     );

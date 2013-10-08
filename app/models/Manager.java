@@ -1,5 +1,6 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
 
@@ -25,7 +26,15 @@ public class Manager extends Model {
     public Integer getManagerId() { return managerId; }
     public String getUsername() { return username; }
     public Integer getType() { return type; }
+    @JsonIgnore
     public Stall getStall() { return  stall; }
+    public Integer getStallId() {
+        if (stall != null) {
+            return stall.getStallId();
+        } else {
+            return null;
+        }
+    }
 
     public void setManagerId(Integer newManagerId) {
         managerId = newManagerId;

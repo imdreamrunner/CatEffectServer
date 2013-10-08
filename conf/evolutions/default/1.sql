@@ -38,7 +38,6 @@ create table dish (
   sort                      integer,
   list_price                integer,
   price                     integer,
-  academic_price            integer,
   options                   varchar(255),
   constraint pk_dish primary key (dish_id))
 ;
@@ -61,6 +60,9 @@ create table order_detail (
   status                    integer,
   create_time               datetime,
   serve_time                datetime,
+  feedback1                 integer,
+  feedback2                 integer,
+  feedback3                 integer,
   constraint pk_order_detail primary key (order_id))
 ;
 
@@ -82,7 +84,20 @@ create table stall (
   description               longtext,
   image                     varchar(255),
   canteen_id                integer,
+  prepaid_discount          integer,
+  student_discount          integer,
+  facuty_discount           integer,
+  stall_discount            integer,
   constraint pk_stall primary key (stall_id))
+;
+
+create table stall_application (
+  stall_application_id      integer auto_increment not null,
+  stall_name                varchar(255),
+  stall_description         varchar(255),
+  contact_person            varchar(255),
+  contact_number            varchar(255),
+  constraint pk_stall_application primary key (stall_application_id))
 ;
 
 create table transaction (
@@ -137,6 +152,8 @@ drop table order_detail;
 drop table order_item;
 
 drop table stall;
+
+drop table stall_application;
 
 drop table transaction;
 

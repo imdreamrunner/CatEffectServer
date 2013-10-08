@@ -18,6 +18,9 @@ public class Stall extends Model {
     @ManyToOne
     @JoinColumn(name="canteen_id")
     private Canteen canteen;
+
+    private Integer prepaidDiscount, studentDiscount, facutyDiscount, stallDiscount;
+
     @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)
     private List<Manager> managers;
     @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)

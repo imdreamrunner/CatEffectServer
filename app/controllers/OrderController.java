@@ -1,14 +1,11 @@
 package controllers;
 
-import java.lang.annotation.*;
-
-import org.codehaus.jackson.node.ObjectNode;
-import play.data.*;
-import play.libs.*;
-import play.mvc.*;
-
-import models.*;
-import utils.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.order.feedback;
 
 public class OrderController extends Controller {
+    public static Result feedback() {
+        return ok(feedback.render());
+    }
 }

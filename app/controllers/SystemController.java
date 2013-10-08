@@ -47,9 +47,17 @@ public class SystemController extends Controller {
     @Authentication(requireSystem = true)
     public static Result auth() {
         ObjectNode result = Json.newObject();
-        result.put("error", 0);
-        result.put("currentManager", Json.toJson(ctx().args.get("manager")));
-        result.put("message", "Success.");
+
+        Manager manager = (Manager) ctx().args.get("manager");
+        if (manager.getType() == 0) {
+            result.put("error", 1009);
+            result.put("message", "This is a system manager account.");
+        } else {
+            result.put("error", 0);
+            result.put("currentManager", Json.toJson(ctx().args.get("manager")));
+            result.put("message", "Success.");
+        }
+
         return ok(result);
     }
 
