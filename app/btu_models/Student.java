@@ -1,13 +1,9 @@
 package btu_models;
 
-import java.util.*;
-import javax.persistence.*;
+import play.db.ebean.Model;
 
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import utils.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Student extends Model {
@@ -15,6 +11,8 @@ public class Student extends Model {
     private Integer studentId;
 
     private String name;
+
+    private String email;
 
     private String cardId;
 }

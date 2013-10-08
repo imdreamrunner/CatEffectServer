@@ -9,11 +9,13 @@
 <body>
 <h1>Managers</h1>
 <div id="tabs">
-    <a href="#" class="current">Lists</a>
-    <a href="#">New Manager</a>
-    <a href="#" onclick="java.setFullScreen(true);">Full Screen</a>
-    <a href="#" onclick="java.open('/', 400, 500);">Pop Up</a>
-    <a href="#" onclick="java.exit();">Exit</a>
+    <a href="javascript:" class="current">System Managers</a>
+    <!--
+    <a href="javascript:">New Manager</a>
+    <a href="javascript:" onclick="java.setFullScreen(true);">Full Screen</a>
+    <a href="javascript:" onclick="java.open('/', 400, 500);">Pop Up</a>
+    <a href="javascript:" onclick="java.exit();">Exit</a>
+    -->
 </div>
 <div id="contents">
     <div class="row">
@@ -24,6 +26,12 @@
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
                     <h3>System Managers</h3>
+                    <span class="button">
+                        <a href="javascript:" onclick="">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            New Manager
+                        </a>
+                    </span>
                 </div>
                 <div class="content content-loader">
                     <table class="table table-striped">

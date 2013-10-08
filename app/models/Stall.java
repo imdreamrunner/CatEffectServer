@@ -35,7 +35,11 @@ public class Stall extends Model {
     public String getDescription() {return description; }
     public Integer getSort() { return sort; }
     public String getImage() { return image; }
+    @JsonIgnore
     public Canteen getCanteen() { return canteen; }
+    public Integer getCanteenId() {
+        return canteen != null ? canteen.getCanteenId() : null;
+    }
     @JsonIgnore
     public List<Manager> getManagers() { return managers; }
 

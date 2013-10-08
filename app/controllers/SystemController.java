@@ -48,15 +48,9 @@ public class SystemController extends Controller {
     public static Result auth() {
         ObjectNode result = Json.newObject();
 
-        Manager manager = (Manager) ctx().args.get("manager");
-        if (manager.getType() == 0) {
-            result.put("error", 1009);
-            result.put("message", "This is a system manager account.");
-        } else {
-            result.put("error", 0);
-            result.put("currentManager", Json.toJson(ctx().args.get("manager")));
-            result.put("message", "Success.");
-        }
+        result.put("error", 0);
+        result.put("currentManager", Json.toJson(ctx().args.get("manager")));
+        result.put("message", "Success.");
 
         return ok(result);
     }
@@ -155,9 +149,37 @@ public class SystemController extends Controller {
 
     @Authentication(requireSystem = true)
     public static Result editStall(Integer stallId) {
-        //find the row by id
-        //form to get new information
-        //check what information has been changed
-        return ok("TODO");
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Stall stall = Stall.find.byId(stallId);
+            if (stall == null) {
+                throw new CatException(2001, "Stall not found.");
+            }
+            stall.setName(data.get("name"));
+            stall.setDescription(data.get("description"));
+            if (data.get("sort") != null) {
+                stall.setSort(Integer.parseInt(data.get("sort")));
+            }
+            stall.setImage(data.get("image"));
+            if (data.get("canteenId") != null) {
+                stall.setCanteen(Integer.parseInt(data.get("canteenId")));
+            }
+            stall.save();
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
     }
+
+    @Authentication(requireSystem = true)
+    public static Result deleteStall(Integer stallId) {
+        ObjectNode result = Json.newObject();
+        Stall stall = Stall.find.byId(stallId);
+        stall.delete();
+        result.put("error", 0);
+        return ok(result);
+    }
+
 }

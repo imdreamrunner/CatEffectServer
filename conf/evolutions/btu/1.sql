@@ -6,6 +6,7 @@
 create table faculty (
   faculty_id                integer auto_increment not null,
   name                      varchar(255),
+  email                     varchar(255),
   card_id                   varchar(255),
   constraint pk_faculty primary key (faculty_id))
 ;
@@ -13,6 +14,7 @@ create table faculty (
 create table staff (
   staff_id                  integer auto_increment not null,
   name                      varchar(255),
+  email                     varchar(255),
   card_id                   varchar(255),
   constraint pk_staff primary key (staff_id))
 ;
@@ -20,6 +22,7 @@ create table staff (
 create table student (
   student_id                integer auto_increment not null,
   name                      varchar(255),
+  email                     varchar(255),
   card_id                   varchar(255),
   constraint pk_student primary key (student_id))
 ;

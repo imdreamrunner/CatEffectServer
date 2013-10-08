@@ -32,5 +32,12 @@ public class PublicController extends Controller {
         return ok(result);
     }
 
+    public static Result getOneStall(Integer stallId) {
+        ObjectNode result = Json.newObject();
+        Stall stall = Stall.find.byId(stallId);
+        result.put("error", 0);
+        result.put("stall", Json.toJson(stall));
+        return ok(result);
+    }
 
 }

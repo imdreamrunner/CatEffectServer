@@ -77,6 +77,12 @@ create table order_item (
   constraint pk_order_item primary key (order_item_id))
 ;
 
+create table prepaid_card (
+  prepaid_card_id           integer auto_increment not null,
+  token                     varchar(255),
+  constraint pk_prepaid_card primary key (prepaid_card_id))
+;
+
 create table stall (
   stall_id                  integer auto_increment not null,
   name                      varchar(255),
@@ -89,15 +95,6 @@ create table stall (
   facuty_discount           integer,
   stall_discount            integer,
   constraint pk_stall primary key (stall_id))
-;
-
-create table stall_application (
-  stall_application_id      integer auto_increment not null,
-  stall_name                varchar(255),
-  stall_description         varchar(255),
-  contact_person            varchar(255),
-  contact_number            varchar(255),
-  constraint pk_stall_application primary key (stall_application_id))
 ;
 
 create table transaction (
@@ -151,9 +148,9 @@ drop table order_detail;
 
 drop table order_item;
 
-drop table stall;
+drop table prepaid_card;
 
-drop table stall_application;
+drop table stall;
 
 drop table transaction;
 

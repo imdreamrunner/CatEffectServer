@@ -7,7 +7,7 @@
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<h1>Stall</h1>
+<h1>Edit Stall</h1>
 <div id="contents">
     <div class="row">
         <div class="col-xs-12">
@@ -17,8 +17,18 @@
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
                     <h3>Information</h3>
+                    <span id="stall-info-save" class="button">
+                        <a href="javascript:" onclick="saveStall()">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Save
+                        </a>
+                    </span>
+                    <span id="stall-info-ajax" class="button hidden">
+                        Saving ...
+                    </span>
                 </div>
-                <div class="content content-loader">
+                <div id="stall-info-div" class="content ajax-loader">
+                    <form id="stall-info"></form>
                 </div>
             </div>
         </div>
@@ -48,10 +58,44 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
+
+<script type="text/html" id="stall-info-template">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control" id="inputName" name="name"
+               placeholder="Stall Name" value="<%= name %>">
+    </div>
+
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea class="form-control" id="inputDescription"
+                  name="description" placeholder="Description"><%= description %></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="inputSort">Sort</label>
+        <input type="text" class="form-control" id="inputSort" name="sort"
+               placeholder="Sort" value="<%= sort %>">
+    </div>
+
+    <div class="form-group">
+        <label for="inputImage">Image</label>
+        <input type="text" class="form-control" id="inputImage" name="Image"
+               placeholder="Image" value="<%= image %>">
+    </div>
+
+    <div class="form-group">
+        <label for="inputCanteenId">Canteen</label>
+        <input type="text" class="form-control" id="inputCanteenId" name="CanteenId"
+               placeholder="Canteen Id" value="<%= canteenId %>">
+    </div>
+</script>
+
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>
 <script src="/assets/javascripts/common.js"></script>
 <script src="/assets/javascripts/main.js"></script>
+<script src="/assets/javascripts/system/stall.js"></script>
 </body>
 </html>

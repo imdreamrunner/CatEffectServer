@@ -2,6 +2,7 @@ package controllers;
 
 import models.Category;
 import models.Dish;
+import models.Manager;
 import models.Order;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
@@ -32,9 +33,17 @@ public class StallController extends Controller {
     @Authentication
 	public static Result auth() {
         ObjectNode result = Json.newObject();
-        result.put("error", 0);
-        result.put("currentManager", Json.toJson(ctx().args.get("manager")));
-        result.put("message", "Success.");
+
+        Manager manager = (Manager) ctx().args.get("manager");
+        if (manager.getType() == 1) {
+            result.put("error", 1009);
+            result.put("message", "This is a system manager account.");
+        } else {
+            result.put("error", 0);
+            result.put("currentManager", Json.toJson(ctx().args.get("manager")));
+            result.put("message", "Success.");
+        }
+
         return ok(result);
     }
 

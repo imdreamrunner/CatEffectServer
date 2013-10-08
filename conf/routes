@@ -13,6 +13,7 @@ GET         /public/canteens/getAll            controllers.PublicController.getA
 
 # Stall Information
 GET         /public/stalls/getAll              controllers.PublicController.getAllStalls()
+GET         /public/stalls/getOne/:id          controllers.PublicController.getOneStall(id: Int)
 
 
 ####################
@@ -38,7 +39,8 @@ POST        /system/managers/getAll            controllers.SystemController.getA
 
 # Manage Stalls
 POST        /system/stalls/add                 controllers.SystemController.addStall()
-POST        /system/stalls/edit                controllers.SystemController.editStall(id: Int)
+POST        /system/stalls/edit/:id            controllers.SystemController.editStall(id: Int)
+POST        /system/stalls/delete/:id          controllers.SystemController.deleteStall(id: Int)
 
 ###################
 # StallController #
