@@ -116,15 +116,15 @@ public class StallController extends Controller {
     	String newName  = data.get("name");
     	String newImage = data.get("image");
     	String newDescription = data.get("description");
-        Integer newCategoryId = null,
-                newListPrice  = null,
-                newPrice      = null;
+        Integer newCategoryId       = null,
+                newPromotionalPrice = null,
+                newPrice            = null;
 
         if (data.get("categoryId") != null) {
             newCategoryId = Integer.parseInt(data.get("categoryId"));
         }
         if (data.get("listPrice") != null) {
-            newListPrice = Integer.parseInt(data.get("listPrice"));
+            newPromotionalPrice = Integer.parseInt(data.get("promotionalPrice"));
         }
         if (data.get("price") != null) {
             newPrice = Integer.parseInt(data.get("price"));
@@ -135,7 +135,7 @@ public class StallController extends Controller {
             newDish.setName(newName);
             newDish.setDescription(newDescription);
             newDish.setImage(newImage);
-            newDish.setListPrice(newListPrice);
+            newDish.setPromotionalPrice(newPromotionalPrice);
             newDish.setPrice(newPrice);
             newDish.setOptions(newOptions);
             newDish.setCategory(newCategoryId);

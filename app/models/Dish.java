@@ -17,23 +17,26 @@ public class Dish extends Model {
     @JoinColumn(name="category_id")
     private Category category;
     private Integer sort = 0;
-    private Integer listPrice;
     private Integer price;
+    private Integer promotionalPrice;
+    private Integer promotionStart, promotionEnd;
     private String options;
 
     public static Finder<Integer, Dish> find = new Finder<Integer, Dish>(
             Integer.class, Dish.class
     );
 
-    public Integer getdishId() { return dishId; }
+    public Integer getDishId() { return dishId; }
     public String getName() { return name; }
     public String getImage() { return image; }
     public String getDescription() { return description; }
     public Category getCategory() { return category; }
     public Integer getSort() { return sort; }
-    public Integer getListPrice() { return listPrice; }
+    public Integer getPromotionalPrice() {return promotionalPrice;}
     public Integer getPrice() { return price; }
     public String getOptions() { return options; }
+    public Integer getPromotionStart() {return promotionStart; }
+    public Integer getPromotionEnd() {return promotionEnd; }
 
     public void setName(String newName) { name = newName;}
     public void setImage(String newImage) { image = newImage;}
@@ -47,8 +50,10 @@ public class Dish extends Model {
         setCategory(newCategory);
     }
     public void setSort(Integer newSort) { sort = newSort;}
-    public void setListPrice(Integer newListPrice) { listPrice = newListPrice;}
     public void setPrice(Integer newPrice) { price = newPrice;}
+    public void setPromotionalPrice(Integer newPromotionalPrice) {promotionalPrice = newPromotionalPrice; }
+    public void setPromotionStart(Integer newPromotionStart) {promotionStart = newPromotionStart; }
+    public void setPromotionEnd(Integer newPromotionEnd) {promotionEnd = newPromotionEnd; }
     public void setOptions(String newOptions) { options = newOptions;}
 
 

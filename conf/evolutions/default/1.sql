@@ -36,8 +36,10 @@ create table dish (
   description               longtext,
   category_id               integer,
   sort                      integer,
-  list_price                integer,
   price                     integer,
+  promotional_price         integer,
+  promotion_start           integer,
+  promotion_end             integer,
   options                   varchar(255),
   constraint pk_dish primary key (dish_id))
 ;
