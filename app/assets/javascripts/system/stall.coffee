@@ -102,6 +102,10 @@ this.editManager = (managerId) ->
   manager = findManager(managerId)
   this.showPopBox("#pop-up-manager", manager, 400, 270)
 
+this.deleteManager = (managerId) ->
+  manager = findManager(managerId)
+  this.showPopBox("#pop-up-confirm-delete-manager", manager, 500, 180)
+
 this.newManager = () ->
   this.showPopBox("#pop-up-new-manager", {}, 400, 270)
 
@@ -116,6 +120,21 @@ this.doAddManager = ->
     auth_password: this.auth.getPassword()
   $.ajax
     url:      "/system/managers/add"
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success:  (data) ->
+      if (!data["error"])
+        location.reload()
+      else
+        alert data["message"]
+
+this.confirmDeleteManager = (managerId) ->
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+  $.ajax
+    url:      "/system/managers/delete/" + managerId
     type:     "post"
     dataType: "json"
     data:     postData

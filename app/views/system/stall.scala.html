@@ -156,7 +156,7 @@
             <a href="javascript:" onclick="editManager(<%= managerId %>)">
                 <span class="glyphicon glyphicon-pencil"></span>Edit
             </a>
-            <a href="javascript:">
+            <a href="javascript:" onclick="deleteManager(<%= managerId %>)">
                 <span class="glyphicon glyphicon-remove"></span>Delete
             </a>
         </td>
@@ -230,6 +230,33 @@
                     <input class="form-control password" placeholder="Password">
                 </div>
             </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pop-up-confirm-delete-manager">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Delete Manager?</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <p>Do you really want to delete the manager <strong><%= username %></strong>?</p>
+            <p>NOTE: This action cannot be undo!</p>
+            <p>
+                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteManager(<%= managerId %>)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Confirm Delete
+                </a>
+            </p>
         </div>
     </div>
 </script>

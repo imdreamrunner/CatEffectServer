@@ -92,7 +92,19 @@ public class SystemController extends Controller {
 
     @Authentication(requireSystem = true)
     public static Result deleteManager(int managerId) {
-        return ok("something");
+        ObjectNode result = Json.newObject();
+        try {
+            Manager manager = Manager.find.byId(managerId);
+            if (manager == null) {
+                throw new CatException(3001, "Manager not found.");
+            }
+            manager.delete();
+            result.put("error", 0);
+        } catch (CatException ex) {
+            result.put("error", ex.getCode());
+            result.put("message", ex.getMessage());
+        }
+        return ok(result);
     }
 
     @Authentication(requireSystem = true)
