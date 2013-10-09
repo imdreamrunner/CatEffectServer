@@ -36,10 +36,6 @@ public class Manager extends Model {
         }
     }
 
-    public void setManagerId(Integer newManagerId) {
-        managerId = newManagerId;
-    }
-
     public void setUsername(String newUsername) throws CatException {
         if (newUsername == null || newUsername.length() < 3) {
             throw new CatException(1, "Username must contain at least 3 characters.");
@@ -70,8 +66,8 @@ public class Manager extends Model {
 
     public void setStall(Integer newStallId) throws CatException {
         Stall newStall = Stall.find.byId(newStallId);
-        if (newStall != null) {
-            throw new CatException(5001, "Stall does not exist");
+        if (newStall == null) {
+            throw new CatException(5001, "Stall does not exist." + newStallId);
         }
         setStall(newStall);
     }

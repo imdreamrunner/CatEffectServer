@@ -8,6 +8,7 @@ loadManagers = () ->
   $('#manager-list').find('.content-loader').removeClass('content-loader');
 
 this.loadStall = ->
+  $("#stall-info").addClass "hidden"
   $("#stall-display").removeClass "hidden"
   stallTableTemplate = _.template $("#stall-table-template").html()
   $.ajax
@@ -84,7 +85,6 @@ this.saveStall = ->
       if (!data["error"])
         $stallInfo.find(".stall-info-ajax").html "Success!"
         # $stallInfo.find(".stall-info-save").show()
-        $stallInfo.addClass "hidden"
         loadStall()
         if that.javaMode()
           that.java.refreshParent()
@@ -104,3 +104,23 @@ this.editManager = (managerId) ->
 
 this.newManager = () ->
   this.showPopBox("#pop-up-new-manager", {}, 400, 270)
+
+this.doAddManager = ->
+  username = $(".popbox .username").val()
+  password = $(".popbox .password").val()
+  postData =
+    username: username
+    password: password
+    stallId:  this.stallId
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+  $.ajax
+    url:      "/system/managers/add"
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success:  (data) ->
+      if (!data["error"])
+        location.reload()
+      else
+        alert data["message"]

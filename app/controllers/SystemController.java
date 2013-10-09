@@ -132,9 +132,13 @@ public class SystemController extends Controller {
         String newStallName = data.get("stallName");
         String newDescription = data.get("description");
         String newImage = data.get("image");
+        Integer newSort = null;
         Integer newCanteenId = null;
         if (data.get("canteenId") != null) {
             newCanteenId = Integer.parseInt(data.get("canteenId"));
+        }
+        if (data.get("sort") != null) {
+            newSort = Integer.parseInt(data.get("sort"));
         }
         try {
             Stall newStall = new Stall();
@@ -142,6 +146,8 @@ public class SystemController extends Controller {
             newStall.setDescription(newDescription);
             newStall.setImage(newImage);
             newStall.setCanteen(newCanteenId);
+            newStall.setSort(newSort);
+            newStall.save();
             result.put("error", 0);
             result.put("newStall", Json.toJson(newStall));
         } catch (CatException e) {

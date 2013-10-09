@@ -51,6 +51,7 @@ POST        /stall/auth                        controllers.StallController.auth(
 
 # HTML
 GET         /stall/sidebar                     controllers.StallController.sidebar()
+GET         /stall/dashboard                   controllers.StallController.dashboard()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()

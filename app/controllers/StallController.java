@@ -13,6 +13,7 @@ import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
 import views.html.stall.sidebar;
+import views.html.stall.dashboard;
 
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class StallController extends Controller {
 
     public static Result sidebar() {
         return ok(sidebar.render());
+    }
+
+    public static Result dashboard() {
+        return ok(dashboard.render());
     }
 
     /*

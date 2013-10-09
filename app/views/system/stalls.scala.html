@@ -11,7 +11,9 @@
 <div id="tabs">
     <span id="canteen-list">
     </span>
+    <!--
     <a href="javascript:">Manage Canteens</a>
+    -->
 </div>
 <div id="contents">
     <div class="row">
@@ -23,7 +25,7 @@
                     </span>
                     <h3 id="canteen-name">Loading</h3>
                     <span class="button">
-                        <a href="javascript:" onclick="">
+                        <a href="javascript:" onclick="newStall()">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                             New Stall
                         </a>
@@ -34,6 +36,7 @@
                         <thead>
                         <tr>
                             <td>Stall</td>
+                            <td>Menu</td>
                             <td>Operation</td>
                         </tr>
                         </thead>
@@ -86,8 +89,14 @@
 <script type="text/html" id="stall-row">
     <tr>
         <td>
-            <a href="javascript:" onclick="java.open('/system/stall#stallId=<%= stallId %>', 1000, 600)">
+            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
                 <%= name %>
+            </a>
+        </td>
+
+        <td>
+            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
+                View Menu
             </a>
         </td>
         <td>
@@ -96,6 +105,37 @@
             </a>
         </td>
     </tr>
+</script>
+
+<script type="text/html" id="pop-up-new-stall">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Add a New Stall</h3>
+            <span class="button">
+                <a href="javascript:" onclick="doAddStall()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Create
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputStallName">Stall Name</label>
+                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
+                </div>
+            </form>
+        </div>
+    </div>
 </script>
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>

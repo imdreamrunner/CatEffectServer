@@ -70,3 +70,13 @@ this.javaMode = javaMode = ->
     else
       console.log "enter browser mode"
   return _javamode
+
+this.newWindow = (target, width, height) ->
+  if javaMode()
+    this.java.open(target, width, height)
+  else
+    urls = target.split("#")
+    if urls[2] == null
+      this.open(target + "#browser=true")
+    else
+      this.open(target + "&browser=true")

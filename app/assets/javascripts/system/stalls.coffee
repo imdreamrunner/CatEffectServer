@@ -1,6 +1,7 @@
 auth = this.auth
 canteenList = {}
 stallList = {}
+currentCanteen = 0;
 
 dataToLoad = 2
 
@@ -27,6 +28,7 @@ getStall = (stallId) ->
 
 this.loadStalls = loadStalls = (canteenId) ->
   $('.canteen-button').removeClass "current"
+  currentCanteen = canteenId
   $('#canteen-button-' + canteenId).addClass "current"
   $('#canteen-name').html getCanteen(canteenId)['name']
   $("#stalls-tbody").html ""
@@ -65,6 +67,28 @@ this.pageLoad ->
     this.java.setMenu(2)
   $.ajax ajaxLoadCanteens
   $.ajax ajaxLoadStalls
+
+this.newStall = ->
+  this.showPopBox("#pop-up-new-stall", {}, 400, 150)
+
+this.doAddStall = ->
+  that = this
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+    stallName:     $(".popbox").find("#inputStallName").val()
+    canteenId:     currentCanteen
+  $.ajax
+    url:      "/system/stalls/add"
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success:  (data) ->
+      if (!data['error'])
+        that.newWindow('/system/stall#stallId=' + data['newStall']['stallId'], 1000, 600)
+      else
+        console.log data['message']
+
 
 this.deleteStall = (stallId) ->
   stall = getStall(stallId)
