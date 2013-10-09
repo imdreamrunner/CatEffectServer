@@ -7,9 +7,23 @@ loadManagers = () ->
     $("#managers-tbody").append(table(manager))
   $('#manager-list').find('.content-loader').removeClass('content-loader');
 
+this.loadStall = ->
+  $("#stall-display").removeClass "hidden"
+  stallTableTemplate = _.template $("#stall-table-template").html()
+  $.ajax
+    url:        "/public/stalls/getOne/" + stallId
+    type:       "get"
+    dataType:   "json"
+    success: (data) ->
+      if (!data['error'])
+        stall = data['stall']
+        $stallDisplay = $("#stall-display")
+        $stallDisplay.find(".ajax-loader").removeClass "ajax-loader"
+        $stallDisplay.find(".stall-table").html stallTableTemplate(stall)
+    error: ->
+      console.log "errer"
 
-this.pageLoad ->
-  this.stallId = stallId = this.params['stallId']
+this.editStall = ->
   stallInfoTemplate = _.template $("#stall-info-template").html()
 
   $.ajax
@@ -19,10 +33,20 @@ this.pageLoad ->
     success: (data) ->
       if (!data['error'])
         stall = data['stall']
-        $("#stall-info-div").removeClass "ajax-loader"
-        $("#stall-info").html stallInfoTemplate(stall)
+        $("#stall-display").addClass "hidden"
+        $stallInfo = $("#stall-info")
+        $stallInfo.removeClass "hidden"
+        $stallInfo.find(".stall-info-ajax").addClass "hidden"
+        $stallInfo.find(".stall-info-save").show()
+        $stallInfo.find(".ajax-loader").removeClass "ajax-loader"
+        $stallInfo.find(".stall-info").html stallInfoTemplate(stall)
     error: ->
       console.log "errer"
+
+this.pageLoad ->
+  this.stallId = stallId = this.params['stallId']
+
+  loadStall()
 
   $.ajax
     url:        "/system/managers/getAll"
@@ -44,11 +68,13 @@ this.pageLoad ->
 
 this.saveStall = ->
   that = this
-  data = $("#stall-info").serialize()
+  $stallInfo = $("#stall-info");
+  data = $stallInfo.find(".stall-info").serialize()
   data += "&auth_username=" + this.auth.getUsername();
   data += "&auth_password=" + this.auth.getPassword();
-  $("#stall-info-save").hide()
-  $("#stall-info-ajax").removeClass "hidden"
+  $stallInfo.find(".stall-info-save").hide()
+  $stallInfo.find(".stall-info-ajax").html "Saving..."
+  $stallInfo.find(".stall-info-ajax").removeClass "hidden"
   $.ajax
     url:        "/system/stalls/edit/" + this.stallId
     type:       "post"
@@ -56,11 +82,15 @@ this.saveStall = ->
     dataType:   "json"
     success: (data) ->
       if (!data["error"])
-        $("#stall-info-ajax").html "Success!"
+        $stallInfo.find(".stall-info-ajax").html "Success!"
+        # $stallInfo.find(".stall-info-save").show()
+        $stallInfo.addClass "hidden"
+        loadStall()
         if that.javaMode()
-          that.java.close(true)
+          that.java.refreshParent()
+          # that.java.close()
       else
-        $("#stall-info-ajax").html data['message']
+        $stallInfo.find(".stall-info-ajax").html data['message']
 
 
 findManager = (managerId) ->

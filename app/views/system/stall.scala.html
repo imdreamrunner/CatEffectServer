@@ -10,31 +10,47 @@
 <h1>Edit Stall</h1>
 <div id="contents">
     <div class="row">
-        <div class="col-xs-12">
-            <div id="stall" class="widget">
+        <div class="col-xs-6">
+            <div id="stall-display" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
                     <h3>Information</h3>
-                    <span id="stall-info-save" class="button">
+                    <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="editStall()">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            Edit
+                        </a>
+                    </span>
+                </div>
+                <div class="content ajax-loader">
+                    <table class="stall-table table table-striped">
+                    </table>
+                </div>
+            </div>
+            <div id="stall-info" class="widget hidden">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Information</h3>
+                    <span class="stall-info-save button">
                         <a href="javascript:" onclick="saveStall()">
                             <span class="glyphicon glyphicon-floppy-disk"></span>
                             Save
                         </a>
                     </span>
-                    <span id="stall-info-ajax" class="button hidden">
+                    <span class="stall-info-ajax button hidden">
                         Saving ...
                     </span>
                 </div>
-                <div id="stall-info-div" class="content ajax-loader">
-                    <form id="stall-info"></form>
+                <div class="content ajax-loader">
+                    <form class="stall-info"></form>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
             <div id="manager-list" class="widget">
                 <div class="title">
                     <span class="icon">
@@ -64,11 +80,37 @@
         </div>
     </div>
 </div>
+<!--
 <div id="copyright">
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
+-->
 
+<script type="text/html" id="stall-table-template">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td><%= name %></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td><%= description %></td>
+    </tr>
+    <tr>
+        <td>Sort</td>
+        <td><%= sort %></td>
+    </tr>
+    <tr>
+        <td>Image</td>
+        <td><%= image %></td>
+    </tr>
+    <tr>
+        <td>Canteen</td>
+        <td><%= canteenId %></td>
+    </tr>
+    </tbody>
+</script>
 <script type="text/html" id="stall-info-template">
     <div class="form-group">
         <label for="inputName">Name</label>
@@ -90,7 +132,7 @@
 
     <div class="form-group">
         <label for="inputImage">Image</label>
-        <input type="text" class="form-control" id="inputImage" name="Image"
+        <input type="text" class="form-control" id="inputImage" name="image"
                placeholder="Image" value="<%= image %>">
     </div>
 
