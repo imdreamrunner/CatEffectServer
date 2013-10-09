@@ -2,9 +2,9 @@ package models;
 
 import play.db.ebean.Model;
 import utils.CatException;
-import java.util.Calendar;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 public class Dish extends Model {
@@ -43,11 +43,11 @@ public class Dish extends Model {
         Calendar now = Calendar.getInstance();
         int hour = now.get(Calendar.HOUR_OF_DAY);
         int minute = now.get(Calendar.MINUTE);
-        int now = hour*60+minute;
+        int currentTime = hour*60+minute;
         if (promotionStart <= promotionEnd) 
-            return (promotionStart <=now && now<=promotionEnd);
-        else 
-            return (promotionStart <=now || now<=promotionEnd);
+            return (promotionStart <= currentTime && currentTime <= promotionEnd);
+        else
+            return (promotionStart <= currentTime || currentTime <= promotionEnd);
         
     }
     public Integer getFinalPrice() { 
