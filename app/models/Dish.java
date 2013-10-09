@@ -2,6 +2,7 @@ package models;
 
 import play.db.ebean.Model;
 import utils.CatException;
+import java.util.Calendar;
 
 import javax.persistence.*;
 
@@ -33,7 +34,29 @@ public class Dish extends Model {
     public Category getCategory() { return category; }
     public Integer getSort() { return sort; }
     public Integer getPromotionalPrice() {return promotionalPrice;}
-    public Integer getPrice() { return price; }
+    public Integer getPrice() {
+        return price;
+    }
+
+    public boolean getPromitionActivated() {
+        if (promotionStart==null || promotionEnd==null) return false;
+        Calendar now = Calendar.getInstance();
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        int now = hour*60+minute;
+        if (promotionStart <= promotionEnd) 
+            return (promotionStart <=now && now<=promotionEnd);
+        else 
+            return (promotionStart <=now || now<=promotionEnd);
+        
+    }
+    public Integer getFinalPrice() { 
+        if (getPromitionActivated())
+            return promotionalPrice;
+        else 
+            return price; 
+    }
+
     public String getOptions() { return options; }
     public Integer getPromotionStart() {return promotionStart; }
     public Integer getPromotionEnd() {return promotionEnd; }
@@ -55,6 +78,11 @@ public class Dish extends Model {
     public void setPromotionStart(Integer newPromotionStart) {promotionStart = newPromotionStart; }
     public void setPromotionEnd(Integer newPromotionEnd) {promotionEnd = newPromotionEnd; }
     public void setOptions(String newOptions) { options = newOptions;}
+    public void setPromotionPeriod(int newPromotionStart, int newPromotionEnd, int newPromotionalPrice) {
+        promotionStart = newPromotionStart;
+        promotionEnd = newPromotionEnd;
+        setPromotionalPrice(newPromotionalPrice);
+    }
 
 
 }
