@@ -19,12 +19,12 @@ auth.getUsername = ->
   if javaMode()
     return java.getUsername()
   else
-    return "test"
+    return "stall1"
 auth.getPassword = ->
   if javaMode()
     return java.getPassword()
   else
-    return "test123"
+    return "stall1"
 
 # Pop up
 
@@ -43,11 +43,11 @@ this.showPopBox = showPopBox = (template, data, width, height) ->
     display:    "none"
   popBoxDiv.css css
   $("body").append popBoxDiv
-  popBoxDiv.show(400)
+  popBoxDiv.fadeIn(400)
 
 this.closePopBox = closePopBox = () ->
   $('.popbox')
-    .hide(400, () -> $(this).remove())
+    .fadeOut(400, () -> $(this).remove())
 
 
 # URL Router

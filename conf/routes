@@ -15,6 +15,11 @@ GET         /public/canteens/getAll            controllers.PublicController.getA
 GET         /public/stalls/getAll              controllers.PublicController.getAllStalls()
 GET         /public/stalls/getOne/:id          controllers.PublicController.getOneStall(id: Int)
 
+# Menu
+GET         /public/categories/getAll/:stall   controllers.PublicController.getAllCategories(stall: Int)
+GET         /public/categories/getOne/:id      controllers.PublicController.getOneCategory(id: Int)
+GET         /public/dishes/getAll/:category    controllers.PublicController.getAllDishes(category: Int)
+GET         /public/dishes/getOne/:id          controllers.PublicController.getOneDish(id: Int)
 
 ####################
 # SystemController #
@@ -52,9 +57,14 @@ POST        /stall/auth                        controllers.StallController.auth(
 # HTML
 GET         /stall/sidebar                     controllers.StallController.sidebar()
 GET         /stall/dashboard                   controllers.StallController.dashboard()
+GET         /stall/menu                        controllers.StallController.menu()
+GET         /stall/dish                        controllers.StallController.dish()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()
+
+# Manage Dishes
+POST        /stall/dishes/add                  controllers.StallController.addDish()
 
 ###################
 # OrderController #

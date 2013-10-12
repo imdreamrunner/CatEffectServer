@@ -1,5 +1,6 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
 
@@ -31,8 +32,13 @@ public class Category extends Model {
         name = newName;
     }
 
+    @JsonIgnore
     public Stall getStall() {
         return stall;
+    }
+
+    public Integer getStallId() {
+        return stall == null ? null : stall.getStallId();
     }
 
     public void setStall(Stall newStall) {
@@ -49,6 +55,10 @@ public class Category extends Model {
 
     public Integer getDisplayOption() {
         return displayOption;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
     }
 
     public void setDisplayOption(Integer newDisplayOption)  {

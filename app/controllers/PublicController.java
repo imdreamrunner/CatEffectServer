@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Canteen;
+import models.Category;
+import models.Dish;
 import models.Stall;
 import org.codehaus.jackson.node.ObjectNode;
 import play.libs.Json;
@@ -40,4 +42,35 @@ public class PublicController extends Controller {
         return ok(result);
     }
 
+    public static Result getAllCategories(Integer stallId) {
+        ObjectNode result = Json.newObject();
+        List<Category> categoryList = Category.find.where("stall_id="+stallId).findList();
+        result.put("error", 0);
+        result.put("categories", Json.toJson(categoryList));
+        return ok(result);
+    }
+
+    public static Result getOneCategory(Integer categoryId) {
+        ObjectNode result = Json.newObject();
+        Category category = Category.find.byId(categoryId);
+        result.put("error", category == null ? 1 : 0);
+        result.put("category", Json.toJson(category));
+        return ok(result);
+    }
+
+    public static Result getAllDishes(Integer categoryId) {
+        ObjectNode result = Json.newObject();
+        List<Dish> dishList = Dish.find.where("category_id=" + categoryId).findList();
+        result.put("error", 0);
+        result.put("dishes", Json.toJson(dishList));
+        return ok(result);
+    }
+
+    public static Result getOneDish(Integer dishId) {
+        ObjectNode result = Json.newObject();
+        Dish dish = Dish.find.byId(dishId);
+        result.put("error", dish == null ? 1 : 0);
+        result.put("dish", Json.toJson(dish));
+        return ok(result);
+    }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
 
@@ -31,7 +32,11 @@ public class Dish extends Model {
     public String getName() { return name; }
     public String getImage() { return image; }
     public String getDescription() { return description; }
+    @JsonIgnore
     public Category getCategory() { return category; }
+    public Integer getCategoryId() {
+        return category == null ? null : category.getCategoryId();
+    }
     public Integer getSort() { return sort; }
     public Integer getPromotionalPrice() {return promotionalPrice;}
     public Integer getPrice() {

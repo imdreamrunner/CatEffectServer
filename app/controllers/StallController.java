@@ -12,8 +12,10 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
-import views.html.stall.sidebar;
 import views.html.stall.dashboard;
+import views.html.stall.menu;
+import views.html.stall.dish;
+import views.html.stall.sidebar;
 
 import java.util.List;
 
@@ -29,6 +31,14 @@ public class StallController extends Controller {
 
     public static Result dashboard() {
         return ok(dashboard.render());
+    }
+
+    public static Result menu() {
+        return ok(menu.render());
+    }
+
+    public static Result dish() {
+        return ok(dish.render());
     }
 
     /*
@@ -99,22 +109,6 @@ public class StallController extends Controller {
 
 	//deleteCategory(categoryId)
 
-	public static Result getAllCategories() {
-        ObjectNode result = Json.newObject();
-        List<Category> categoryList = Category.find.all();
-        result.put("error", 0);
-        result.put("categories", Json.toJson(categoryList));
-        return ok(result);
-	}
-
-	public static Result getOneCategory(Integer categoryId) {
-		ObjectNode result = Json.newObject();
-        Category category = Category.find.byId(categoryId);
-        result.put("error", category == null ? 1 : 0);
-        result.put("category", Json.toJson(category));
-        return ok(result);
-	}
-
 	public static Result addDish() {
 		ObjectNode result = Json.newObject();
     	DynamicForm data = Form.form().bindFromRequest();
@@ -158,21 +152,7 @@ public class StallController extends Controller {
 
 	//deleteDish
 
-	public static Result getAllDishes() {
-		ObjectNode result = Json.newObject();
-        List<Dish> dishList = Dish.find.all();
-        result.put("error", 0);
-        result.put("dishes", Json.toJson(dishList));
-        return ok(result);
-	}
 
-	public static Result getOneDish(Integer dishId) {
-		ObjectNode result = Json.newObject();
-        Dish dish = Dish.find.byId(dishId);
-        result.put("error", dish == null ? 1 : 0);
-        result.put("dish", Json.toJson(dish));
-        return ok(result);
-	}
 
 	public static Result getOneOrder(Integer orderId) {
 		ObjectNode result = Json.newObject();

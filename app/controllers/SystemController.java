@@ -149,7 +149,7 @@ public class SystemController extends Controller {
         if (data.get("canteenId") != null) {
             newCanteenId = Integer.parseInt(data.get("canteenId"));
         }
-        if (data.get("sort") != null) {
+        if (data.get("sort") != null && data.get("sort") != "") {
             newSort = Integer.parseInt(data.get("sort"));
         }
         try {
@@ -180,7 +180,7 @@ public class SystemController extends Controller {
             }
             stall.setName(data.get("name"));
             stall.setDescription(data.get("description"));
-            if (data.get("sort") != null) {
+            if (data.get("sort") != null && data.get("sort") != "") {
                 stall.setSort(Integer.parseInt(data.get("sort")));
             }
             stall.setImage(data.get("image"));
