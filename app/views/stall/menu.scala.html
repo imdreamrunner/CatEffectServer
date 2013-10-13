@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Menu</title>
-    <link href="/assets/stylesheets/jquery-ui-1.10.3.custom.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
@@ -36,7 +35,7 @@
                     </span>
                 <h3><%= name %></h3>
                     <span class="button">
-                        <a href="javascript:" onclick="closePopBox()">
+                        <a href="javascript:" onclick="newWindow('/stall/category#categoryId=<%= categoryId %>', 500, 400)">
                             <span class="glyphicon glyphicon-plus"></span>
                             Edit Category
                         </a>
@@ -46,7 +45,7 @@
                 <% _.each(dishes, function(dish) { %>
                     <div>
                         <%= dish["name"] %>
-                        <a href="javascript:" onclick="newWindow('/stall/dish#dishId=<%= dish['dishId'] %>', 500, 400)">Eidt</a>
+                        <a href="javascript:" onclick="newWindow('/stall/dish#dishId=<%= dish['dishId'] %>', 500, 400)">Edit</a>
                     </div>
                 <% }); %>
                 <div>

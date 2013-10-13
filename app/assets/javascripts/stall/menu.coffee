@@ -17,6 +17,7 @@ loadMenu = () ->
     createObject = (category) ->
       categoryId = category["categoryId"]
       $categoryObject = $(categoryTemplate(category))
+      $categoryObject[0].categoryId = categoryId;
       mouseEnterHandler = ->
         $("#category-"+categoryId).find(".icon .glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
       mouseLeaveHandler = ->
@@ -27,7 +28,8 @@ loadMenu = () ->
     for category in categories
       createObject(category)
     sortUpdateHandler = ->
-      console.log "sort update"
+      $("#category-list > div").each (id, categoryObject) ->
+        console.log categoryObject.categoryId
     $("#category-list").sortable
       handle: ".icon"
     $("#category-list").bind('sortupdate', sortUpdateHandler)

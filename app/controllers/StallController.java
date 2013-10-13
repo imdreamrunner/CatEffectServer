@@ -12,10 +12,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import utils.Authentication;
 import utils.CatException;
-import views.html.stall.dashboard;
-import views.html.stall.menu;
-import views.html.stall.dish;
-import views.html.stall.sidebar;
+import views.html.stall.*;
 
 import java.util.List;
 
@@ -39,6 +36,10 @@ public class StallController extends Controller {
 
     public static Result dish() {
         return ok(dish.render());
+    }
+
+    public static Result category() {
+        return ok(category.render());
     }
 
     /*
