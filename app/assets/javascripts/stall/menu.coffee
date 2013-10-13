@@ -18,9 +18,9 @@ loadMenu = () ->
       categoryId = category["categoryId"]
       $categoryObject = $(categoryTemplate(category))
       mouseEnterHandler = ->
-        $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
+        $("#category-"+categoryId).find(".icon .glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
       mouseLeaveHandler = ->
-        $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
+        $("#category-"+categoryId).find(".icon .glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
       $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
       $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
       $categoryList.append($categoryObject)
@@ -28,7 +28,9 @@ loadMenu = () ->
       createObject(category)
     sortUpdateHandler = ->
       console.log "sort update"
-    $("#category-list").sortable().bind('sortupdate', sortUpdateHandler)
+    $("#category-list").sortable
+      handle: ".icon"
+    $("#category-list").bind('sortupdate', sortUpdateHandler)
 
   # Ajax get menu
   $.ajax
