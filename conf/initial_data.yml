@@ -41,19 +41,16 @@ canteens:
 stalls:
 
   - !!models.Stall
-    stallId:  1
     name:     Stall 1
     canteen:  !!models.Canteen
                 canteenId: 1
 
   - !!models.Stall
-    stallId:  2
     name:     Stall 2
     canteen:  !!models.Canteen
                 canteenId: 1
 
   - !!models.Stall
-    stallId:  3
     name:     Stall 3
     canteen:  !!models.Canteen
                 canteenId: 1

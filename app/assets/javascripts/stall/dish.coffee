@@ -10,4 +10,5 @@ setStallId = (stallId) ->
   loadDish()
 
 loadDish = ->
-  $.a
+  $.ajax
+    url: ""
