@@ -43,6 +43,7 @@ public class Stall extends Model {
     @JsonIgnore
     public List<Manager> getManagers() { return managers; }
 
+    public void setStallId(Integer theStallId) {stallId = theStallId;}
     public void setName(String n) { name = n; }
     public void setSort(Integer s) {sort = s;}
     public void setDescription(String d) { description = d; }
