@@ -13,7 +13,7 @@
     <a href="javascript:" onclick="addCategory()">New Category</a>
 </div>
 <div id="contents">
-    <div id="category-list" class="row">
+    <div id="category-list" class="row sortable">
     </div>
 </div>
 <div id="copyright">
@@ -121,5 +121,9 @@
 <script src="/assets/javascripts/common.js"></script>
 <script src="/assets/javascripts/stall/common.js"></script>
 <script src="/assets/javascripts/stall/menu.js"></script>
+<script src="/assets/javascripts/jquery.sortable.js"></script>
+<script>
+    $('.sortable').sortable();
+</script>
 </body>
 </html>
