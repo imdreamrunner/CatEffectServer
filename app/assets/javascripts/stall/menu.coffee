@@ -1,3 +1,9 @@
+# Handler called when page is loaded
+this.pageLoad ->
+  if this.javaMode()
+    this.java.setMenu(2)
+  this.getStallId(setStallId) # defined in stall/common.coffee
+
 # The callback function of getStallId
 setStallId = (stallId) ->
   this.stallId = stallId
@@ -29,12 +35,6 @@ loadMenu = () ->
     success:  (data) ->
       if (!data["error"])
         displayMenu data["categories"]
-
-# Handler called when page is loaded
-this.pageLoad ->
-  if this.javaMode()
-    this.java.setMenu(2)
-  this.getStallId(setStallId) # defined in stall/common.coffee
 
 this.addDish = (categoryId) ->
   this.showPopBox("#pop-box-new-dish", {categoryId: categoryId}, 400, 150)
