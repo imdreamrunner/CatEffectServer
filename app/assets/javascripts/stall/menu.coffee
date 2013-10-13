@@ -26,7 +26,9 @@ loadMenu = () ->
       $categoryList.append($categoryObject)
     for category in categories
       createObject(category)
-    $("#category-list").sortable()
+    sortUpdateHandler = ->
+      console.log "sort update"
+    $("#category-list").sortable().bind('sortupdate', sortUpdateHandler)
 
   # Ajax get menu
   $.ajax
