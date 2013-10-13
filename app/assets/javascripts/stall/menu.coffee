@@ -53,6 +53,7 @@ this.doAddDish = (categoryId) ->
     data:     postData
     success: (data) ->
       if (!data["error"])
+        location.reload()
         console.log "success"
 
 this.addCategory =  ->
