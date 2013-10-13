@@ -21,6 +21,12 @@ GET         /public/categories/getOne/:id      controllers.PublicController.getO
 GET         /public/dishes/getAll/:category    controllers.PublicController.getAllDishes(category: Int)
 GET         /public/dishes/getOne/:id          controllers.PublicController.getOneDish(id: Int)
 
+###################
+# OrderController #
+###################
+
+GET         /order/menu                        controllers.OrderController.viewMenu()
+
 ####################
 # SystemController #
 ####################

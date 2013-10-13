@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Menu</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<h1>View Menu</h1>
+
+<div id="contents">
+    <div id="category-list" class="row">
+    </div>
+</div>
+<div id="copyright">
+    <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
+</div>
+
+<script type="text/html" id="category-template">
+    <div id="category-<%= categoryId %>" class="col-xs-12">
+        <div class="widget">
+            <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                <h3><%= name %></h3>
+            </div>
+            <div id="dish-list-<%= categoryId%>" class="content">
+                <% _.each(dishes, function(dish) { %>
+                <div>
+                    <%= dish["name"] %>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
+<script src="/assets/javascripts/order/common.js"></script>
+<script src="/assets/javascripts/order/menu.js"></script>
+</body>
+</html>
