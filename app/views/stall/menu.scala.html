@@ -10,7 +10,7 @@
 <h1>Menu</h1>
 <div id="tabs">
     <a href="javascript:" class="current">Edit Dishes</a>
-    <a href="javascript:">New Category</a>
+    <a href="javascript:" onclick="addCategory()">New Category</a>
 </div>
 <div id="contents">
     <div id="category-list" class="row">
@@ -63,6 +63,37 @@
             <h3>Add a New Dish</h3>
             <span class="button">
                 <a href="javascript:" onclick="doAddDish(<%= categoryId %>)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Create
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputName">Dish Name</label>
+                    <input class="form-control" id="inputName" name="name" placeholder="Dish Name">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pop-box-new-category">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Add a New Category</h3>
+            <span class="button">
+                <a href="javascript:" onclick="doAddCategory()">
                     <span class="glyphicon glyphicon-ok"></span>
                     Create
                 </a>

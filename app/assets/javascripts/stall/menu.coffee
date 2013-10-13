@@ -39,3 +39,22 @@ this.doAddDish = (categoryId) ->
     success: (data) ->
       if (!data["error"])
         console.log "success"
+
+this.addCategory =  ->
+  this.showPopBox("#pop-box-new-category", {}, 400, 150)
+
+this.doAddCategory = ->
+  postData =
+    name:          $(".popbox").find("#inputName").val()
+    stallId:       this.stallId
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+
+  $.ajax
+    url:      "/stall/categories/add"
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success: (data) ->
+      if (!data["error"])
+        location.reload()
