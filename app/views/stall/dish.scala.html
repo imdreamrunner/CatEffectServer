@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Menu</title>
+    <title>Menu Item</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
@@ -10,22 +10,128 @@
 <h1>Dish</h1>
 <div id="contents">
     <div class="row">
-        <div class="col-xs-6">
-            <div class="widget">
+        <div class="col-xs-12">
+            <div id="dish-display" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                    <h3>Dish</h3>
+                    <h3>Information</h3>
+                    <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="editDish()">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            Edit
+                        </a>
+                    </span>
                 </div>
                 <div class="content">
-                    <p>lalala</p>
+                    <table id="dish-display-table" class="table table-striped">
+                    </table>
+                </div>
+            </div>
+            <div id="dish-edit" class="widget hidden">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Edit</h3>
+                    <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="saveDish()">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Save
+                        </a>
+                    </span>
+                </div>
+                <div class="content">
+                    <form id="dish-edit-form">
+                    </form>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+<script type="text/html" id="dish-display-template">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td><%= name %></td>
+    </tr>
+    <tr>
+        <td>Image</td>
+        <td><%= image %></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td><%= description %></td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td><%= price %></td>
+    </tr>
+    <tr>
+        <td>Promotional Price</td>
+        <td><%= promotionalPrice %></td>
+    </tr>
+    <tr>
+        <td>Promotion Start</td>
+        <td><%= promotionStart %></td>
+    </tr>
+    <tr>
+        <td>Promotion End</td>
+        <td><%= promotionEnd %></td>
+    </tr>
+    <tr>
+        <td>Options</td>
+        <td><%= options %></td>
+    </tr>
+    </tbody>
+</script>
+
+<script type="text/html" id="dish-edit-template">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control" id="inputName" name="name"
+               placeholder="Dish Name" value="<%= name %>">
+    </div>
+    <div class="form-group">
+        <label for="inputImage">Image</label>
+        <input type="text" class="form-control" id="inputImage" name="image"
+               placeholder="Image" value="<%= image %>">
+    </div>
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea class="form-control" id="inputDescription"
+                  name="description" placeholder="Description"><%= description %></textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputPrice">Price</label>
+        <input type="text" class="form-control" id="inputPrice" name="price"
+               placeholder="List Price" value="<%= price %>">
+    </div>
+    <div class="form-group">
+        <label for="inputPromotionalPrice">Promotional Price</label>
+        <input type="text" class="form-control" id="inputPromotionalPrice" name="promotionalPrice"
+               placeholder="Promotional Price" value="<%= promotionalPrice %>">
+    </div>
+    <div class="form-group">
+        <label for="inputPromotionStart">Promotion Start</label>
+        <input type="text" class="form-control" id="inputPromotionStart" name="promotionStart"
+               placeholder="Promotion Start" value="<%= promotionStart %>">
+    </div>
+    <div class="form-group">
+        <label for="inputPromotionEnd">Promotion End</label>
+        <input type="text" class="form-control" id="inputPromotionEnd" name="promotionEnd"
+               placeholder="Promotion End" value="<%= promotionEnd %>">
+    </div>
+    <div class="form-group">
+        <label for="inputOptions">Options</label>
+        <input type="text" class="form-control" id="inputOptions" name="options"
+               placeholder="Options" value="<%= options %>">
+    </div>
+</script>
+
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>

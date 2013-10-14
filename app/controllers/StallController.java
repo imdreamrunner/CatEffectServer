@@ -123,7 +123,7 @@ public class StallController extends Controller {
         if (data.get("categoryId") != null) {
             newCategoryId = Integer.parseInt(data.get("categoryId"));
         }
-        if (data.get("listPrice") != null) {
+        if (data.get("newPromotionalPrice") != null) {
             newPromotionalPrice = Integer.parseInt(data.get("promotionalPrice"));
         }
         if (data.get("price") != null) {
@@ -149,7 +149,49 @@ public class StallController extends Controller {
         return ok(result);
 	}
 
-	//public static editDish(Integer dishId) 
+	public static Result editDish(Integer dishId) {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Dish dish = Dish.find.byId(dishId);
+            String newName  = data.get("name");
+            String newImage = data.get("image");
+            String newDescription = data.get("description");
+
+            if (data.get("categoryId") != null) {
+                Integer newCategoryId = Integer.parseInt(data.get("categoryId"));
+                dish.setCategory(newCategoryId);
+            }
+            if (data.get("price") != null && data.get("price").length() > 0) {
+                Integer newPrice = Integer.parseInt(data.get("price"));
+                dish.setPrice(newPrice);
+            }
+            if (data.get("promotionalPrice") != null && data.get("promotionalPrice").length() > 0) {
+                Integer newPromotionalPrice = Integer.parseInt(data.get("promotionalPrice"));
+                dish.setPromotionalPrice(newPromotionalPrice);
+            }
+            if (data.get("promotionStart") != null && data.get("promotionStart").length() > 0) {
+                Integer newPromotionStart = Integer.parseInt(data.get("promotionStart"));
+                dish.setPromotionStart(newPromotionStart);
+            }
+            if (data.get("promotionEnd") != null && data.get("promotionEnd").length() > 0) {
+                Integer newPromotionEnd = Integer.parseInt(data.get("promotionEnd"));
+                dish.setPromotionEnd(newPromotionEnd);
+            }
+            String newOptions = data.get("options");
+            dish.setName(newName);
+            dish.setDescription(newDescription);
+            dish.setImage(newImage);
+            dish.setOptions(newOptions);
+            dish.save();
+            result.put("error", 0);
+            result.put("dish", Json.toJson(dish));
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
 
 	//deleteDish
 

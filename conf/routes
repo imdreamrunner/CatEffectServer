@@ -72,6 +72,7 @@ POST        /stall/categories/add              controllers.StallController.addCa
 
 # Manage Dishes
 POST        /stall/dishes/add                  controllers.StallController.addDish()
+POST        /stall/dishes/edit/:id             controllers.StallController.editDish(id: Int)
 
 ###################
 # OrderController #
