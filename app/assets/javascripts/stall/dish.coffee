@@ -49,3 +49,19 @@ this.saveDish = ->
         if that.javaMode()
           that.java.refreshParent()
         displayDish()
+
+
+this.chooseImage = ->
+  oMyForm = new FormData()
+  oMyForm.append("image", $("#inputFile")[0].files[0])
+  $.ajax
+    url: "/public/upload/image"
+    data: oMyForm
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST'
+    success: (data) ->
+      if (!data['error'])
+        $("#dish-edit").find("#inputImage").val(data['image'])
+        $("#dish-edit").find("#imgImage").delay(1000).attr("src", "/assets/uploads/" + data['image'])

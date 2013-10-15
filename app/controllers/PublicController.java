@@ -9,9 +9,13 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import utils.CatException;
+import utils.RandomString;
 import views.html.index;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PublicController extends Controller {
@@ -80,18 +84,36 @@ public class PublicController extends Controller {
         ObjectNode result = Json.newObject();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart picture = null;
-        if (body != null) {
+        try {
+            if (body == null) {
+                throw new CatException(9001, "File upload error.");
+            }
             picture = body.getFile("image");
-        }
-        if (picture != null) {
+            if (picture == null) {
+                throw new CatException(9002, "File upload error.");
+            }
             String fileName = picture.getFilename();
             String contentType = picture.getContentType();
+            String fileType = null;
+            if (contentType.equals("image/png")) {
+                fileType = "png";
+            } else if (contentType.equals("image/jpeg")) {
+                fileType = "jpg";
+            }
+            if (fileType == null) {
+                throw new CatException(9003, "File type " + contentType + " unsupported.");
+            }
+            String newFileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+            newFileName += RandomString.generate(10);
+            newFileName += "." + fileType;
             File file = picture.getFile();
+            File target = new File("public/uploads/" + newFileName);
+            file.renameTo(target);
             result.put("error", 0);
-            result.put("fileName", fileName);
-            result.put("contentType", contentType);
-        } else {
-            result.put("error", 9001);
+            result.put("image", newFileName);
+        } catch (CatException ce) {
+            result.put("error", ce.getCode());
+            result.put("message", ce.getMessage());
         }
         return ok(result);
     }
