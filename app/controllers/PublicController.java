@@ -7,9 +7,11 @@ import models.Stall;
 import org.codehaus.jackson.node.ObjectNode;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import views.html.index;
 
+import java.io.File;
 import java.util.List;
 
 public class PublicController extends Controller {
@@ -71,6 +73,26 @@ public class PublicController extends Controller {
         Dish dish = Dish.find.byId(dishId);
         result.put("error", dish == null ? 1 : 0);
         result.put("dish", Json.toJson(dish));
+        return ok(result);
+    }
+
+    public static Result uploadImage() {
+        ObjectNode result = Json.newObject();
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart picture = null;
+        if (body != null) {
+            picture = body.getFile("image");
+        }
+        if (picture != null) {
+            String fileName = picture.getFilename();
+            String contentType = picture.getContentType();
+            File file = picture.getFile();
+            result.put("error", 0);
+            result.put("fileName", fileName);
+            result.put("contentType", contentType);
+        } else {
+            result.put("error", 9001);
+        }
         return ok(result);
     }
 }
