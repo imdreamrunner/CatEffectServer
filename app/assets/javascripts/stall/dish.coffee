@@ -64,4 +64,6 @@ this.chooseImage = ->
     success: (data) ->
       if (!data['error'])
         $("#dish-edit").find("#inputImage").val(data['image'])
-        $("#dish-edit").find("#imgImage").delay(1000).attr("src", "/assets/uploads/" + data['image'])
+        changeImg = ->
+          $("#dish-edit").find("#imgImage").attr("src", "/assets/uploads/" + data['image'])
+        setTimeout(changeImg, 1000)
