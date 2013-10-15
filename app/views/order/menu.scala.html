@@ -5,6 +5,7 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/order/menu.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <h1>View Menu</h1>
@@ -15,6 +16,9 @@
 </div>
 <div id="copyright">
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
+</div>
+
+<div id="ordered" class="row">
 </div>
 
 <script type="text/html" id="category-template">
@@ -29,7 +33,9 @@
             <div id="dish-list-<%= categoryId%>" class="content">
                 <% _.each(dishes, function(dish) { %>
                 <div>
+                    <a href="#" class="dish" id="dish-<%= dish['dishId'] %>">
                     <%= dish["name"] %>
+                    </a>
                 </div>
                 <% }); %>
             </div>

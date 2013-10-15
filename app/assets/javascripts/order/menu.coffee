@@ -9,6 +9,8 @@ setStallId = (stallId) ->
   this.stallId = stallId
   loadMenu()
 
+this.dishOrderedList = dishOrderedList = []
+
 # Load data into web page
 loadMenu = () ->
   displayMenu = (categories) ->
@@ -27,7 +29,16 @@ loadMenu = () ->
     for category in categories
       createObject(category)
 
-  # Ajax get menu
+    # event listener to onclick of orfer
+    that = this
+    $('a.dish').click (e) ->
+      e.preventDefault()
+      console.log e
+      newDishOrdered = e.delegateTarget.id.split('-')[1]
+      dishOrderedList.push(newDishOrdered)
+      that.showDishOrdered()
+
+  # Ajax get memu
   $.ajax
     url:      "/public/categories/getAll/" + this.stallId
     type:     "get"
@@ -36,3 +47,16 @@ loadMenu = () ->
       if (!data["error"])
         displayMenu data["categories"]
 
+this.showDishOrdered = ->
+  $('#ordered').html ""
+  for newDishOrdered in dishOrderedList
+    $('#ordered').append(newDishOrdered,
+        "<button type='button' onclick='deleteDish("+newDishOrdered+")'>delete</button> ")
+
+
+this.deleteDish = (target) ->
+  for id, orderedDish in dishOrderedList
+    if orderedDish == target
+      dishOrderedList.splice(id,1)
+      break
+  this.showDishOrdered()
