@@ -10,6 +10,7 @@ setStallId = (stallId) ->
   loadMenu()
 
 this.dishOrderedList = dishOrderedList = []
+this.quantityList = quantityList = []
 
 # Load data into web page
 loadMenu = () ->
@@ -33,9 +34,19 @@ loadMenu = () ->
     that = this
     $('a.dish').click (e) ->
       e.preventDefault()
-      console.log e
+      #console.log e
       newDishOrdered = e.delegateTarget.id.split('-')[1]
-      dishOrderedList.push(newDishOrdered)
+      newDishOrdered = parseInt(newDishOrdered, 0)
+      contained = false
+      for orderedDish,id in dishOrderedList
+        if (orderedDish == newDishOrdered)
+          contained = true
+          quantityList[id] = quantityList[id]+1
+      if (!contained)
+        dishOrderedList.push(newDishOrdered)
+        quantityList.push(1)
+        console.log "dishOrderedList = " + dishOrderedList
+        console.log "quantityList = " + quantityList
       that.showDishOrdered()
 
   # Ajax get memu
@@ -49,14 +60,24 @@ loadMenu = () ->
 
 this.showDishOrdered = ->
   $('#ordered').html ""
-  for newDishOrdered in dishOrderedList
-    $('#ordered').append(newDishOrdered,
-        "<button type='button' onclick='deleteDish("+newDishOrdered+")'>delete</button> ")
+  for newDishOrdered,id in dishOrderedList
+    $('#ordered').append(newDishOrdered," * ",quantityList[id],
+        "<button type='button' onclick='deleteAllDish("+newDishOrdered+")'>Delete All</button> ",
+        "<button type='button' onclick='deleteOneDish("+newDishOrdered+")'>Delete One</button> ")
 
 
-this.deleteDish = (target) ->
-  for id, orderedDish in dishOrderedList
-    if orderedDish == target
+this.deleteAllDish = (target) ->
+  for orderedDish,id in dishOrderedList
+    if (orderedDish == target)
       dishOrderedList.splice(id,1)
+      break
+  this.showDishOrdered()
+
+this.deleteOneDish = (target) ->
+  for orderedDish,id in dishOrderedList
+    if (orderedDish == target)
+      quantityList[id] = quantityList[id] - 1
+      if (quantityList[id] == 0)
+        deleteAllDish(target)
       break
   this.showDishOrdered()
