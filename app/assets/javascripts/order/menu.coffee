@@ -17,16 +17,21 @@ loadMenu = () ->
   displayMenu = (categories) ->
     categoryTemplate = _.template $("#category-template").html()
     $categoryList = $("#category-list")
+
     createObject = (category) ->
       categoryId = category["categoryId"]
       $categoryObject = $(categoryTemplate(category))
+
       mouseEnterHandler = ->
         $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
+
       mouseLeaveHandler = ->
         $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
+
       $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
       $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
       $categoryList.append($categoryObject)
+
     for category in categories
       createObject(category)
 
@@ -62,6 +67,7 @@ this.showDishOrdered = ->
   $('#ordered').html ""
   for newDishOrdered,id in dishOrderedList
     $('#ordered').append(newDishOrdered," * ",quantityList[id],
+    #<img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
         "<button type='button' onclick='deleteAllDish("+newDishOrdered+")'>Delete All</button> ",
         "<button type='button' onclick='deleteOneDish("+newDishOrdered+")'>Delete One</button> ")
 
