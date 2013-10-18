@@ -11,6 +11,7 @@ setStallId = (stallId) ->
 
 this.dishOrderedList = dishOrderedList = []
 this.quantityList = quantityList = []
+this.categories = categories = []
 
 # Load data into web page
 loadMenu = () ->
@@ -35,57 +36,44 @@ loadMenu = () ->
     for category in categories
       createObject(category)
 
-    # event listener to onclick of orfer
+    # event listener to onclick of order
     that = this
     $('a.dish').click (e) ->
       e.preventDefault()
-      that.newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
-      console.log "newId = " +that.newDishOrderedId
-      that.newDishOrdered
-
-      # find the dish object by the id we now have in newDishOrdered
-      #我知道为什么有bug了：因为ajax貌似是在最后才运行？
-      $.ajax
-        url:      "/public/dishes/getOne/" + that.newDishOrderedId
-        type:     "get"
-        dataType: "json"
-        success:  (data) ->
-          if (!data["error"])
-            that.newDishOrdered = data["dish"]
-            console.log "inside ajax"
-            console.log that.newDishOrdered
-
-      console.log "after ajax"
-      console.log that.newDishOrdered
+      newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
+      for category in categories
+        for dish in category.dishes
+          if dish.dishId == newDishOrderedId
+            newDishOrdered = dish
 
       contained = false
-      for orderedDish,id in dishOrderedList
-        if (orderedDish.dishId == that.newDishOrdered.dishId)
+      for orderedDish in dishOrderedList
+        if (orderedDish.dishId == newDishOrdered.dishId)
           contained = true
-          quantityList[id] = quantityList[id]+1
+          orderedDish.quantity = orderedDish.quantity + 1
       if (!contained)
-        dishOrderedList.push(that.newDishOrdered)
-        quantityList.push(1)
-        console.log dishOrderedList[1]
-        console.log "quantityList = " + quantityList
+        newDishOrdered.quantity = 1
+        dishOrderedList.push(newDishOrdered)
       that.showDishOrdered(dishOrderedList)
 
   # Ajax get memu
+  that = this
   $.ajax
     url:      "/public/categories/getAll/" + this.stallId
     type:     "get"
     dataType: "json"
     success:  (data) ->
       if (!data["error"])
+        that.categories = data["categories"]
         displayMenu data["categories"]
 
 this.showDishOrdered = (orderedDishList) ->
+
   orderedDishTemplate = _.template $("#orderedDish-template").html()
 
   $orderedList = $("#ordered-list")
-
+  $orderedList.html ""
   createOrderedObject = (orderedDish) ->
-    #DishId = OrderedDish["dishId"]
     $orderedDishObject = $(orderedDishTemplate(orderedDish))
 
     $orderedList.append($orderedDishObject)
@@ -93,16 +81,8 @@ this.showDishOrdered = (orderedDishList) ->
   for orderedDish in orderedDishList
     createOrderedObject(orderedDish)
 
-  #$('#ordered').html ""
-  #for newDishOrdered,id in dishOrderedList
-  #  $('#ordered').append(newDishOrdered," * ",quantityList[id],
-  #      "<button type='button' onclick='deleteAllDish("+newDishOrdered+")'>Delete All</button> ",
-  #      "<button type='button' onclick='deleteOneDish("+newDishOrdered+")'>Delete One</button> ")
-
-
 this.deleteAllDish = (target) ->
   for orderedDish,id in dishOrderedList
-    #console.log orderedDish
     if (orderedDish.dishId == target)
       dishOrderedList.splice(id,1)
       break
@@ -111,8 +91,8 @@ this.deleteAllDish = (target) ->
 this.deleteOneDish = (target) ->
   for orderedDish,id in dishOrderedList
     if (orderedDish.dishId == target)
-      quantityList[id] = quantityList[id] - 1
-      if (quantityList[id] == 0)
+      orderedDish.quantity = orderedDish.quantity - 1
+      if (orderedDish.quantity == 0)
         deleteAllDish(target)
       break
   this.showDishOrdered(dishOrderedList)
