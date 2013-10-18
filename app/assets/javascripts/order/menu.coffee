@@ -39,20 +39,36 @@ loadMenu = () ->
     that = this
     $('a.dish').click (e) ->
       e.preventDefault()
-      #console.log e
-      newDishOrdered = e.delegateTarget.id.split('-')[1]
-      newDishOrdered = parseInt(newDishOrdered, 0)
+      that.newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
+      console.log "newId = " +that.newDishOrderedId
+      that.newDishOrdered
+
+      # find the dish object by the id we now have in newDishOrdered
+      #我知道为什么有bug了：因为ajax貌似是在最后才运行？
+      $.ajax
+        url:      "/public/dishes/getOne/" + that.newDishOrderedId
+        type:     "get"
+        dataType: "json"
+        success:  (data) ->
+          if (!data["error"])
+            that.newDishOrdered = data["dish"]
+            console.log "inside ajax"
+            console.log that.newDishOrdered
+
+      console.log "after ajax"
+      console.log that.newDishOrdered
+
       contained = false
       for orderedDish,id in dishOrderedList
-        if (orderedDish == newDishOrdered)
+        if (orderedDish.dishId == that.newDishOrdered.dishId)
           contained = true
           quantityList[id] = quantityList[id]+1
       if (!contained)
-        dishOrderedList.push(newDishOrdered)
+        dishOrderedList.push(that.newDishOrdered)
         quantityList.push(1)
-        console.log "dishOrderedList = " + dishOrderedList
+        console.log dishOrderedList[1]
         console.log "quantityList = " + quantityList
-      that.showDishOrdered()
+      that.showDishOrdered(dishOrderedList)
 
   # Ajax get memu
   $.ajax
@@ -63,27 +79,40 @@ loadMenu = () ->
       if (!data["error"])
         displayMenu data["categories"]
 
-this.showDishOrdered = ->
-  $('#ordered').html ""
-  for newDishOrdered,id in dishOrderedList
-    $('#ordered').append(newDishOrdered," * ",quantityList[id],
-    #<img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
-        "<button type='button' onclick='deleteAllDish("+newDishOrdered+")'>Delete All</button> ",
-        "<button type='button' onclick='deleteOneDish("+newDishOrdered+")'>Delete One</button> ")
+this.showDishOrdered = (orderedDishList) ->
+  orderedDishTemplate = _.template $("#orderedDish-template").html()
+
+  $orderedList = $("#ordered-list")
+
+  createOrderedObject = (orderedDish) ->
+    #DishId = OrderedDish["dishId"]
+    $orderedDishObject = $(orderedDishTemplate(orderedDish))
+
+    $orderedList.append($orderedDishObject)
+
+  for orderedDish in orderedDishList
+    createOrderedObject(orderedDish)
+
+  #$('#ordered').html ""
+  #for newDishOrdered,id in dishOrderedList
+  #  $('#ordered').append(newDishOrdered," * ",quantityList[id],
+  #      "<button type='button' onclick='deleteAllDish("+newDishOrdered+")'>Delete All</button> ",
+  #      "<button type='button' onclick='deleteOneDish("+newDishOrdered+")'>Delete One</button> ")
 
 
 this.deleteAllDish = (target) ->
   for orderedDish,id in dishOrderedList
-    if (orderedDish == target)
+    #console.log orderedDish
+    if (orderedDish.dishId == target)
       dishOrderedList.splice(id,1)
       break
-  this.showDishOrdered()
+  this.showDishOrdered(dishOrderedList)
 
 this.deleteOneDish = (target) ->
   for orderedDish,id in dishOrderedList
-    if (orderedDish == target)
+    if (orderedDish.dishId == target)
       quantityList[id] = quantityList[id] - 1
       if (quantityList[id] == 0)
         deleteAllDish(target)
       break
-  this.showDishOrdered()
+  this.showDishOrdered(dishOrderedList)
