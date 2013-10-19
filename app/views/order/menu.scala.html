@@ -35,7 +35,7 @@
             <div id="dish-list-<%= categoryId%>" class="content">
                 <% _.each(dishes, function(dish) { %>
                 <div>
-                    <a href="#" class="dish" id="dish-<%= dish['dishId'] %>">
+                    <a href="javascript:" class="dish" id="dish-<%= dish['dishId'] %>" onclick="orderDish(<%= dish['dishId'] %>)">
                     <%= dish["name"] %>
                     </a>
                 </div>
@@ -45,8 +45,8 @@
     </div>
 </script>
 
-<script type="text/html" id="orderedDish-template">
-    <div id="OrderedDish-<%= dishId %>" class="col-xs-12">
+<script type="text/html" id="ordered-dish-template">
+    <div id="Ordered-dish-<%= dishId %>" class="col-xs-12">
         <div class="widget">
             <div class="title">
                 <h3><%= name %> * <%= quantity %></h3>

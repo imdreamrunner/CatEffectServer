@@ -7,69 +7,85 @@ this.pageLoad ->
 # The callback function of getStallId
 setStallId = (stallId) ->
   this.stallId = stallId
-  loadMenu()
+  loadData()
 
 this.dishOrderedList = dishOrderedList = []
-this.quantityList = quantityList = []
 this.categories = categories = []
 
-# Load data into web page
-loadMenu = () ->
-  displayMenu = (categories) ->
-    categoryTemplate = _.template $("#category-template").html()
-    $categoryList = $("#category-list")
-
-    createObject = (category) ->
-      categoryId = category["categoryId"]
-      $categoryObject = $(categoryTemplate(category))
-
-      mouseEnterHandler = ->
-        $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
-
-      mouseLeaveHandler = ->
-        $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
-
-      $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
-      $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
-      $categoryList.append($categoryObject)
-
-    for category in categories
-      createObject(category)
-
-    # event listener to onclick of order
-    that = this
-    $('a.dish').click (e) ->
-      e.preventDefault()
-      newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
-      for category in categories
-        for dish in category.dishes
-          if dish.dishId == newDishOrderedId
-            newDishOrdered = dish
-
-      contained = false
-      for orderedDish in dishOrderedList
-        if (orderedDish.dishId == newDishOrdered.dishId)
-          contained = true
-          orderedDish.quantity = orderedDish.quantity + 1
-      if (!contained)
-        newDishOrdered.quantity = 1
-        dishOrderedList.push(newDishOrdered)
-      that.showDishOrdered(dishOrderedList)
-
+loadData = () ->
   # Ajax get memu
-  that = this
   $.ajax
     url:      "/public/categories/getAll/" + this.stallId
     type:     "get"
     dataType: "json"
     success:  (data) ->
       if (!data["error"])
-        that.categories = data["categories"]
-        displayMenu data["categories"]
+        categories = data["categories"]
+        loadMenu()
+
+# Load data into web page
+loadMenu = () ->
+  categoryTemplate = _.template $("#category-template").html()
+  $categoryList = $("#category-list")
+
+  createObject = (category) ->
+    categoryId = category["categoryId"]
+    $categoryObject = $(categoryTemplate(category))
+
+    mouseEnterHandler = ->
+      $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
+
+    mouseLeaveHandler = ->
+      $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
+
+    $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
+    $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
+    $categoryList.append($categoryObject)
+
+  for category in categories
+    createObject(category)
+
+  # event listener to onclick of order
+  """
+  that = this
+  $('a.dish').click (e) ->
+    e.preventDefault()
+    newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
+    for category in categories
+      for dish in category.dishes
+        if dish.dishId == newDishOrderedId
+          newDishOrdered = dish
+
+    contained = false
+    for orderedDish in dishOrderedList
+      if (orderedDish.dishId == newDishOrdered.dishId)
+        contained = true
+        orderedDish.quantity = orderedDish.quantity + 1
+    if (!contained)
+      newDishOrdered.quantity = 1
+      dishOrderedList.push(newDishOrdered)
+    that.showDishOrdered(dishOrderedList)
+  """
+
+this.orderDish = (dishId) ->
+  newDishOrderedId = dishId
+  for category in categories
+    for dish in category.dishes
+      if dish.dishId == newDishOrderedId
+        newDishOrdered = dish
+  contained = false
+  for orderedDish in dishOrderedList
+    if (orderedDish.dishId == newDishOrdered.dishId)
+      contained = true
+      orderedDish.quantity = orderedDish.quantity + 1
+  if (!contained)
+    newDishOrdered.quantity = 1
+    dishOrderedList.push(newDishOrdered)
+  this.showDishOrdered(dishOrderedList)
 
 this.showDishOrdered = (orderedDishList) ->
 
-  orderedDishTemplate = _.template $("#orderedDish-template").html()
+  orderedDishTemplate = _.template $("#ordered-dish-template").html()
 
   $orderedList = $("#ordered-list")
   $orderedList.html ""
