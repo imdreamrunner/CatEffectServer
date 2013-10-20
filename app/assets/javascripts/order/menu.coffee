@@ -1,7 +1,5 @@
 # Handler called when page is loaded
 this.pageLoad ->
-  if this.javaMode()
-    this.java.setMenu(2)
   this.getStall(setStall) # defined in stall/common.coffee
 
 # The callback function of getStallId
