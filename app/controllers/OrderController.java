@@ -26,19 +26,25 @@ public class OrderController extends Controller {
     public static Result placeOrder() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
-        String strOrderItems = data.get("orderItems");
-        System.out.println(strOrderItems);
-        JsonNode nodeOrderItems = Json.parse(strOrderItems);
-        for (int i = 0; i < nodeOrderItems.size(); i++) {
-            JsonNode objectItem = nodeOrderItems.get(i);
-            Integer dishId = Integer.parseInt(objectItem.get("dishId").toString());
-            Integer quantity = Integer.parseInt(objectItem.get("quantity").toString());
-            String note = objectItem.get("note").toString();
-            System.out.println(dishId);
-            System.out.println(quantity);
-            System.out.println(note);
+        try {
+            String strOrderItems = data.get("orderItems");
+            Integer accountId = Integer.parseInt(data.get("accountId").toString());
+            System.out.println(accountId);
+            JsonNode nodeOrderItems = Json.parse(strOrderItems);
+            for (int i = 0; i < nodeOrderItems.size(); i++) {
+                JsonNode objectItem = nodeOrderItems.get(i);
+                Integer dishId = Integer.parseInt(objectItem.get("dishId").toString());
+                Integer quantity = Integer.parseInt(objectItem.get("quantity").toString());
+                String note = objectItem.get("note").toString();
+                System.out.println(dishId);
+                System.out.println(quantity);
+                System.out.println(note);
+            }
+            result.put("error", 0);
+        } catch (NullPointerException npe) {
+            result.put("error", 1101);
+            result.put("message", "Data not complete.");
         }
-        result.put("error", 0);
         return ok(result);
     }
 }

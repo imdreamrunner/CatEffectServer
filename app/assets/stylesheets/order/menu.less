@@ -62,6 +62,7 @@ h3 {
     padding-top: 50px;
     text-align: center;
     background: url("/assets/images/order-item-gradient.png") repeat-x top;
+    // font-weight: bold;
   }
   .price {
     margin-top: 20px;
@@ -184,13 +185,31 @@ h3 {
   position: fixed;
   display: block;
   width: 150px;
-  height: 50px;
-  bottom: 50px;
+  height: 40px;
+  bottom: 200px;
   right: 50px;
-  line-height: 50px;
-  background: #D90;
+  line-height: 40px;
+  background: rgba(0, 0, 0, 0.4);
   color: #FFF;
   border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   text-align: center;
   font-size: 20px;
+  display: none;
+  &:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.full-screen-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #FFF;
+  z-index: 100;
 }

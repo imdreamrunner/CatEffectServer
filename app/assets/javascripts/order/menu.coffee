@@ -78,9 +78,11 @@ this.showDishOrdered = () ->
 
   if dishOrderedList.length == 0
     $("#ordered-list-placeholder").hide()
+    $("#button-check-out").hide()
     $orderedList.hide(300)
   else
     $("#ordered-list-placeholder").show()
+    $("#button-check-out").delay(300).show(300)
     $orderedList.show(300)
 
   for orderItem in dishOrderedList
