@@ -30,6 +30,7 @@ img.preview {
 }
 
 .dish-list {
+  // Fix clear issue of parent height
   &:before,
   &:after {
     content: " ";
@@ -40,6 +41,4 @@ img.preview {
     clear: both;
   }
   *zoom: 1;
-
-  // Fix clear issue of parent height
 }

@@ -21,6 +21,39 @@ h3 {
   opacity: 0.7;
 }
 
+.dish-list {
+  margin: 10px 50px;
+  // Fix clear issue of parent height
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+
+.dish-item {
+  width: 130px;
+  height: 170px;
+  float: left;
+  margin: 10px;
+  .image {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    img {
+      height: 130px;
+    }
+  }
+  .name {
+    text-align: center;
+  }
+}
+
 .show-dish {
   position: absolute;
   top: 50%;

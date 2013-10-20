@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Menu</title>
+    <title>Customer Order Mode</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/order/menu.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<h1>View Menu</h1>
+<h1>Stall Name</h1>
 
 <div id="contents">
     <div id="category-list">
@@ -22,12 +22,17 @@
 <script type="text/html" id="category-template">
     <div id="category-<%= categoryId %>" class="category">
         <h3><%= name %></h3>
-        <div id="dish-list-<%= categoryId%>" class="content">
+        <div id="dish-list-<%= categoryId%>" class="dish-list">
             <% _.each(dishes, function(dish) { %>
-            <div>
-                <a href="javascript:" class="dish" id="dish-button-<%= dish['dishId'] %>" onclick="showDish(<%= dish['dishId'] %>)">
-                <%= dish["name"] %>
-                </a>
+            <div id="dish-item-<%= dish['dishId'] %>" class="dish-item">
+                <div class="image">
+                    <a href="javascript:" onclick="showDish(<%= dish['dishId'] %>)">
+                        <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
+                    </a>
+                </div>
+                <div class="name">
+                    <%= dish["name"] %>
+                </div>
             </div>
             <% }); %>
         </div>
