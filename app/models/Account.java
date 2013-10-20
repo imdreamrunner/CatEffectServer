@@ -22,6 +22,10 @@ public class Account extends Model {
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
 
+    public static Finder<Integer, Account> find = new Finder<Integer, Account>(
+            Integer.class, Account.class
+    );
+
     public Integer getAccountId() {
         return accountId;
     }

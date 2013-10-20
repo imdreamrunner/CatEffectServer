@@ -1,6 +1,7 @@
 package models;
 
 import play.db.ebean.Model;
+import utils.CatException;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -42,6 +43,13 @@ public class Order extends Model {
 
     public void setOrderId(Integer newOrderId) {orderId = newOrderId;}
     public void setAccount(Account newAccount) {account = newAccount;}
+    public void setAccount(Integer newAccountId) throws CatException {
+        Account newAccount = Account.find.byId(newAccountId);
+        if (newAccount == null) {
+            throw new CatException(6001, "Account not found");
+        }
+        setAccount(newAccount);
+    }
     public void setSubtotal(Integer newSubtotal) {subtotal = newSubtotal;}
     public void setTransaction(Transaction newTransaction) {transaction = newTransaction;}
     public void setStatus(Integer newStatus) {status = newStatus;}
