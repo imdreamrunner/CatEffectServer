@@ -19,10 +19,11 @@ h3 {
   font-size: 18px;
   padding: 5px;
   opacity: 0.7;
+  box-shadow: 0 0 2px 1px rgba(0,0,0, 0.5);
 }
 
 .dish-list {
-  margin: 10px 50px;
+  margin: 10px 40px;
   // Fix clear issue of parent height
   &:before,
   &:after {
@@ -37,20 +38,36 @@ h3 {
 }
 
 .dish-item {
-  width: 130px;
-  height: 170px;
+  width: 220px;
+  height: 220px;
   float: left;
   margin: 10px;
+  background: #FFF;
+  box-shadow: 0 0 2px 1px rgba(0,0,0, 0.4);
+
   .image {
-    width: 130px;
-    height: 130px;
+    width: 220px;
+    height: 170px;
     overflow: hidden;
     img {
-      height: 130px;
+      width: 220px;
     }
   }
   .name {
+    position: absolute;
+    width: 220px;
+    margin-top: -50px;
+    padding-top: 50px;
     text-align: center;
+    background: url("/assets/images/order-item-gradient.png") repeat-x top;
+  }
+  .price {
+    margin-top: 20px;
+    text-align: center;
+    color: #AAA;
+    span {
+      color: #fa8e1c;
+    }
   }
 }
 
@@ -58,6 +75,8 @@ h3 {
   position: absolute;
   top: 50%;
   left: 50%;
+  margin: -150px 0 0 -200px;
   width: 400px;
   height: 300px;
+  background: #FFF;
 }

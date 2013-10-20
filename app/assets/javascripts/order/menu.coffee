@@ -78,7 +78,12 @@ this.showDish = (dishId) ->
   $('.show-dish').remove()
   dishTemplate = _.template $("#dish-template").html()
   dish = findDish(dishId)
-  $('body').append(dishTemplate(dish))
+  $popBox = $("<div class='pop-box'></div>")
+  $popBox.html dishTemplate(dish)
+  $('body').append($popBox)
+
+this.cancelOrder = () ->
+  $(".pop-box").remove()
 
 this.orderDish = (dishId) ->
   orderItem =

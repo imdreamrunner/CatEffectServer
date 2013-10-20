@@ -24,14 +24,15 @@
         <h3><%= name %></h3>
         <div id="dish-list-<%= categoryId%>" class="dish-list">
             <% _.each(dishes, function(dish) { %>
-            <div id="dish-item-<%= dish['dishId'] %>" class="dish-item">
+            <div id="dish-item-<%= dish['dishId'] %>" class="dish-item" onclick="showDish(<%= dish['dishId'] %>)">
                 <div class="image">
-                    <a href="javascript:" onclick="showDish(<%= dish['dishId'] %>)">
-                        <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
-                    </a>
+                    <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
                 </div>
                 <div class="name">
                     <%= dish["name"] %>
+                </div>
+                <div class="price">
+                    $ <span><%= dish["finalPrice"] %></span>
                 </div>
             </div>
             <% }); %>
@@ -46,6 +47,7 @@
             <input name="quantity" class="quantity" value="1">
             <input name="note" class="note" value="">
             <input type="button" value="Add!" onclick="orderDish(<%= dishId %>)">
+            <input type="button" value="Cancel" onclick="cancelOrder()">
         </div>
     </div>
 </script>
