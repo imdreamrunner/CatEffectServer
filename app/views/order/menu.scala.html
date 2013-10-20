@@ -14,9 +14,6 @@
     <div id="category-list" class="row">
     </div>
 </div>
-<div id="copyright">
-    <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
-</div>
 
 <div id="orderedContents">
     <div id="ordered-list" class="row">
@@ -35,12 +32,20 @@
             <div id="dish-list-<%= categoryId%>" class="content">
                 <% _.each(dishes, function(dish) { %>
                 <div>
-                    <a href="javascript:" class="dish" id="dish-<%= dish['dishId'] %>" onclick="orderDish(<%= dish['dishId'] %>)">
+                    <a href="javascript:" class="dish" id="dish-button-<%= dish['dishId'] %>" onclick="showDish(<%= dish['dishId'] %>)">
                     <%= dish["name"] %>
                     </a>
                 </div>
                 <% }); %>
             </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="dish-template">
+    <div id="dish-<%= dishId %>" class="show-dish">
+        <div>
+            <%= name %>
         </div>
     </div>
 </script>

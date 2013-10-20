@@ -67,6 +67,18 @@ loadMenu = () ->
     that.showDishOrdered(dishOrderedList)
   """
 
+findDish = (dishId) ->
+  for category in categories
+    for dish in category['dishes']
+      if dish['dishId'] == dishId
+        return dish
+
+this.showDish = (dishId) ->
+  $('.show-dish').remove()
+  dishTemplate = _.template $("#dish-template").html()
+  dish = findDish(dishId)
+  $('body').append(dishTemplate(dish))
+
 this.orderDish = (dishId) ->
   newDishOrderedId = dishId
   for category in categories
