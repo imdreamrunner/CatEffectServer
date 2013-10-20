@@ -108,6 +108,7 @@ this.orderDish = (dishId) ->
     newDishOrdered.quantity = 1
     dishOrderedList.push(newDishOrdered)
   ###
+  $(".pop-box").remove()
   this.showDishOrdered()
 
 this.showDishOrdered = () ->
@@ -124,6 +125,15 @@ this.showDishOrdered = () ->
   for orderItem in dishOrderedList
     createOrderedObject(orderItem)
 
+this.deleteOrderItem = (orderItemId) ->
+  for orderItem, id in dishOrderedList
+    if orderItem['orderItemId'] == orderItemId
+      dishOrderedList.splice(id, 1)
+      break
+  this.showDishOrdered()
+
+
+###
 this.deleteAllDish = (target) ->
   for orderedDish,id in dishOrderedList
     if (orderedDish.dishId == target)
@@ -139,3 +149,6 @@ this.deleteOneDish = (target) ->
         deleteAllDish(target)
       break
   this.showDishOrdered(dishOrderedList)
+
+
+###

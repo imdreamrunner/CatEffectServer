@@ -63,19 +63,20 @@
 <script type="text/html" id="ordered-dish-template">
     <% dish = findDish(dishId); %>
     <div class="ordered-dish">
-        <div class="detail">
-            <div class="title">
-                <%= dish['name'] %> * <%= quantity %>
-            </div>
-            <div class="note">
-                <%= note %>
-            </div>
-        </div>
         <a href="javascript:" class="remove" onclick='deleteOrderItem(<%= orderItemId %>)'>
             <span class="glyphicon glyphicon-remove-sign"></span>
         </a>
         <div class="image">
             <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= name %>">
+        </div>
+        <div class="detail">
+            <div class="title">
+                <span class="name"><%= dish['name'] %></span>
+                <span>* <%= quantity %></span>
+            </div>
+            <div class="note">
+                <%= note %>
+            </div>
         </div>
         <!--
         <div class="title">
