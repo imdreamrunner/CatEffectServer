@@ -106,7 +106,7 @@ this.checkOut = ->
       note:       orderItem['note']
       price:      dish['finalPrice']
       listPrice:  dish['price']
-    subtotal += dish['finalPrice']
+    subtotal += dish['finalPrice'] * orderItem['quantity']
   postData =
     accountId:  1
     subtotal: subtotal
