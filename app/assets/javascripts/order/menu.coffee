@@ -92,4 +92,12 @@ this.deleteOrderItem = (orderItemId) ->
       dishOrderedList.splice(id, 1)
       break
   this.showDishOrdered()
-#
+
+this.checkOut = ->
+  orderItems = []
+  for orderItem in dishOrderedList
+    orderItems.push
+      dishId:   orderItem['dishId']
+      quantity: orderItem['quantity']
+      note:     orderItem['note']
+  console.log orderItems
