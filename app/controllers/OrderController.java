@@ -21,5 +21,5 @@ public class OrderController extends Controller {
 
 
 
-# 一边点菜，一边在controller计算总价，并且传回coffee那边显示出来
-# 按pay button的时候，process payment
+// 一边点菜，一边在controller计算总价，并且传回coffee那边显示出来
+// 按pay button的时候，process payment
