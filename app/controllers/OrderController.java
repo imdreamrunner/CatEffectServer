@@ -17,6 +17,10 @@ public class OrderController extends Controller {
     public static Result calculateTotalPrice() {
         return ok(menu.render());
     }
+
+    public static Result placeOrder() {
+        return ok("todo");
+    }
 }
 
 
