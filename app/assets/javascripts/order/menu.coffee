@@ -6,6 +6,10 @@ this.pageLoad ->
 setStall = (stall) ->
   this.stall = stall
   this.stallId = stall['stallId']
+  if stall['image']
+    $('body').css("background-image", "url('/assets/uploads/" + stall['image'] + "')")
+  else
+    $('body').css("background-image", 'url("/assets/images/order-background-dafault.jpg")')
   $('h1').html stall['name']
   loadData()
 
@@ -28,45 +32,13 @@ loadData = () ->
 loadMenu = () ->
   categoryTemplate = _.template $("#category-template").html()
   $categoryList = $("#category-list")
-
   createObject = (category) ->
     categoryId = category["categoryId"]
     $categoryObject = $(categoryTemplate(category))
-
-    mouseEnterHandler = ->
-      $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-book").addClass("glyphicon-move")
-
-    mouseLeaveHandler = ->
-      $("#category-"+categoryId).find(".glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
-
-    $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
-    $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
     $categoryList.append($categoryObject)
 
   for category in categories
     createObject(category)
-
-  # event listener to onclick of order
-  """
-  that = this
-  $('a.dish').click (e) ->
-    e.preventDefault()
-    newDishOrderedId = parseInt(e.delegateTarget.id.split('-')[1],0)
-    for category in categories
-      for dish in category.dishes
-        if dish.dishId == newDishOrderedId
-          newDishOrdered = dish
-
-    contained = false
-    for orderedDish in dishOrderedList
-      if (orderedDish.dishId == newDishOrdered.dishId)
-        contained = true
-        orderedDish.quantity = orderedDish.quantity + 1
-    if (!contained)
-      newDishOrdered.quantity = 1
-      dishOrderedList.push(newDishOrdered)
-    that.showDishOrdered(dishOrderedList)
-  """
 
 this.findDish = findDish = (dishId) ->
   for category in categories
@@ -93,21 +65,6 @@ this.orderDish = (dishId) ->
     note:         $("#dish-" + dishId).find(".note").val()
   orderItemNextId++
   dishOrderedList.push(orderItem)
-  ###
-  newDishOrderedId = dishId
-  for category in categories
-    for dish in category.dishes
-      if dish.dishId == newDishOrderedId
-        newDishOrdered = dish
-  contained = false
-  for orderedDish in dishOrderedList
-    if (orderedDish.dishId == newDishOrdered.dishId)
-      contained = true
-      orderedDish.quantity = orderedDish.quantity + 1
-  if (!contained)
-    newDishOrdered.quantity = 1
-    dishOrderedList.push(newDishOrdered)
-  ###
   $(".pop-box").remove()
   this.showDishOrdered()
 
@@ -135,24 +92,4 @@ this.deleteOrderItem = (orderItemId) ->
       dishOrderedList.splice(id, 1)
       break
   this.showDishOrdered()
-
-
-###
-this.deleteAllDish = (target) ->
-  for orderedDish,id in dishOrderedList
-    if (orderedDish.dishId == target)
-      dishOrderedList.splice(id,1)
-      break
-  this.showDishOrdered(dishOrderedList)
-
-this.deleteOneDish = (target) ->
-  for orderedDish,id in dishOrderedList
-    if (orderedDish.dishId == target)
-      orderedDish.quantity = orderedDish.quantity - 1
-      if (orderedDish.quantity == 0)
-        deleteAllDish(target)
-      break
-  this.showDishOrdered(dishOrderedList)
-
-
-###
+#

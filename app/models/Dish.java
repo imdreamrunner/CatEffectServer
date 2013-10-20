@@ -19,7 +19,7 @@ public class Dish extends Model {
     @JoinColumn(name="category_id")
     private Category category;
     private Integer sort = 0;
-    private Integer price;
+    private Integer price = 0;
     private Integer promotionalPrice;
     private Integer promotionStart, promotionEnd;
     private String options;

@@ -1,5 +1,6 @@
 body {
-  background: url("/assets/images/order-background-dafault.jpg") no-repeat center center fixed;
+  background-repeat: no-repeat;
+  background-position: center center fixed;
   background-size: cover;
 }
 
@@ -17,6 +18,7 @@ h3 {
   background: rgba(0,0,0,0.6);
   color: #FFF;
   font-size: 18px;
+  font-weight: normal;
   padding: 5px;
   opacity: 0.7;
 }
@@ -85,12 +87,13 @@ h3 {
     position: absolute;
     font-size: 32px;
     color: #FFF;
-    text-shadow: 3px 3px 10px #000;
+    text-shadow: 2px 2px 8px #000;
     margin: 10px;
   }
 
   .image {
     height: 380px;
+    overflow: hidden;
     img {
       width: 500px;
       min-height: 380px;
@@ -153,12 +156,12 @@ h3 {
     }
     .title {
       .name {
-        width: 130px;
+        width: 120px;
         height: 20px;
         text-align: left;
       }
       span {
-        width: 20px;
+        width: 30px;
         text-align: right;
         display: block;
         float: left;
