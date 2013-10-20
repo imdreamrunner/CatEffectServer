@@ -19,11 +19,18 @@ public class Transaction {
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    public void setAccount(Account newAccount) {
-        account = newAccount;
-    }
+    public Integer getTransactionId() {return transactionId;}
+    public Account getAccount() {return account;}
+    public Integer getType() {return type;}
+    public Integer getAmount() {return amount;}
+    public Date getTime() {return time;}
+    public Order getOrder() {return order;}
+    public Manager getManager() {return manager;}
 
-    public void setType(Integer newType) {
-        type = newType;
-    }
+    public void setAccount(Account newAccount) {account = newAccount;}
+    public void setType(Integer newType) {type = newType;}
+    public void setAmount(Integer newAmount) {amount = newAmount;}
+    public void setTime(Date newTime) {time = newTime;}
+    public void setOrder(Order newOrder) {order = newOrder;}
+    public void setManager(Manager newManager) {manager = newManager;}
 }
