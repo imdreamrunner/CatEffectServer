@@ -120,8 +120,10 @@ this.showDishOrdered = () ->
     $orderedList.append($orderedDishObject)
 
   if dishOrderedList.length == 0
+    $("#ordered-list-placeholder").hide()
     $orderedList.hide(300)
   else
+    $("#ordered-list-placeholder").show()
     $orderedList.show(300)
 
   for orderItem in dishOrderedList
