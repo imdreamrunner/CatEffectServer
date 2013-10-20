@@ -97,14 +97,21 @@ this.deleteOrderItem = (orderItemId) ->
 
 this.checkOut = ->
   orderItems = []
+  subtotal = 0
   for orderItem in dishOrderedList
+    dish = findDish(orderItem['dishId'])
     orderItems.push
-      dishId:   orderItem['dishId']
-      quantity: orderItem['quantity']
-      note:     orderItem['note']
+      dishId:     orderItem['dishId']
+      quantity:   orderItem['quantity']
+      note:       orderItem['note']
+      price:      dish['finalPrice']
+      listPrice:  dish['price']
+    subtotal += dish['finalPrice']
   postData =
     accountId:  1
+    subtotal: subtotal
     orderItems: JSON.stringify(orderItems)
+  console.log postData
   $.ajax
     url:      "/order/orders/add"
     type:     "post"
@@ -112,3 +119,4 @@ this.checkOut = ->
     data:     postData
     success:  (data) ->
       console.log data
+      $("#check-out-success").show();
