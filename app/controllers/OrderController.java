@@ -1,5 +1,7 @@
 package controllers;
 
+import models.Order;
+import models.OrderItem;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
@@ -7,6 +9,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utils.CatException;
 import views.html.order.feedback;
 import views.html.order.menu;
 
@@ -29,21 +32,35 @@ public class OrderController extends Controller {
         try {
             String strOrderItems = data.get("orderItems");
             Integer accountId = Integer.parseInt(data.get("accountId").toString());
-            System.out.println(accountId);
+            Integer subtotal = Integer.parseInt(data.get("subtotal").toString());
+            Order order = new Order();
+            order.setAccount(accountId);
+            order.setSubtotal(subtotal);
+            order.save();
             JsonNode nodeOrderItems = Json.parse(strOrderItems);
             for (int i = 0; i < nodeOrderItems.size(); i++) {
                 JsonNode objectItem = nodeOrderItems.get(i);
                 Integer dishId = Integer.parseInt(objectItem.get("dishId").toString());
                 Integer quantity = Integer.parseInt(objectItem.get("quantity").toString());
+                Integer price = Integer.parseInt(objectItem.get("price").toString());
+                Integer listPrice = Integer.parseInt(objectItem.get("listPrice").toString());
                 String note = objectItem.get("note").toString();
-                System.out.println(dishId);
-                System.out.println(quantity);
-                System.out.println(note);
+                OrderItem orderItem = new OrderItem();
+                orderItem.setDish(dishId);
+                orderItem.setOrder(order.getOrderId());
+                orderItem.setQuantity(quantity);
+                orderItem.setPrice(price);
+                orderItem.setListPrice(listPrice);
+                orderItem.setNote(note);
+                orderItem.save();
             }
             result.put("error", 0);
         } catch (NullPointerException npe) {
             result.put("error", 1101);
             result.put("message", "Data not complete.");
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
         }
         return ok(result);
     }

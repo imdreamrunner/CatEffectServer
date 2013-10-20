@@ -18,4 +18,12 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "manager_id")
     private Manager manager;
+
+    public void setAccount(Account newAccount) {
+        account = newAccount;
+    }
+
+    public void setType(Integer newType) {
+        type = newType;
+    }
 }

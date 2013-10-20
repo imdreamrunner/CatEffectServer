@@ -19,7 +19,7 @@ public class Order extends Model {
     @OneToOne
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
-    private Integer status;
+    private Integer status; // 1 for paid, 2 for ready, 3 for served.
     private Date createTime;
     private Date serveTime;
     @OneToMany(mappedBy = "order")
@@ -31,6 +31,11 @@ public class Order extends Model {
     public static Finder<Integer, Order> find = new Finder<Integer, Order>(
             Integer.class, Order.class
     );
+
+    public Order() {
+        createTime = new Date();
+        status = 0;
+    }
 
     public Integer getOrderId() {return orderId;}
     public Account getAccount() {return account;}
@@ -53,7 +58,6 @@ public class Order extends Model {
     public void setSubtotal(Integer newSubtotal) {subtotal = newSubtotal;}
     public void setTransaction(Transaction newTransaction) {transaction = newTransaction;}
     public void setStatus(Integer newStatus) {status = newStatus;}
-    public void setCreateTime(Date newCreateTime) {createTime = newCreateTime;}
     public void setServeTime(Date newServeTime) {serveTime = newServeTime;}
 
 
