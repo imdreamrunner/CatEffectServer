@@ -112,15 +112,17 @@ this.orderDish = (dishId) ->
   this.showDishOrdered()
 
 this.showDishOrdered = () ->
-
   orderedDishTemplate = _.template $("#ordered-dish-template").html()
-
   $orderedList = $("#ordered-list")
   $orderedList.html ""
   createOrderedObject = (orderedDish) ->
     $orderedDishObject = $(orderedDishTemplate(orderedDish))
-
     $orderedList.append($orderedDishObject)
+
+  if dishOrderedList.length == 0
+    $orderedList.hide(300)
+  else
+    $orderedList.show(300)
 
   for orderItem in dishOrderedList
     createOrderedObject(orderItem)
