@@ -2,13 +2,16 @@
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(2)
-  this.getStallId(setStallId) # defined in stall/common.coffee
+  this.getStall(setStall) # defined in stall/common.coffee
 
 # The callback function of getStallId
-setStallId = (stallId) ->
-  this.stallId = stallId
+setStall = (stall) ->
+  this.stall = stall
+  this.stallId = stall['stallId']
+  $('h1').html stall['name']
   loadData()
 
+this.orderItemNextId = orderItemNextId = 1;
 this.dishOrderedList = dishOrderedList = []
 this.categories = categories = []
 
@@ -81,10 +84,11 @@ this.showDish = (dishId) ->
 
 this.orderDish = (dishId) ->
   orderItem =
-    dishId:   dishId
-    quantity: parseInt($("#dish-" + dishId).find(".quantity").val())
-    note:     $("#dish-" + dishId).find(".note").val()
-  console.log orderItem
+    orderItemId:  orderItemNextId
+    dishId:       dishId
+    quantity:     parseInt($("#dish-" + dishId).find(".quantity").val())
+    note:         $("#dish-" + dishId).find(".note").val()
+  orderItemNextId++
   dishOrderedList.push(orderItem)
   ###
   newDishOrderedId = dishId

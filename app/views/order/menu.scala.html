@@ -10,33 +10,26 @@
 <h1>View Menu</h1>
 
 <div id="contents">
-    <div id="category-list" class="row">
+    <div id="category-list">
     </div>
 </div>
 
 <div id="orderedContents">
-    <div id="ordered-list" class="row">
+    <div id="ordered-list">
     </div>
 </div>
 
 <script type="text/html" id="category-template">
-    <div id="category-<%= categoryId %>" class="col-xs-12">
-        <div class="widget">
-            <div class="title">
-                    <span class="icon">
-                        <span class="glyphicon glyphicon-book"></span>
-                    </span>
-                <h3><%= name %></h3>
+    <div id="category-<%= categoryId %>" class="category">
+        <h3><%= name %></h3>
+        <div id="dish-list-<%= categoryId%>" class="content">
+            <% _.each(dishes, function(dish) { %>
+            <div>
+                <a href="javascript:" class="dish" id="dish-button-<%= dish['dishId'] %>" onclick="showDish(<%= dish['dishId'] %>)">
+                <%= dish["name"] %>
+                </a>
             </div>
-            <div id="dish-list-<%= categoryId%>" class="content">
-                <% _.each(dishes, function(dish) { %>
-                <div>
-                    <a href="javascript:" class="dish" id="dish-button-<%= dish['dishId'] %>" onclick="showDish(<%= dish['dishId'] %>)">
-                    <%= dish["name"] %>
-                    </a>
-                </div>
-                <% }); %>
-            </div>
+            <% }); %>
         </div>
     </div>
 </script>
@@ -65,8 +58,7 @@
             <div class="note">
                 <%= note %>
             </div>
-            <button type='button' onclick='deleteAllDish(<%= dishId %>)'>Delete All</button>
-            <button type='button' onclick='deleteOneDish(<%= dishId %>)'>Delete One</button>
+            <button type='button' onclick='deleteOrderItem(<%= orderItemId %>)'>Delete</button>
         </div>
     </div>
 </script>
