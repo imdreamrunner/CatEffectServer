@@ -45,18 +45,25 @@
     <div id="dish-<%= dishId %>" class="show-dish">
         <div>
             <%= name %>
+            <input name="quantity" class="quantity" value="1">
+            <input name="note" class="note" value="">
+            <input type="button" value="Add!" onclick="orderDish(<%= dishId %>)">
         </div>
     </div>
 </script>
 
 <script type="text/html" id="ordered-dish-template">
+    <% dish = findDish(dishId); %>
     <div id="Ordered-dish-<%= dishId %>" class="col-xs-12">
         <div class="widget">
             <div class="title">
-                <h3><%= name %> * <%= quantity %></h3>
+                <h3><%= dish['name'] %> * <%= quantity %></h3>
             </div>
             <div class="content">
-                <img src="/assets/uploads/<%= image %>" alt="<%= name %>" height="200" >
+                <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= name %>" height="200" >
+            </div>
+            <div class="note">
+                <%= note %>
             </div>
             <button type='button' onclick='deleteAllDish(<%= dishId %>)'>Delete All</button>
             <button type='button' onclick='deleteOneDish(<%= dishId %>)'>Delete One</button>

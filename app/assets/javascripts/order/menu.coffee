@@ -67,7 +67,7 @@ loadMenu = () ->
     that.showDishOrdered(dishOrderedList)
   """
 
-findDish = (dishId) ->
+this.findDish = findDish = (dishId) ->
   for category in categories
     for dish in category['dishes']
       if dish['dishId'] == dishId
@@ -80,6 +80,13 @@ this.showDish = (dishId) ->
   $('body').append(dishTemplate(dish))
 
 this.orderDish = (dishId) ->
+  orderItem =
+    dishId:   dishId
+    quantity: parseInt($("#dish-" + dishId).find(".quantity").val())
+    note:     $("#dish-" + dishId).find(".note").val()
+  console.log orderItem
+  dishOrderedList.push(orderItem)
+  ###
   newDishOrderedId = dishId
   for category in categories
     for dish in category.dishes
@@ -93,9 +100,10 @@ this.orderDish = (dishId) ->
   if (!contained)
     newDishOrdered.quantity = 1
     dishOrderedList.push(newDishOrdered)
-  this.showDishOrdered(dishOrderedList)
+  ###
+  this.showDishOrdered()
 
-this.showDishOrdered = (orderedDishList) ->
+this.showDishOrdered = () ->
 
   orderedDishTemplate = _.template $("#ordered-dish-template").html()
 
@@ -106,8 +114,8 @@ this.showDishOrdered = (orderedDishList) ->
 
     $orderedList.append($orderedDishObject)
 
-  for orderedDish in orderedDishList
-    createOrderedObject(orderedDish)
+  for orderItem in dishOrderedList
+    createOrderedObject(orderItem)
 
 this.deleteAllDish = (target) ->
   for orderedDish,id in dishOrderedList
