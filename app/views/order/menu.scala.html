@@ -9,14 +9,10 @@
 <body>
 <h1>Stall Name</h1>
 
-<div id="contents">
-    <div id="category-list">
-    </div>
+<div id="category-list">
 </div>
 
-<div id="orderedContents">
-    <div id="ordered-list">
-    </div>
+<div id="ordered-list">
 </div>
 
 <script type="text/html" id="category-template">
@@ -42,10 +38,22 @@
 
 <script type="text/html" id="dish-template">
     <div id="dish-<%= dishId %>" class="show-dish">
-        <div>
+        <div class="name">
             <%= name %>
+        </div>
+        <div class="image">
+            <img src="/assets/uploads/<%= image %>" alt="<%= name %>">
+        </div>
+        <div class="description">
+            <%= description %>
+        </div>
+        <div class="divQuantity">
             <input name="quantity" class="quantity" value="1">
+        </div>
+        <div class="divNote">
             <input name="note" class="note" value="">
+        </div>
+        <div class="divButtons">
             <input type="button" value="Add!" onclick="orderDish(<%= dishId %>)">
             <input type="button" value="Cancel" onclick="cancelOrder()">
         </div>
@@ -54,19 +62,30 @@
 
 <script type="text/html" id="ordered-dish-template">
     <% dish = findDish(dishId); %>
-    <div id="Ordered-dish-<%= dishId %>" class="col-xs-12">
-        <div class="widget">
+    <div class="ordered-dish">
+        <div class="detail">
             <div class="title">
-                <h3><%= dish['name'] %> * <%= quantity %></h3>
-            </div>
-            <div class="content">
-                <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= name %>" height="200" >
+                <%= dish['name'] %> * <%= quantity %>
             </div>
             <div class="note">
                 <%= note %>
             </div>
-            <button type='button' onclick='deleteOrderItem(<%= orderItemId %>)'>Delete</button>
         </div>
+        <a href="javascript:" class="remove" onclick='deleteOrderItem(<%= orderItemId %>)'>
+            <span class="glyphicon glyphicon-remove-sign"></span>
+        </a>
+        <div class="image">
+            <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= name %>">
+        </div>
+        <!--
+        <div class="title">
+            <%= quantity %>
+        </div>
+        <div class="note">
+            <%= note %>
+        </div>
+        <button type='button' onclick='deleteOrderItem(<%= orderItemId %>)'>Delete</button>
+        -->
     </div>
 </script>
 
