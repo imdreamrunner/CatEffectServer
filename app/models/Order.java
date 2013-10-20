@@ -30,4 +30,24 @@ public class Order extends Model {
     public static Finder<Integer, Order> find = new Finder<Integer, Order>(
             Integer.class, Order.class
     );
+
+    public Integer getOrderId() {return orderId;}
+    public Account getAccount() {return account;}
+    public Integer getSubtotal() {return subtotal;}
+    public Transaction getTransaction() {return transaction;}
+    public Integer getStatus() {return status;}
+    public Date getCreateTime() {return createTime;}
+    public Date getServeTime() {return serveTime;}
+    public List<OrderItem> getOrderItems() {return orderItems;}
+
+    public void setOrderId(Integer newOrderId) {orderId = newOrderId;}
+    public void setAccount(Account newAccount) {account = newAccount;}
+    public void setSubtotal(Integer newSubtotal) {subtotal = newSubtotal;}
+    public void setTransaction(Transaction newTransaction) {transaction = newTransaction;}
+    public void setStatus(Integer newStatus) {status = newStatus;}
+    public void setCreateTime(Date newCreateTime) {createTime = newCreateTime;}
+    public void setServeTime(Date newServeTime) {serveTime = newServeTime;}
+
+
+
 }
