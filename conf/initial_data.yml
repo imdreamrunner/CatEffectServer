@@ -1,4 +1,7 @@
-# Managers
+accounts:
+  - !!models.Account
+    type:       0
+    balance:    0
 
 canteens:
 
