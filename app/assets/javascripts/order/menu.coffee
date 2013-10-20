@@ -100,4 +100,13 @@ this.checkOut = ->
       dishId:   orderItem['dishId']
       quantity: orderItem['quantity']
       note:     orderItem['note']
-  console.log orderItems
+  postData =
+    accountId:  1
+    orderItems: JSON.stringify(orderItems)
+  $.ajax
+    url:      "/order/orders/add"
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success:  (data) ->
+      console.log data
