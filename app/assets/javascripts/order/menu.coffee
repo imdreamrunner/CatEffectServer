@@ -95,6 +95,9 @@ this.deleteOrderItem = (orderItemId) ->
       break
   this.showDishOrdered()
 
+this.showCheckOut = ->
+  $("#check-out-summary").show()
+
 this.checkOut = ->
   orderItems = []
   subtotal = 0
@@ -120,3 +123,6 @@ this.checkOut = ->
     success:  (data) ->
       console.log data
       $("#check-out-success").show();
+      refresh = ->
+        location.reload()
+      setTimeout(refresh, 5000)

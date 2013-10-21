@@ -15,13 +15,39 @@
 <div id="ordered-list">
 </div>
 
-<a id="button-check-out" href="javascript:" onclick="checkOut()">Check Out</a>
+<a id="button-check-out" href="javascript:" onclick="showCheckOut()">Check Out</a>
 
 <div id="ordered-list-placeholder">
 </div>
 
 <div id="check-out-summary" class="full-screen-message">
-
+    <div class="order-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Note</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Note</td>
+                </tr>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Note</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="subtotal">
+            Subtotal: <span>1000</span>
+        </div>
+        <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
+    </div>
 </div>
 
 <div id="check-out-success" class="full-screen-message">
