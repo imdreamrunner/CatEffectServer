@@ -2,24 +2,10 @@ auth = this.auth
 prepaidCardList = []
 currentCanteen = 0;
 
-dataToLoad = 2
-
 table = _.template $("#prepaidcard-row").html()
 
-loadData = ->
-  if dataToLoad != 0
-    return
-  $('#canteen-list').html ''
-  for canteen in canteenList
-    $('#canteen-list').append canteenButton(canteen)
-  loadStalls(canteenList[0]['canteenId'])
-
-getStall = (stallId) ->
-  for stall in stallList
-    if stallId == stall['stallId']
-      return stall
-
 this.loadPrepaidcards = loadPrepaidCards = () ->
+  console.log(prepaidCardList)
   $("#prepaidcards-tbody").html ""
   for prepaidCard in prepaidCardList
     $("#prepaidcards-tbody").append(table(prepaidCard))
@@ -39,8 +25,7 @@ this.pageLoad ->
     success:    (data) ->
       if (!data['error'])
         prepaidCardList = data['prepaidCards']
-        dataToLoad--
-        loadData()
+        loadPrepaidcards()
     error:      () ->
       console.log "error"
 
