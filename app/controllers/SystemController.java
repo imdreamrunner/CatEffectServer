@@ -174,7 +174,7 @@ public class SystemController extends Controller {
         List<PrepaidCard> prepaidcardList;
         prepaidcardList = PrepaidCard.find.all();
         result.put("error", 0);
-        result.put("prepaidcard", Json.toJson(prepaidcardList));
+        result.put("prepaidCards", Json.toJson(prepaidcardList));
         return ok(result);
     }
 
