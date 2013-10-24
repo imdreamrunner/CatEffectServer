@@ -13,7 +13,7 @@ this.loadAccounts = loadAccounts = () ->
 
 this.pageLoad ->
   if this.javaMode()
-    this.java.setMenu(2)
+    this.java.setMenu(3)
 
   $.ajax
     url:        "/system/accounts/getAllMatriculation"

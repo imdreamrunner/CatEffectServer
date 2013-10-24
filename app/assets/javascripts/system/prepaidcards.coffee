@@ -31,7 +31,7 @@ this.loadPrepaidcards = loadPrepaidCards = () ->
 
 this.pageLoad ->
   if this.javaMode()
-    this.java.setMenu(2)
+    this.java.setMenu(3)
   ajaxLoadData()
 
 
