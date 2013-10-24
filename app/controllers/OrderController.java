@@ -47,7 +47,7 @@ public class OrderController extends Controller {
                 String note = objectItem.get("note").toString();
                 OrderItem orderItem = new OrderItem();
                 orderItem.setDish(dishId);
-                orderItem.setOrder(order.getOrderId());
+                orderItem.setOrder(order);
                 orderItem.setQuantity(quantity);
                 orderItem.setPrice(price);
                 orderItem.setListPrice(listPrice);
