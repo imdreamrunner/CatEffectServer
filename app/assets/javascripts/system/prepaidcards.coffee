@@ -8,8 +8,9 @@ this.loadPrepaidcards = loadPrepaidCards = () ->
   console.log(prepaidCardList)
   $("#prepaidcards-tbody").html ""
   for prepaidCard in prepaidCardList
+    console.log prepaidCard
     $("#prepaidcards-tbody").append(table(prepaidCard))
-  $('#prepaidcards-tbody').find('.content-loader').removeClass('content-loader');
+  $('#prepardcard-list').find('.content-loader').removeClass('content-loader');
 
 this.pageLoad ->
   if this.javaMode()
