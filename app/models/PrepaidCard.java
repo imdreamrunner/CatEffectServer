@@ -27,4 +27,8 @@ public class PrepaidCard {
             = new Model.Finder<Integer, PrepaidCard>(
                 Integer.class, PrepaidCard.class
     );
-}3
+
+    public Account getAccount() {
+        return Account.getAccount(0, prepaidCardId);
+    }
+}
