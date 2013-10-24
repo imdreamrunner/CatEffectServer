@@ -30,8 +30,6 @@ this.pageLoad ->
     error:      () ->
       console.log "error"
 
-this.newPrepaidCard = ->
-  this.showPopBox("#pop-up-new-prepaidcard", {}, 400, 150)
 
 this.doAddPrepaidCard = ->
   that = this
@@ -45,10 +43,8 @@ this.doAddPrepaidCard = ->
     data:     postData
     success:  (data) ->
       console.log data['message']
+      location.reload()
 
-this.deleteStall = (stallId) ->
-  stall = getStall(stallId)
-  this.showPopBox("#pop-up-confirm-delete", stall, 400, 180)
 
 this.confirmDeleteStall = (stallId) ->
   ajaxDeleteStall =

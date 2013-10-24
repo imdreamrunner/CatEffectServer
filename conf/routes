@@ -64,6 +64,7 @@ POST        /system/stalls/delete/:id          controllers.SystemController.dele
 # Manage Prepaid Cards
 POST        /system/prepaidCards/add           controllers.SystemController.addPrepaidCard()
 POST        /system/prepaidCards/getAll        controllers.SystemController.getAllPrepaidCards()
+
 ###################
 # StallController #
 ###################

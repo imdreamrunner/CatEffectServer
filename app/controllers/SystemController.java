@@ -152,10 +152,11 @@ public class SystemController extends Controller {
 
     @Authentication(requireSystem = true)
     public static Result addPrepaidCard() {
+        System.out.println("hi");
         ObjectNode result = Json.newObject();
-        DynamicForm data = Form.form().bindFromRequest();
         try {
             PrepaidCard newPrepaidCard = new PrepaidCard();
+            newPrepaidCard.save();
             result.put("error", 0);
             result.put("newPrepaidCard", Json.toJson(newPrepaidCard));
         } catch (CatException e) {

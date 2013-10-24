@@ -19,7 +19,7 @@
                     </span>
                     <h3 id="canteen-name">Loading</h3>
                     <span class="button">
-                        <a href="javascript:" onclick="newPrepaidcard()">
+                        <a href="javascript:" onclick="doAddPrepaidCard()">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                             New prepaid card
                         </a>
@@ -73,13 +73,6 @@
     </div>
 </script>
 
-<script type="text/html" id="canteen-button">
-    <a href="javascript:"
-       id="canteen-button-<%= canteenId %>"
-       class="canteen-button"
-       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
-</script>
-
 <script type="text/html" id="prepaidcard-row">
     <tr>
         <td>
@@ -115,37 +108,6 @@
             </a>
         </td>
     </tr>
-</script>
-
-<script type="text/html" id="pop-up-new-prepaidcard">
-    <div class="widget">
-        <div class="title">
-            <span class="icon">
-                <span class="glyphicon glyphicon-cog"></span>
-            </span>
-            <h3>Add a New Prepaid Card</h3>
-            <span class="button">
-                <a href="javascript:" onclick="doAddStall()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                    Create
-                </a>
-            </span>
-            <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Cancel
-                </a>
-            </span>
-        </div>
-        <div class="content">
-            <form role="form">
-                <div class="form-group">
-                    <label for="inputStallName">Stall Name</label>
-                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
-                </div>
-            </form>
-        </div>
-    </div>
 </script>
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
