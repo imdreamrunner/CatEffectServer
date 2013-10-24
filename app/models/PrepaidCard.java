@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class PrepaidCard {
+public class PrepaidCard extends Model {
     @Id
     private Integer prepaidCardId;
     private String token;
