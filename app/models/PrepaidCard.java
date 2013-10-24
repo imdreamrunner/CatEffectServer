@@ -1,5 +1,6 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
 import utils.RandomString;
@@ -28,7 +29,13 @@ public class PrepaidCard {
                 Integer.class, PrepaidCard.class
     );
 
+    @JsonIgnore
     public Account getAccount() {
         return Account.getAccount(0, prepaidCardId);
+    }
+
+    public Integer getBalance() {
+        Account account = getAccount();
+        return account != null ? account.getBalance() : null;
     }
 }

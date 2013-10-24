@@ -76,7 +76,7 @@ public class Account extends Model {
     }
 
     public static Account getAccount(Integer type, Integer relevantId) {
-        List<Account> accounts = find.where("type = " + type + " and relevent_id = " + relevantId).findList();
+        List<Account> accounts = find.where("type = " + type + " and relevant_id = " + relevantId).findList();
         if (accounts.size() == 0) {
             Account newAccount = new Account();
             newAccount.setType(type);
