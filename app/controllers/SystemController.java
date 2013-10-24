@@ -1,5 +1,7 @@
 package controllers;
 
+import btu_models.Student;
+import models.Account;
 import models.Manager;
 import models.PrepaidCard;
 import models.Stall;
@@ -147,6 +149,22 @@ public class SystemController extends Controller {
         }
         result.put("error", 0);
         result.put("managers", Json.toJson(managerList));
+        return ok(result);
+    }
+
+    public static Result testStudent() {
+        ObjectNode result = Json.newObject();
+        result.put("students", Json.toJson(Student.find.all()));
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result getAllMatriculationAccounts() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        List<Account> accounts = Account.find.where("type > 0").findList();
+        result.put("error", 0);
+        result.put("accounts", Json.toJson(accounts));
         return ok(result);
     }
 

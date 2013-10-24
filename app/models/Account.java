@@ -1,5 +1,8 @@
 package models;
 
+import btu_models.Faculty;
+import btu_models.Staff;
+import btu_models.Student;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
@@ -94,5 +97,17 @@ public class Account extends Model {
         } else {
             return null;
         }
+    }
+
+    public Student getStudent() {
+        return type == 1 ? Student.find.byId(relevantId) : null;
+    }
+
+    public Faculty getFaculty() {
+        return type == 2 ? Faculty.find.byId(relevantId) : null;
+    }
+
+    public Staff getStaff() {
+        return type == 3 ? Staff.find.byId(relevantId) : null;
     }
 }

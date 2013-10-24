@@ -1,5 +1,7 @@
 package btu_models;
 
+import models.Account;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
@@ -12,6 +14,11 @@ public class Student extends Model {
     private String name;
     private String email;
     private String cardId;
+
+    public static Model.Finder<Integer, Student> find
+            = new Model.Finder<Integer, Student>(
+            "btu", Integer.class, Student.class
+    );
 
     public Integer getStudentId() { return studentId; }
     public String getName() { return name; };
@@ -29,5 +36,10 @@ public class Student extends Model {
     }
     public void setCardId(String newCardId) {
         cardId = newCardId;
+    }
+
+    @JsonIgnore
+    public Account getAccount() {
+        return Account.getAccount(1, studentId);
     }
 }
