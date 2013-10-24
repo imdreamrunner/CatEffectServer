@@ -45,12 +45,12 @@ ajaxLoadCanteens =
     console.log "error"
 
 ajaxLoadPrepaidcards =
-  url:        "/public/prepaidcards/getAll"
+  url:        "/public/prepaidCards/getAll"
   type:       "get"
   dataType:   "json"
   success:    (data) ->
     if (!data['error'])
-      prepaidcardList = data['prepaidcards']
+      prepaidCardList = data['prepaidCards']
       dataToLoad--
       loadData()
   error:      () ->
@@ -63,16 +63,16 @@ this.pageLoad ->
   $.ajax ajaxLoadCanteens
   $.ajax ajaxLoadStalls
 
-this.newPrepaidcard = ->
+this.newPrepaidCard = ->
   this.showPopBox("#pop-up-new-prepaidcard", {}, 400, 150)
 
-this.doAddPrepaidcard = ->
+this.doAddPrepaidCard = ->
   that = this
   postData =
     auth_username: this.auth.getUsername()
     auth_password: this.auth.getPassword()
   $.ajax
-    url:      "/system/prepaidcards/add"
+    url:      "/system/prepaidCards/add"
     type:     "post"
     dataType: "json"
     data:     postData

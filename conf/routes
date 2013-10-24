@@ -21,6 +21,8 @@ GET         /public/categories/getOne/:id      controllers.PublicController.getO
 GET         /public/dishes/getAll/:category    controllers.PublicController.getAllDishes(category: Int)
 GET         /public/dishes/getOne/:id          controllers.PublicController.getOneDish(id: Int)
 
+# Prepaid Cards
+POST         /system/prepaidCards/getAll       controllers.SystemController.getAllPrepaidcards()
 # Upload
 POST        /public/upload/image               controllers.PublicController.uploadImage()
 
