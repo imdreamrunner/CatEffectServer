@@ -166,7 +166,7 @@ public class SystemController extends Controller {
     }
 
     @Authentication(requireSystem = true)
-    public static Result getAllPrepaidcards() {
+    public static Result getAllPrepaidCards() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
         String strPrepaidCardId = data.get("prepaidCardId");

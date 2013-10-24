@@ -1,12 +1,10 @@
 auth = this.auth
-canteenList = {}
-stallsList = {}
+prepaidCardList = []
 currentCanteen = 0;
 
 dataToLoad = 2
 
-table = _.template $("#stall-row").html()
-canteenButton = _.template $("#canteen-button").html()
+table = _.template $("#prepaidcard-row").html()
 
 loadData = ->
   if dataToLoad != 0
@@ -16,11 +14,6 @@ loadData = ->
     $('#canteen-list').append canteenButton(canteen)
   loadStalls(canteenList[0]['canteenId'])
 
-getCanteen = (canteenId) ->
-  for canteen in canteenList
-    if canteenId == canteen['canteenId']
-      return canteen
-
 getStall = (stallId) ->
   for stall in stallList
     if stallId == stall['stallId']
@@ -28,24 +21,12 @@ getStall = (stallId) ->
 
 this.loadPrepaidcards = loadPrepaidCards = () ->
   $("#prepaidcards-tbody").html ""
-  for prepaidcard in prepaidcardList
-    $("#prepaidcards-tbody").append(table(prepaidcard))
+  for prepaidCard in prepaidCardList
+    $("#prepaidcards-tbody").append(table(prepaidCard))
   $('#prepaidcards-tbody').find('.content-loader').removeClass('content-loader');
 
-ajaxLoadCanteens =
-  url:        "/public/canteens/getAll"
-  type:       "get"
-  dataType:   "json"
-  success:    (data) ->
-    if (!data['error'])
-      canteenList = data['canteens']
-      dataToLoad--
-      loadData()
-  error:      () ->
-    console.log "error"
-
 ajaxLoadPrepaidcards =
-  url:        "/public/prepaidCards/getAll"
+  url:        "/system/prepaidCards/getAll"
   type:       "get"
   dataType:   "json"
   success:    (data) ->
@@ -56,12 +37,11 @@ ajaxLoadPrepaidcards =
   error:      () ->
     console.log "error"
 
-
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(2)
-  $.ajax ajaxLoadCanteens
-  $.ajax ajaxLoadStalls
+  console.log("hi")
+  $.ajax ajaxLoadPrepaidcards
 
 this.newPrepaidCard = ->
   this.showPopBox("#pop-up-new-prepaidcard", {}, 400, 150)
@@ -78,7 +58,6 @@ this.doAddPrepaidCard = ->
     data:     postData
     success:  (data) ->
       console.log data['message']
-
 
 this.deleteStall = (stallId) ->
   stall = getStall(stallId)
