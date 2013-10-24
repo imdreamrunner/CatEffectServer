@@ -157,6 +157,27 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
+    public static Result getAllPrepaidcards() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        String strPrepaidCardId = data.get("prepaidCardId");
+        String token = data.get("token");
+        List<PrepaidCard> prepaidCardList;
+        if (strPrepaidCardId != null) {
+            Integer prepaidCardId = Integer.parseInt(strPrepaidCardId);
+            managerList = Manager.find.where("type = " + type).findList();
+        } if (strStallId != null) {
+            Integer stallId = Integer.parseInt(strStallId);
+            managerList = Manager.find.where("stall_id = " + stallId).findList();
+        } else {
+            managerList = Manager.find.all();
+        }
+        result.put("error", 0);
+        result.put("managers", Json.toJson(managerList));
+        return ok(result);
+    }
+
 
     @Authentication(requireSystem = true)
     public static Result addStall() {

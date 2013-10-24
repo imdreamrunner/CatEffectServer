@@ -1,5 +1,6 @@
 package models;
 
+import play.db.ebean.Model;
 import utils.CatException;
 import utils.RandomString;
 
@@ -21,4 +22,9 @@ public class PrepaidCard {
 
     public Integer getPrepaidCardId() {return prepaidCardId;}
     public String getToken() {return token;}
-}
+
+    public static Model.Finder<Integer, PrepaidCard> find
+            = new Model.Finder<Integer, PrepaidCard>(
+                Integer.class, PrepaidCard.class
+    );
+}3

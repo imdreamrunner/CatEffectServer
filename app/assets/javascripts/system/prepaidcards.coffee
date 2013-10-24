@@ -26,16 +26,11 @@ getStall = (stallId) ->
     if stallId == stall['stallId']
       return stall
 
-this.loadStalls = loadStalls = (canteenId) ->
-  $('.canteen-button').removeClass "current"
-  currentCanteen = canteenId
-  $('#canteen-button-' + canteenId).addClass "current"
-  $('#canteen-name').html getCanteen(canteenId)['name']
-  $("#stalls-tbody").html ""
-  for stall in stallList
-    if stall['canteenId'] == canteenId
-      $("#stalls-tbody").append(table(stall))
-  $('#stall-list').find('.content-loader').removeClass('content-loader');
+this.loadPrepaidcards = loadPrepaidCards = () ->
+  $("#prepaidcards-tbody").html ""
+  for prepaidcard in prepaidcardList
+    $("#prepaidcards-tbody").append(table(prepaidcard))
+  $('#prepaidcards-tbody').find('.content-loader').removeClass('content-loader');
 
 ajaxLoadCanteens =
   url:        "/public/canteens/getAll"
@@ -49,13 +44,13 @@ ajaxLoadCanteens =
   error:      () ->
     console.log "error"
 
-ajaxLoadStalls =
-  url:        "/public/stalls/getAll"
+ajaxLoadPrepaidcards =
+  url:        "/public/prepaidcards/getAll"
   type:       "get"
   dataType:   "json"
   success:    (data) ->
     if (!data['error'])
-      stallList = data['stalls']
+      prepaidcardList = data['prepaidcards']
       dataToLoad--
       loadData()
   error:      () ->
