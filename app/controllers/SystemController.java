@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Manager;
+import models.PrepaidCard;
 import models.Stall;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
@@ -38,6 +39,10 @@ public class SystemController extends Controller {
 
     public static Result stall() {
         return ok(stall.render());
+    }
+
+    public static Result prepaidcards() {
+        return ok(prepaidcards.render());
     }
 
     /*
@@ -136,6 +141,22 @@ public class SystemController extends Controller {
         result.put("managers", Json.toJson(managerList));
         return ok(result);
     }
+
+    @Authentication(requireSystem = true)
+    public static Result addPrepaidcard() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            PrepaidCard newPrepaidCard = new PrepaidCard();
+            result.put("error", 0);
+            result.put("newPrepaidCard", Json.toJson(newPrepaidCard));
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
 
     @Authentication(requireSystem = true)
     public static Result addStall() {

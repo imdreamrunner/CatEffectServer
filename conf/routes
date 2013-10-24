@@ -44,6 +44,7 @@ GET         /system/dashboard                  controllers.SystemController.dash
 GET         /system/managers                   controllers.SystemController.managers()
 GET         /system/stalls                     controllers.SystemController.stalls()
 GET         /system/stall                      controllers.SystemController.stall()
+GET         /system/prepaidcards               controllers.SystemController.prepaidcards()
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()
@@ -57,6 +58,8 @@ POST        /system/stalls/add                 controllers.SystemController.addS
 POST        /system/stalls/edit/:id            controllers.SystemController.editStall(id: Int)
 POST        /system/stalls/delete/:id          controllers.SystemController.deleteStall(id: Int)
 
+# Manage Prepaid Cards
+POST        /system/prepaidcards/add           controllers.SystemController.addPrepaidcard()
 ###################
 # StallController #
 ###################

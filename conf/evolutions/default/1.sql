@@ -4,24 +4,24 @@
 # --- !Ups
 
 create table account (
-  account_id                integer not null,
+  account_id                integer auto_increment not null,
   type                      integer,
   relevant_id               integer,
   balance                   integer,
-  create_time               timestamp,
-  last_used_time            timestamp,
+  create_time               datetime,
+  last_used_time            datetime,
   constraint pk_account primary key (account_id))
 ;
 
 create table canteen (
-  canteen_id                integer not null,
+  canteen_id                integer auto_increment not null,
   name                      varchar(255),
   sort                      integer,
   constraint pk_canteen primary key (canteen_id))
 ;
 
 create table category (
-  category_id               integer not null,
+  category_id               integer auto_increment not null,
   name                      varchar(255),
   stall_id                  integer,
   display_option            integer,
@@ -30,10 +30,10 @@ create table category (
 ;
 
 create table dish (
-  dish_id                   integer not null,
+  dish_id                   integer auto_increment not null,
   name                      varchar(255),
   image                     varchar(255),
-  description               clob,
+  description               longtext,
   category_id               integer,
   sort                      integer,
   price                     integer,
@@ -45,7 +45,7 @@ create table dish (
 ;
 
 create table manager (
-  manager_id                integer not null,
+  manager_id                integer auto_increment not null,
   username                  varchar(255) not null,
   password                  varchar(255),
   type                      integer,
@@ -55,13 +55,13 @@ create table manager (
 ;
 
 create table order_detail (
-  order_id                  integer not null,
+  order_id                  integer auto_increment not null,
   account_id                integer,
   subtotal                  integer,
   transaction_id            integer,
   status                    integer,
-  create_time               timestamp,
-  serve_time                timestamp,
+  create_time               datetime,
+  serve_time                datetime,
   feedback1                 integer,
   feedback2                 integer,
   feedback3                 integer,
@@ -69,7 +69,7 @@ create table order_detail (
 ;
 
 create table order_item (
-  order_item_id             integer not null,
+  order_item_id             integer auto_increment not null,
   order_id                  integer,
   dish_id                   integer,
   list_price                integer,
@@ -80,16 +80,16 @@ create table order_item (
 ;
 
 create table prepaid_card (
-  prepaid_card_id           integer not null,
+  prepaid_card_id           integer auto_increment not null,
   token                     varchar(255),
   constraint pk_prepaid_card primary key (prepaid_card_id))
 ;
 
 create table stall (
-  stall_id                  integer not null,
+  stall_id                  integer auto_increment not null,
   name                      varchar(255),
   sort                      integer,
-  description               clob,
+  description               longtext,
   image                     varchar(255),
   canteen_id                integer,
   prepaid_discount          integer,
@@ -100,34 +100,14 @@ create table stall (
 ;
 
 create table transaction (
-  transaction_id            integer not null,
+  transaction_id            integer auto_increment not null,
   account_id                integer,
   type                      integer,
   amount                    integer,
-  time                      timestamp,
+  time                      datetime,
   manager_id                integer,
   constraint pk_transaction primary key (transaction_id))
 ;
-
-create sequence account_seq;
-
-create sequence canteen_seq;
-
-create sequence category_seq;
-
-create sequence dish_seq;
-
-create sequence manager_seq;
-
-create sequence order_detail_seq;
-
-create sequence order_item_seq;
-
-create sequence prepaid_card_seq;
-
-create sequence stall_seq;
-
-create sequence transaction_seq;
 
 alter table category add constraint fk_category_stall_1 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
 create index ix_category_stall_1 on category (stall_id);
@@ -154,47 +134,27 @@ create index ix_transaction_manager_10 on transaction (manager_id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists account;
+drop table account;
 
-drop table if exists canteen;
+drop table canteen;
 
-drop table if exists category;
+drop table category;
 
-drop table if exists dish;
+drop table dish;
 
-drop table if exists manager;
+drop table manager;
 
-drop table if exists order_detail;
+drop table order_detail;
 
-drop table if exists order_item;
+drop table order_item;
 
-drop table if exists prepaid_card;
+drop table prepaid_card;
 
-drop table if exists stall;
+drop table stall;
 
-drop table if exists transaction;
+drop table transaction;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists account_seq;
-
-drop sequence if exists canteen_seq;
-
-drop sequence if exists category_seq;
-
-drop sequence if exists dish_seq;
-
-drop sequence if exists manager_seq;
-
-drop sequence if exists order_detail_seq;
-
-drop sequence if exists order_item_seq;
-
-drop sequence if exists prepaid_card_seq;
-
-drop sequence if exists stall_seq;
-
-drop sequence if exists transaction_seq;
+SET FOREIGN_KEY_CHECKS=1;
 
