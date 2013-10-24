@@ -21,8 +21,6 @@ GET         /public/categories/getOne/:id      controllers.PublicController.getO
 GET         /public/dishes/getAll/:category    controllers.PublicController.getAllDishes(category: Int)
 GET         /public/dishes/getOne/:id          controllers.PublicController.getOneDish(id: Int)
 
-# Prepaid Cards
-POST         /system/prepaidCards/getAll       controllers.SystemController.getAllPrepaidcards()
 # Upload
 POST        /public/upload/image               controllers.PublicController.uploadImage()
 
@@ -46,6 +44,7 @@ GET         /system/dashboard                  controllers.SystemController.dash
 GET         /system/managers                   controllers.SystemController.managers()
 GET         /system/stalls                     controllers.SystemController.stalls()
 GET         /system/stall                      controllers.SystemController.stall()
+GET         /system/accounts                   controllers.SystemController.accounts()
 GET         /system/prepaidcards               controllers.SystemController.prepaidcards()
 
 # Manage Managers
@@ -60,8 +59,11 @@ POST        /system/stalls/add                 controllers.SystemController.addS
 POST        /system/stalls/edit/:id            controllers.SystemController.editStall(id: Int)
 POST        /system/stalls/delete/:id          controllers.SystemController.deleteStall(id: Int)
 
+# Manage Accounts
+
 # Manage Prepaid Cards
 POST        /system/prepaidcards/add           controllers.SystemController.addPrepaidcard()
+POST        /system/prepaidCards/getAll        controllers.SystemController.getAllPrepaidcards()
 ###################
 # StallController #
 ###################

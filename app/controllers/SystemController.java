@@ -45,6 +45,14 @@ public class SystemController extends Controller {
         return ok(prepaidcards.render());
     }
 
+    public static Result matriculationcards() {
+        return ok(matriculationcards.render());
+    }
+
+    public static Result accounts() {
+        return ok(accounts.render());
+    }
+
     /*
      * JSON Methods.
      */
