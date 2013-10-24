@@ -5,6 +5,7 @@ import models.Account;
 import models.Manager;
 import models.PrepaidCard;
 import models.Stall;
+import models.Transaction;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -49,6 +50,10 @@ public class SystemController extends Controller {
 
     public static Result matriculationCards() {
         return ok(matriculationcards.render());
+    }
+
+    public static Result transaction() {
+        return ok(transaction.render());
     }
 
     public static Result accounts() {
@@ -205,8 +210,10 @@ public class SystemController extends Controller {
     public static Result getAllPrepaidCards() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
+        ///
         String strPrepaidCardId = data.get("prepaidCardId");
         String token = data.get("token");
+        ///no need？
         List<PrepaidCard> prepaidcardList;
         prepaidcardList = PrepaidCard.find.all();
         result.put("error", 0);
@@ -279,6 +286,17 @@ public class SystemController extends Controller {
         Stall stall = Stall.find.byId(stallId);
         stall.delete();
         result.put("error", 0);
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result getAllTransaction() {
+        System.out.println("here");
+        ObjectNode result = Json.newObject();
+        List<Transaction> transactionList;
+        transactionList = Transaction.find.all();
+        result.put("error", 0);
+        result.put("transaction", Json.toJson(transactionList));
         return ok(result);
     }
 

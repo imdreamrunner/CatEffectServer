@@ -1,10 +1,14 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 import java.util.Date;
+import utils.CatException;
+
 
 @Entity
-public class Transaction {
+public class Transaction extends Model {
     @Id
     private Integer transactionId;
     @ManyToOne
@@ -33,4 +37,9 @@ public class Transaction {
     public void setTime(Date newTime) {time = newTime;}
     public void setOrder(Order newOrder) {order = newOrder;}
     public void setManager(Manager newManager) {manager = newManager;}
+
+    public static Model.Finder<Integer, Transaction> find
+            = new Model.Finder<Integer, Transaction>(
+                Integer.class, Transaction.class
+    );
 }

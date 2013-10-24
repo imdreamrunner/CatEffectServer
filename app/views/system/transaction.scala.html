@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction Records</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<h1>Transaction</h1>
+<div id="Search tabs">
+    <span id="canteen-list">
+    </span>
+    <!--
+    <a href="javascript:">Manage Canteens</a>
+    -->
+</div>
+<div id="contents">
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="transaction-list" class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                </div>
+                <div class="content content-loader">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>Transaction ID</td>
+                            <td>Account ID</td>
+                            <td>Type</td>
+                            <td>Amount</td>
+                            <td>Date & Time</td>
+                            <td>Manager ID</td>
+                        </tr>
+                        </thead>
+                        <tbody id="transaction-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="copyright">
+    <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
+    <p class="small">* Information displayed in this page is only for authorized administrators.</p>
+</div>
+
+<script type="text/html" id="transaction-row">
+    <tr>
+        <td><a href="javascript:" onclick=""><%= transactionId %> </a></td>
+        <td><a href="javascript:" onclick=""><%= account %> </a></td>
+        <td><a href="javascript:" onclick=""><%= type %> </a></td>
+        <td><a href="javascript:" onclick=""><%= amount %> </a></td>
+        <td><a href="javascript:" onclick=""><%= time %> </a></td>
+        <td><a href="javascript:" onclick=""><%= manager %> </a></td>
+        <td><a>View Order Details</a></td>
+    </tr>
+</script>
+
+<!--
+<script type="text/html" id="pop-up-new-stall">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Add a New Stall</h3>
+            <span class="button">
+                <a href="javascript:" onclick="doAddStall()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Create
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputStallName">Stall Name</label>
+                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+!-->
+
+<!--
+<script type="text/html" id="pop-up-confirm-delete">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Delete Stall?</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <p>Do you really want to delete the stall <strong><%= name %></strong>?</p>
+            <p>NOTE: This action cannot be undo!</p>
+            <p>
+                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteStall(<%= stallId %>)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Confirm Delete
+                </a>
+            </p>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="canteen-button">
+    <a href="javascript:"
+       id="canteen-button-<%= canteenId %>"
+       class="canteen-button"
+       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
+</script>
+!-->
+
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
+<script src="/assets/javascripts/system/transaction.js"></script>
+</body>
+</html>
