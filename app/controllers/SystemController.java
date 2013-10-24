@@ -41,11 +41,11 @@ public class SystemController extends Controller {
         return ok(stall.render());
     }
 
-    public static Result prepaidcards() {
+    public static Result prepaidCards() {
         return ok(prepaidcards.render());
     }
 
-    public static Result matriculationcards() {
+    public static Result matriculationCards() {
         return ok(matriculationcards.render());
     }
 
@@ -151,7 +151,7 @@ public class SystemController extends Controller {
     }
 
     @Authentication(requireSystem = true)
-    public static Result addPrepaidcard() {
+    public static Result addPrepaidCard() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
         try {
