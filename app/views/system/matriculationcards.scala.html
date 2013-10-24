@@ -34,7 +34,8 @@
                             <td>Name</td>
                             <td>Card ID</td>
                             <td>Balance</td>
-                            <td>Operation</td>
+                            <td>Top-Up</td>
+                            <td>History</td>
                         </tr>
                         </thead>
                         <tbody id="matriculationcards-tbody">
@@ -108,7 +109,12 @@
         </td>
         <td>
             <a href="javascript:" onclick="deleteAccount(<%= accountId %>)">
-                <span class="glyphicon glyphicon-remove"></span>Delete
+                Top-Up
+            </a>
+        </td>
+        <td>
+            <a href="javascript:" onclick="deleteAccount(<%= accountId %>)">
+                View History
             </a>
         </td>
     </tr>
