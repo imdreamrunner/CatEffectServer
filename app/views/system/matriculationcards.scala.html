@@ -12,7 +12,7 @@
 <div id="contents">
     <div class="row">
         <div class="col-xs-12">
-            <div id="stall-list" class="widget">
+            <div id="matriculationcards-list" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
@@ -23,11 +23,15 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <td>Matriculation ID</td>
+                            <td>Account ID</td>
+                            <td>Type</td>
+                            <td>Name</td>
+                            <td>Card ID</td>
                             <td>Balance</td>
+                            <td>Operation</td>
                         </tr>
                         </thead>
-                        <tbody id="prepaidcards-tbody">
+                        <tbody id="matriculationcards-tbody">
                         </tbody>
                     </table>
                 </div>
@@ -67,35 +71,44 @@
     </div>
 </script>
 
-<script type="text/html" id="canteen-button">
-    <a href="javascript:"
-       id="canteen-button-<%= canteenId %>"
-       class="canteen-button"
-       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
-</script>
-
-<script type="text/html" id="stall-row">
+<script type="text/html" id="matriculationcard-row">
     <tr>
         <td>
-            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
-                <%= name %>
-            </a>
-        </td>
-
-        <td>
-            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
-                View Menu
-            </a>
+            <%= accountId %>
         </td>
         <td>
-            <a href="javascript:" onclick="deleteStall(<%= stallId %>)">
+            <%
+                if (type == 1) print("Student");
+                if (type == 2) print("Faculty");
+                if (type == 3) print("Staff");
+            %>
+        </td>
+        <td>
+            <%
+            if (type == 1) print(student['name']);
+            if (type == 2) print(faculty['name']);
+            if (type == 3) print(staff['name']);
+            %>
+        </td>
+        <td>
+            <%
+            if (type == 1) print(student['cardId']);
+            if (type == 2) print(faculty['cardId']);
+            if (type == 3) print(staff['cardId']);
+            %>
+        </td>
+        <td>
+            <%= balance %>
+        </td>
+        <td>
+            <a href="javascript:" onclick="deleteAccount(<%= accountId %>)">
                 <span class="glyphicon glyphicon-remove"></span>Delete
             </a>
         </td>
     </tr>
 </script>
 
-<script type="text/html" id="pop-up-new-prepaidcard">
+<script type="text/html" id="pop-up-new-matriculationcard">
     <div class="widget">
         <div class="title">
             <span class="icon">

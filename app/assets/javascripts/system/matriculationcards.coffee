@@ -1,23 +1,22 @@
 auth = this.auth
-prepaidCardList = []
+accounts = []
 currentCanteen = 0;
 
-table = _.template $("#prepaidcard-row").html()
+table = _.template $("#matriculationcard-row").html()
 
-this.loadPrepaidcards = loadPrepaidCards = () ->
-  console.log(prepaidCardList)
-  $("#prepaidcards-tbody").html ""
-  for prepaidCard in prepaidCardList
-    console.log prepaidCard
-    $("#prepaidcards-tbody").append(table(prepaidCard))
-  $('#prepardcard-list').find('.content-loader').removeClass('content-loader');
+this.loadAccounts = loadAccounts = () ->
+  $("#matriculationcards-tbody").html ""
+  for account in accounts
+    console.log account
+    $("#matriculationcards-tbody").append(table(account))
+  $('#matriculationcards-list').find('.content-loader').removeClass('content-loader');
 
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(2)
 
   $.ajax
-    url:        "/system/prepaidCards/getAll"
+    url:        "/system/accounts/getAllMatriculation"
     type:       "post"
     dataType:   "json"
     data:
@@ -25,13 +24,14 @@ this.pageLoad ->
       auth_password: this.auth.getPassword()
     success:    (data) ->
       if (!data['error'])
-        prepaidCardList = data['prepaidCards']
-        loadPrepaidcards()
+        console.log data['accounts']
+        accounts = data['accounts']
+        loadAccounts()
     error:      () ->
       console.log "error"
 
 this.newPrepaidCard = ->
-  this.showPopBox("#pop-up-new-prepaidcard", {}, 400, 150)
+  this.showPopBox("#pop-up-new-matriculationcard", {}, 400, 150)
 
 this.doAddPrepaidCard = ->
   that = this
@@ -39,7 +39,7 @@ this.doAddPrepaidCard = ->
     auth_username: this.auth.getUsername()
     auth_password: this.auth.getPassword()
   $.ajax
-    url:      "/system/prepaidCards/add"
+    url:      "/system/matriculationCards/add"
     type:     "post"
     dataType: "json"
     data:     postData
