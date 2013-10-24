@@ -26,6 +26,11 @@ public class Account extends Model {
             Integer.class, Account.class
     );
 
+    public Account() {
+        setBalance(0);
+        setCreateTime(new Date());
+    }
+
     public Integer getAccountId() {
         return accountId;
     }
@@ -54,4 +59,40 @@ public class Account extends Model {
         balance = b;
     }
 
+    public void setCreateTime(Date newCreateTime) {
+        createTime = newCreateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setLastUsedTime(Date newLastUsedTime) {
+        lastUsedTime = newLastUsedTime;
+    }
+
+    public Date getLastUsedTime() {
+        return lastUsedTime;
+    }
+
+    public static Account getAccount(Integer type, Integer relevantId) {
+        List<Account> accounts = find.where("type = " + type + " and relevent_id = " + relevantId).findList();
+        if (accounts.size() == 0) {
+            Account newAccount = new Account();
+            newAccount.setType(type);
+            newAccount.setRelevantId(relevantId);
+            newAccount.save();
+            return newAccount;
+        } else {
+            return accounts.get(0);
+        }
+    }
+
+    public PrepaidCard getPrepaidCard() {
+        if (type == 0) {
+            return PrepaidCard.find.byId(relevantId);
+        } else {
+            return null;
+        }
+    }
 }
