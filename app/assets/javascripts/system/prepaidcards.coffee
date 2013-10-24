@@ -25,23 +25,24 @@ this.loadPrepaidcards = loadPrepaidCards = () ->
     $("#prepaidcards-tbody").append(table(prepaidCard))
   $('#prepaidcards-tbody').find('.content-loader').removeClass('content-loader');
 
-ajaxLoadPrepaidcards =
-  url:        "/system/prepaidCards/getAll"
-  type:       "get"
-  dataType:   "json"
-  success:    (data) ->
-    if (!data['error'])
-      prepaidCardList = data['prepaidCards']
-      dataToLoad--
-      loadData()
-  error:      () ->
-    console.log "error"
-
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(2)
-  console.log("hi")
-  $.ajax ajaxLoadPrepaidcards
+
+  $.ajax
+    url:        "/system/prepaidCards/getAll"
+    type:       "post"
+    dataType:   "json"
+    data:
+      auth_username: this.auth.getUsername()
+      auth_password: this.auth.getPassword()
+    success:    (data) ->
+      if (!data['error'])
+        prepaidCardList = data['prepaidCards']
+        dataToLoad--
+        loadData()
+    error:      () ->
+      console.log "error"
 
 this.newPrepaidCard = ->
   this.showPopBox("#pop-up-new-prepaidcard", {}, 400, 150)
