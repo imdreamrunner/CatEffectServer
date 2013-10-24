@@ -12,6 +12,8 @@ this.loadPrepaidcards = loadPrepaidCards = () ->
     $("#prepaidcards-tbody").append(table(prepaidCard))
   $('#prepardcard-list').find('.content-loader').removeClass('content-loader');
 
+
+
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(2)
@@ -45,10 +47,18 @@ this.doAddPrepaidCard = ->
       console.log data['message']
       location.reload()
 
+this.deletePrepaidCard = (prepaidCardId)->
+  PrepaidCard = getPrepaidCard(prepaidCardId)
+  this.showPopBox("#pop-up-confirm-delete", PrepaidCard, 400, 180)
 
-this.confirmDeleteStall = (stallId) ->
-  ajaxDeleteStall =
-    url:      "/system/stalls/delete/" + stallId
+getPrepaidCard = (prepaidCardId) ->
+  for PrepaidCard in prepaidCardList
+    if PrepaidCard['prepaidCardId'] == prepaidCardId
+      return PrepaidCard
+
+this.confirmDeletePrepaidCard = (prepaidCardId) ->
+  $.ajax
+    url:      "/system/prepaidCards/delete/" + prepaidCardId
     type:     "post"
     dataType: "json"
     data:
@@ -60,4 +70,3 @@ this.confirmDeleteStall = (stallId) ->
         location.reload()
     error: () ->
       console.log "error!"
-  $.ajax ajaxDeleteStall

@@ -61,10 +61,10 @@
             </span>
         </div>
         <div class="content">
-            <p>Do you really want to delete the prepaid card <strong><%= name %></strong>?</p>
+            <p>Do you really want to delete the prepaid card <strong><%= prepaidCardId %></strong>?</p>
             <p>NOTE: This action cannot be undo!</p>
             <p>
-                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteStall(<%= stallId %>)">
+                <a href="javascript:" class="btn btn-default" onclick="confirmDeletePrepaidCard(<%= prepaidCardId %>)">
                     <span class="glyphicon glyphicon-trash"></span>
                     Confirm Delete
                 </a>
@@ -99,7 +99,7 @@
             </a>
         </td>
         <td>
-            <a href="javascript:" onclick="">
+            <a href="javascript:" onclick="deletePrepaidCard(<%= prepaidCardId %>)">
                 <span class="glyphicon glyphicon-remove"></span>Delete
             </a>
         </td>

@@ -185,6 +185,23 @@ public class SystemController extends Controller {
     }
 
     @Authentication(requireSystem = true)
+    public static Result deletePrepaidCard(int prepaidCardId) {
+        ObjectNode result = Json.newObject();
+        try {
+            PrepaidCard prepaidCard = PrepaidCard.find.byId(prepaidCardId);
+            if (prepaidCard == null) {
+                throw new CatException(3001, "Prepaid Card not found.");
+            }
+            prepaidCard.delete();
+            result.put("error", 0);
+        } catch (CatException ex) {
+            result.put("error", ex.getCode());
+            result.put("message", ex.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
     public static Result getAllPrepaidCards() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();

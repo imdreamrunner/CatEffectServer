@@ -63,6 +63,7 @@ POST        /system/stalls/delete/:id          controllers.SystemController.dele
 # Manage Accounts
 POST        /system/prepaidCards/add           controllers.SystemController.addPrepaidCard()
 POST        /system/prepaidCards/getAll        controllers.SystemController.getAllPrepaidCards()
+POST        /system/prepaidCards/delete/:id    controllers.SystemController.deletePrepaidCard(id: Int)
 POST        /system/accounts/getAllMatriculation controllers.SystemController.getAllMatriculationAccounts()
 POST        /testStudent                       controllers.SystemController.testStudent()
 
