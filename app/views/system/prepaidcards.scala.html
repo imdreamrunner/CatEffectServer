@@ -80,17 +80,33 @@
        onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
 </script>
 
-<script type="text/html" id="stall-row">
+<script type="text/html" id="prepaidcard-row">
     <tr>
         <td>
-            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
-                <%= name %>
+            <a href="javascript:" onclick="">
+                <%= prepaidCardId %>
             </a>
         </td>
 
         <td>
-            <a href="javascript:" onclick="newWindow('/system/stall#stallId=<%= stallId %>', 1000, 600)">
-                View Menu
+            <a href="javascript:" onclick="">
+                <%= account['balance'] %>
+            </a>
+        </td>
+
+        <td>
+            <a href="javascript:" onclick="">
+                View History
+            </a>
+        </td>
+        <td>
+            <a href="javascript:" onclick="">
+                Top Up
+            </a>
+        </td>
+        <td>
+            <a href="javascript:" onclick="">
+                QR Code
             </a>
         </td>
         <td>
