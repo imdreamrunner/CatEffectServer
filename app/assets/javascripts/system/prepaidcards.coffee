@@ -4,20 +4,7 @@ currentCanteen = 0;
 
 table = _.template $("#prepaidcard-row").html()
 
-this.loadPrepaidcards = loadPrepaidCards = () ->
-  console.log(prepaidCardList)
-  $("#prepaidcards-tbody").html ""
-  for prepaidCard in prepaidCardList
-    console.log prepaidCard
-    $("#prepaidcards-tbody").append(table(prepaidCard))
-  $('#prepardcard-list').find('.content-loader').removeClass('content-loader');
-
-
-
-this.pageLoad ->
-  if this.javaMode()
-    this.java.setMenu(2)
-
+ajaxLoadData = ->
   $.ajax
     url:        "/system/prepaidCards/getAll"
     type:       "post"
@@ -32,6 +19,21 @@ this.pageLoad ->
     error:      () ->
       console.log "error"
 
+this.loadPrepaidcards = loadPrepaidCards = () ->
+  console.log(prepaidCardList)
+  $("#prepaidcards-tbody").html ""
+  for prepaidCard in prepaidCardList
+    console.log prepaidCard
+    $("#prepaidcards-tbody").append(table(prepaidCard))
+  $('#prepardcard-list').find('.content-loader').removeClass('content-loader');
+
+
+
+this.pageLoad ->
+  if this.javaMode()
+    this.java.setMenu(2)
+  ajaxLoadData()
+
 
 this.doAddPrepaidCard = ->
   that = this
@@ -45,7 +47,7 @@ this.doAddPrepaidCard = ->
     data:     postData
     success:  (data) ->
       console.log data['message']
-      location.reload()
+      ajaxLoadData()
 
 this.deletePrepaidCard = (prepaidCardId)->
   PrepaidCard = getPrepaidCard(prepaidCardId)
@@ -57,6 +59,7 @@ getPrepaidCard = (prepaidCardId) ->
       return PrepaidCard
 
 this.confirmDeletePrepaidCard = (prepaidCardId) ->
+  that = this
   $.ajax
     url:      "/system/prepaidCards/delete/" + prepaidCardId
     type:     "post"
@@ -67,6 +70,7 @@ this.confirmDeletePrepaidCard = (prepaidCardId) ->
     success: (data) ->
       console.log data
       if (!data['error'])
-        location.reload()
+        ajaxLoadData()
+        that.closePopBox()
     error: () ->
       console.log "error!"
