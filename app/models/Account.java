@@ -55,12 +55,17 @@ public class Account extends Model {
     }
 
     public Integer getBalance() {
+        calculateBalance();
+        return balance;
+    }
+
+    public void calculateBalance() {
         Integer total = 0;
         for (Transaction transaction : transactions) {
             total += transaction.getAmount();
         }
         setBalance(total);
-        return balance;
+        save();
     }
 
     public void setBalance(Integer b) {
@@ -85,7 +90,7 @@ public class Account extends Model {
 
     public static Account getAccount(Integer type, Integer relevantId) {
         List<Account> accounts = find.where("type = " + type + " and relevant_id = " + relevantId).findList();
-        if (accounts.size() == 0) {
+        if (accounts.size() < 1) {
             Account newAccount = new Account();
             newAccount.setType(type);
             newAccount.setRelevantId(relevantId);

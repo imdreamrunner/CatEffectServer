@@ -1,5 +1,8 @@
 package controllers;
 
+import btu_models.Faculty;
+import btu_models.Staff;
+import btu_models.Student;
 import models.*;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
@@ -84,6 +87,18 @@ public class OrderController extends Controller {
             if (type == 0) {
                 PrepaidCard prepaidCard = PrepaidCard.find.where("token='" + id + "'").findList().get(0);
                 account = Account.getAccount(type, prepaidCard.getPrepaidCardId());
+            }
+            if (type == 1) {
+                Student student = Student.find.where("card_id = '" + id + "'").findList().get(0);
+                account = Account.getAccount(type, student.getStudentId());
+            }
+            if (type == 2) {
+                Faculty faculty = Faculty.find.where("card_id = '" + id + "'").findList().get(0);
+                account = Account.getAccount(type, faculty.getFacultyId());
+            }
+            if (type == 3) {
+                Staff staff = Staff.find.where("card_id = '" + id + "'").findList().get(0);
+                account = Account.getAccount(type, staff.getStaffId());
             }
             result.put("error", 0);
             result.put("account", Json.toJson(account));

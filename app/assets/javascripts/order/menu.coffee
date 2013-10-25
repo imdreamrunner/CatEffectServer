@@ -54,7 +54,7 @@ this.showDish = (dishId) ->
   $popBox.html dishTemplate(dish)
   $('body').append($popBox)
 
-this.cancelOrder = () ->
+this.cancelDish = () ->
   $(".pop-box").remove()
 
 this.orderDish = (dishId) ->
@@ -113,21 +113,22 @@ getCheckOutSummary = ->
   for orderItem in dishOrderedList
     subtotal += dish['finalPrice'] * orderItem['quantity']
   postData =
-    accountId:  1
+    accountId:  this.account['accountId']
     stallId:  this.stallId
     subtotal: subtotal
     orderItems: JSON.stringify(orderItems)
   return postData
 
 this.showCheckOut = ->
-  getAccountInfo()
-  $("#check-out-dish-tbody").html("")
-  orderItems = getOrderItems()
-  rowTemplate = _.template $("#check-out-dish-template").html()
-  for orderItem in orderItems
-    $("#check-out-dish-tbody").append(rowTemplate(orderItem))
-  $("#check-out-subtotal").html getCheckOutSummary()['subtotal']
   $("#check-out-summary").show(300)
+  getAccountInfo ->
+    $("#check-out-dish-tbody").html("")
+    orderItems = getOrderItems()
+    rowTemplate = _.template $("#check-out-dish-template").html()
+    for orderItem in orderItems
+      $("#check-out-dish-tbody").append(rowTemplate(orderItem))
+    $("#check-out-subtotal").html getCheckOutSummary()['subtotal']
+    $("#check-out-summary").show(300)
 
 this.checkOut = ->
   postData = getCheckOutSummary()
@@ -151,17 +152,20 @@ getAccountString = ->
   if this.javaMode()
     accountString = this.java.getAccountString()
   else
-    accountString = "0 HelloWorld"
+    accountString = "2 U1220822F"
+  if accountString == null
+    accountString = ""
   return accountString
 
 getAccountInfo = (callback) ->
+  that = this
+  accountString = getAccountString()
   $.ajax
     url: "/order/getAccountByString"
     type: "post"
     dataType: "json"
     data:
-      accountString: getAccountString()
-    success: (data)->
-      console.log data
-      if callback
-        callback(data)
+      accountString: accountString
+    success: (data) ->
+      that.account = data['account']
+      callback.call(that)
