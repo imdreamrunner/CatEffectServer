@@ -5,7 +5,7 @@ table = _.template $("#transaction-row").html()
 
 ajaxLoadData = ->
   $.ajax
-    url:        "/system/transaction/getAll"
+    url:        "/system/transactions/getAll"
     type:       "post"
     dataType:   "json"
     data:
@@ -22,9 +22,7 @@ this.loadTransaction = loadTransaction = () ->
   console.log(transactionList)
   $("#transaction-tbody").html ""
   for transaction in transactionList
-    console.log "here"
-    console.log transaction
-    $("#transaction-tbody").append(table(transactionList))
+    $("#transaction-tbody").append(table(transaction))
   $('#transaction-list').find('.content-loader').removeClass('content-loader');
 
 

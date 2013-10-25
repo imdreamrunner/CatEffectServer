@@ -52,8 +52,8 @@ public class SystemController extends Controller {
         return ok(matriculationcards.render());
     }
 
-    public static Result transaction() {
-        return ok(transaction.render());
+    public static Result transactions() {
+        return ok(transactions.render());
     }
 
     public static Result accounts() {
@@ -290,7 +290,7 @@ public class SystemController extends Controller {
     }
 
     @Authentication(requireSystem = true)
-    public static Result getAllTransaction() {
+    public static Result getAllTransactions() {
         System.out.println("here");
         ObjectNode result = Json.newObject();
         List<Transaction> transactionList;

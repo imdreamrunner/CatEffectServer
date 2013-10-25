@@ -1,10 +1,10 @@
 package models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.util.Date;
-import utils.CatException;
 
 
 @Entity
@@ -24,12 +24,23 @@ public class Transaction extends Model {
     private Manager manager;
 
     public Integer getTransactionId() {return transactionId;}
+    @JsonIgnore
     public Account getAccount() {return account;}
+    public Integer getAccountId() {
+        return account != null ? account.getAccountId() : null;
+    }
+    public Integer getAccountType() {
+        return account != null ? account.getType() : null;
+    }
     public Integer getType() {return type;}
     public Integer getAmount() {return amount;}
     public Date getTime() {return time;}
     public Order getOrder() {return order;}
+    @JsonIgnore
     public Manager getManager() {return manager;}
+    public Integer getManagerId() {
+        return manager != null ? manager.getManagerId() : null;
+    }
 
     public void setAccount(Account newAccount) {account = newAccount;}
     public void setType(Integer newType) {type = newType;}
