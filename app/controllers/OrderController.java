@@ -31,9 +31,11 @@ public class OrderController extends Controller {
         DynamicForm data = Form.form().bindFromRequest();
         try {
             String strOrderItems = data.get("orderItems");
+            Integer stallId = Integer.parseInt(data.get("stallId").toString());
             Integer accountId = Integer.parseInt(data.get("accountId").toString());
             Integer subtotal = Integer.parseInt(data.get("subtotal").toString());
             Order order = new Order();
+            order.setStall(stallId);
             order.setAccount(accountId);
             order.setSubtotal(subtotal);
             order.save();

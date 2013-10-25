@@ -112,6 +112,7 @@ this.checkOut = ->
     subtotal += dish['finalPrice'] * orderItem['quantity']
   postData =
     accountId:  1
+    stallId:  this.stallId
     subtotal: subtotal
     orderItems: JSON.stringify(orderItems)
   console.log postData
