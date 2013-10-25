@@ -58,7 +58,7 @@ create table order_detail (
   order_id                  integer auto_increment not null,
   account_id                integer,
   subtotal                  integer,
-  stall_stall_id            integer,
+  stall_id                  integer,
   transaction_id            integer,
   status                    integer,
   create_time               datetime,
@@ -118,8 +118,8 @@ alter table manager add constraint fk_manager_stall_3 foreign key (stall_id) ref
 create index ix_manager_stall_3 on manager (stall_id);
 alter table order_detail add constraint fk_order_detail_account_4 foreign key (account_id) references account (account_id) on delete restrict on update restrict;
 create index ix_order_detail_account_4 on order_detail (account_id);
-alter table order_detail add constraint fk_order_detail_stall_5 foreign key (stall_stall_id) references stall (stall_id) on delete restrict on update restrict;
-create index ix_order_detail_stall_5 on order_detail (stall_stall_id);
+alter table order_detail add constraint fk_order_detail_stall_5 foreign key (stall_id) references stall (stall_id) on delete restrict on update restrict;
+create index ix_order_detail_stall_5 on order_detail (stall_id);
 alter table order_detail add constraint fk_order_detail_transaction_6 foreign key (transaction_id) references transaction (transaction_id) on delete restrict on update restrict;
 create index ix_order_detail_transaction_6 on order_detail (transaction_id);
 alter table order_item add constraint fk_order_item_order_7 foreign key (order_id) references order_detail (order_id) on delete restrict on update restrict;

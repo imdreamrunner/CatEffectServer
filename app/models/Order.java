@@ -18,6 +18,7 @@ public class Order extends Model {
     private Account account;
     private Integer subtotal;
     @ManyToOne
+    @JoinColumn(name = "stall_id")
     private Stall stall;
     @OneToOne
     @JoinColumn(name = "transaction_id")
