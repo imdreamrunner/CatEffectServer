@@ -35,7 +35,9 @@ public class Transaction extends Model {
     public Integer getType() {return type;}
     public Integer getAmount() {return amount;}
     public Date getTime() {return time;}
+    @JsonIgnore
     public Order getOrder() {return order;}
+    public Integer getOrderId() {return order != null ? order.getOrderId() : null;}
     @JsonIgnore
     public Manager getManager() {return manager;}
     public Integer getManagerId() {
