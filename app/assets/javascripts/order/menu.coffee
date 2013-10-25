@@ -95,12 +95,8 @@ this.deleteOrderItem = (orderItemId) ->
       break
   this.showDishOrdered()
 
-this.showCheckOut = ->
-  $("#check-out-summary").show()
-
-this.checkOut = ->
+getOrderItems = ->
   orderItems = []
-  subtotal = 0
   for orderItem in dishOrderedList
     dish = findDish(orderItem['dishId'])
     orderItems.push
@@ -109,13 +105,31 @@ this.checkOut = ->
       note:       orderItem['note']
       price:      dish['finalPrice']
       listPrice:  dish['price']
+  return orderItems
+
+getCheckOutSummary = ->
+  orderItems = getOrderItems()
+  subtotal = 0
+  for orderItem in dishOrderedList
     subtotal += dish['finalPrice'] * orderItem['quantity']
   postData =
     accountId:  1
     stallId:  this.stallId
     subtotal: subtotal
     orderItems: JSON.stringify(orderItems)
-  console.log postData
+  return postData
+
+this.showCheckOut = ->
+  $("#check-out-dish-tbody").html("")
+  orderItems = getOrderItems()
+  rowTemplate = _.template $("#check-out-dish-template").html()
+  for orderItem in orderItems
+    $("#check-out-dish-tbody").append(rowTemplate(orderItem))
+  $("#check-out-subtotal").html getCheckOutSummary()['subtotal']
+  $("#check-out-summary").show(300)
+
+this.checkOut = ->
+  postData = getCheckOutSummary()
   $.ajax
     url:      "/order/orders/add"
     type:     "post"
@@ -127,3 +141,7 @@ this.checkOut = ->
       refresh = ->
         location.reload()
       setTimeout(refresh, 5000)
+
+
+this.cancelOrder = ->
+  $("#check-out-summary").hide(300)

@@ -30,23 +30,14 @@
                     <td>Note</td>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Item</td>
-                    <td>Quantity</td>
-                    <td>Note</td>
-                </tr>
-                <tr>
-                    <td>Item</td>
-                    <td>Quantity</td>
-                    <td>Note</td>
-                </tr>
+            <tbody id="check-out-dish-tbody">
             </tbody>
         </table>
         <div class="subtotal">
-            Subtotal: <span>1000</span>
+            Subtotal: <span id="check-out-subtotal"><%= subtotal %></span>
         </div>
         <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
+        <a class="confirmCheckOut" href="javascript:" onclick="cancelOrder()">Cancel</a>
     </div>
 </div>
 
@@ -55,6 +46,15 @@
         Thank you!
     </div>
 </div>
+
+<script type="text/html" id="check-out-dish-template">
+    <% dish = findDish(dishId); %>
+    <tr>
+        <td><%= dish['name'] %></td>
+        <td><%= quantity %></td>
+        <td><%= note %></td>
+    </tr>
+</script>
 
 <script type="text/html" id="category-template">
     <div id="category-<%= categoryId %>" class="category">
