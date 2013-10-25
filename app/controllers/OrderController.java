@@ -2,6 +2,7 @@ package controllers;
 
 import models.Order;
 import models.OrderItem;
+import models.Transaction;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
@@ -35,9 +36,15 @@ public class OrderController extends Controller {
             Integer accountId = Integer.parseInt(data.get("accountId").toString());
             Integer subtotal = Integer.parseInt(data.get("subtotal").toString());
             Order order = new Order();
+            Transaction transaction = new Transaction();
+            transaction.setType(1);
+            transaction.setAccount(accountId);
+            transaction.setAmount(-subtotal);
+            transaction.save();
             order.setStall(stallId);
             order.setAccount(accountId);
             order.setSubtotal(subtotal);
+            order.setTransaction(transaction);
             order.save();
             JsonNode nodeOrderItems = Json.parse(strOrderItems);
             for (int i = 0; i < nodeOrderItems.size(); i++) {

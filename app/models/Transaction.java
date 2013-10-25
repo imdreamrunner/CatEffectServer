@@ -43,6 +43,10 @@ public class Transaction extends Model {
     }
 
     public void setAccount(Account newAccount) {account = newAccount;}
+    public void setAccount(Integer newAccountId) {
+        Account newAccount = Account.find.byId(newAccountId);
+        setAccount(newAccount);
+    }
     public void setType(Integer newType) {type = newType;}
     public void setAmount(Integer newAmount) {amount = newAmount;}
     public void setTime(Date newTime) {time = newTime;}
@@ -56,4 +60,8 @@ public class Transaction extends Model {
             = new Model.Finder<Integer, Transaction>(
                 Integer.class, Transaction.class
     );
+
+    public Transaction() {
+        setTime(new Date());
+    }
 }
