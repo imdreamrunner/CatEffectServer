@@ -1,8 +1,6 @@
 package controllers;
 
-import models.Order;
-import models.OrderItem;
-import models.Transaction;
+import models.*;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
@@ -70,6 +68,29 @@ public class OrderController extends Controller {
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    public static Result getAccountByString() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            String accountString = data.get("accountString");
+            String[] accountInfo = accountString.split(" ");
+            Integer type = Integer.parseInt(accountInfo[0]);
+            String id = accountInfo[1];
+            Account account = null;
+            if (type == 0) {
+                PrepaidCard prepaidCard = PrepaidCard.find.where("token='" + id + "'").findList().get(0);
+                account = Account.getAccount(type, prepaidCard.getPrepaidCardId());
+            }
+            result.put("error", 0);
+            result.put("account", Json.toJson(account));
+
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", "Unknown error.");
         }
         return ok(result);
     }

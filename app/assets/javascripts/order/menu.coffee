@@ -120,6 +120,7 @@ getCheckOutSummary = ->
   return postData
 
 this.showCheckOut = ->
+  getAccountInfo()
   $("#check-out-dish-tbody").html("")
   orderItems = getOrderItems()
   rowTemplate = _.template $("#check-out-dish-template").html()
@@ -145,3 +146,22 @@ this.checkOut = ->
 
 this.cancelOrder = ->
   $("#check-out-summary").hide(300)
+
+getAccountString = ->
+  if this.javaMode()
+    accountString = this.java.getAccountString()
+  else
+    accountString = "0 HelloWorld"
+  return accountString
+
+getAccountInfo = (callback) ->
+  $.ajax
+    url: "/order/getAccountByString"
+    type: "post"
+    dataType: "json"
+    data:
+      accountString: getAccountString()
+    success: (data)->
+      console.log data
+      if callback
+        callback(data)

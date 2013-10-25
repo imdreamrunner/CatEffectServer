@@ -30,6 +30,7 @@ POST        /public/upload/image               controllers.PublicController.uplo
 
 GET         /order/menu                        controllers.OrderController.viewMenu()
 POST        /order/orders/add                  controllers.OrderController.placeOrder()
+POST        /order/getAccountByString          controllers.OrderController.getAccountByString()
 
 ####################
 # SystemController #
