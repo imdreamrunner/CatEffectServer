@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<h1>Orders</h1>
+<div id="contents">
+    <div id="order-list" class="row">
+    </div>
+</div>
+<div id="copyright">
+    <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
+    <p class="small">* Information displayed in this page is only for authorized administrators.</p>
+</div>
+
+
+<script type="text/html" id="order-template">
+    <div id="order-<%= orderId %>" class="col-xs-12">
+        <div class="widget">
+            <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                <h3><%= orderId %></h3>
+                    <span class="button">
+                        <a href="javascript:" onclick="">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Change Status
+                        </a>
+                    </span>
+            </div>
+            <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
+                <% _.each(orderItems, function(orderItems) { %>
+                <div class="order-item">
+                    <div class="image">
+                        <a href="javascript:" onclick="">
+                            <img src="/assets/uploads/<%= orderItems['dish']['image'] %>" alt="<%= orderItems['dish']['name'] %>" width=100>
+                        </a>
+                    </div>
+                    <div class="name">
+                        <%= orderItems['dish']['name'] %>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--
+<script type="text/html" id="pop-up-new-stall">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Add a New Stall</h3>
+            <span class="button">
+                <a href="javascript:" onclick="doAddStall()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Create
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputStallName">Stall Name</label>
+                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+!-->
+
+<!--
+<script type="text/html" id="pop-up-confirm-delete">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Delete Stall?</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <p>Do you really want to delete the stall <strong><%= name %></strong>?</p>
+            <p>NOTE: This action cannot be undo!</p>
+            <p>
+                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteStall(<%= stallId %>)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Confirm Delete
+                </a>
+            </p>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="canteen-button">
+    <a href="javascript:"
+       id="canteen-button-<%= canteenId %>"
+       class="canteen-button"
+       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
+</script>
+!-->
+
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
+<script src="/assets/javascripts/stall/orders.js"></script>
+<script src="/assets/javascripts/stall/common.js"></script>
+</body>
+</html>

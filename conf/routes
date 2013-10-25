@@ -85,6 +85,7 @@ GET         /stall/dashboard                   controllers.StallController.dashb
 GET         /stall/menu                        controllers.StallController.menu()
 GET         /stall/category                    controllers.StallController.category()
 GET         /stall/dish                        controllers.StallController.dish()
+GET         /stall/orders                      controllers.StallController.orders()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()
@@ -93,6 +94,8 @@ POST        /stall/categories/add              controllers.StallController.addCa
 POST        /stall/dishes/add                  controllers.StallController.addDish()
 POST        /stall/dishes/edit/:id             controllers.StallController.editDish(id: Int)
 
+# Manage Orders
+POST        /stall/orders/getAll              controllers.StallController.getAllOrders()
 ###################
 # OrderController #
 ###################

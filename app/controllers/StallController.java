@@ -42,6 +42,10 @@ public class StallController extends Controller {
         return ok(category.render());
     }
 
+    public static Result orders() {
+        return ok(orders.render());
+    }
+
     /*
      * JSON Methods.
      */
@@ -207,10 +211,25 @@ public class StallController extends Controller {
 
 	public static Result getAllOrders() {
 		ObjectNode result = Json.newObject();
-        List<Order> orderList = Order.find.all();
-        result.put("error", 0);
-        result.put("orders", Json.toJson(orderList));
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            String strStallId = data.get("stallId");
+            int stallId;
+            if (strStallId != null) {
+                stallId = Integer.parseInt(strStallId);
+            }
+            else {
+                throw new CatException(9001,"Stall ID cannot be null");
+            }
+            List<Order> orderList = Order.find.where("stall_id = " + stallId).findList();
+            result.put("error", 0);
+            result.put("orders", Json.toJson(orderList));
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
         return ok(result);
+
 	}
 	
 
