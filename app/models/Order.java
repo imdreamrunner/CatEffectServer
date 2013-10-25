@@ -57,6 +57,10 @@ public class Order extends Model {
     }
     public void setSubtotal(Integer newSubtotal) {subtotal = newSubtotal;}
     public void setTransaction(Transaction newTransaction) {transaction = newTransaction;}
+    public void setTransaction(Integer newTransactionId) {
+        Transaction newTransaction = Transaction.find.byId(newTransactionId);
+        setTransaction(newTransaction);
+    }
     public void setStatus(Integer newStatus) {status = newStatus;}
     public void setServeTime(Date newServeTime) {serveTime = newServeTime;}
 

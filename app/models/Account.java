@@ -55,6 +55,11 @@ public class Account extends Model {
     }
 
     public Integer getBalance() {
+        Integer total = 0;
+        for (Transaction transaction : transactions) {
+            total += transaction.getAmount();
+        }
+        setBalance(total);
         return balance;
     }
 

@@ -46,8 +46,11 @@ public class Transaction extends Model {
     public void setType(Integer newType) {type = newType;}
     public void setAmount(Integer newAmount) {amount = newAmount;}
     public void setTime(Date newTime) {time = newTime;}
-    public void setOrder(Order newOrder) {order = newOrder;}
     public void setManager(Manager newManager) {manager = newManager;}
+    public void setManager(Integer newManagerId) {
+        Manager newManager = Manager.find.byId(newManagerId);
+        setManager(newManager);
+    }
 
     public static Model.Finder<Integer, Transaction> find
             = new Model.Finder<Integer, Transaction>(
