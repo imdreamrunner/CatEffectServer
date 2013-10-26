@@ -21,6 +21,9 @@
 </div>
 
 <div id="check-out-summary" class="full-screen-message">
+    <div class="account-info">
+        Welcome <span class="account-name"></span>, your current balance is <span class="account-balance"></span>.
+    </div>
     <div class="order-table">
         <table class="table table-striped">
             <thead>
@@ -36,14 +39,24 @@
         <div class="subtotal">
             Subtotal: <span id="check-out-subtotal"><%= subtotal %></span>
         </div>
-        <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
-        <a class="confirmCheckOut" href="javascript:" onclick="cancelOrder()">Cancel</a>
+        <div class="success-buttons">
+            <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
+            <a class="cancelCheckOut" href="javascript:" onclick="cancelOrder()">Cancel</a>
+        </div>
+        <div class="fail-buttons">
+            Insufficient balance! Please Top-Up your account at OFS.
+            <a class="cancelCheckOut" href="javascript:" onclick="cancelOrder()">Cancel</a>
+        </div>
     </div>
 </div>
 
 <div id="check-out-success" class="full-screen-message">
     <div class="title">
         Thank you!
+    </div>
+    <div class="new-balance-suggest">
+        Your new balance is <span class="new-balance"></span>.
+        <span class="top-up-suggest">Please top-up at OFS.</span>
     </div>
 </div>
 

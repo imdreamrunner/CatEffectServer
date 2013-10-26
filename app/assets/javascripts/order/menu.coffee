@@ -122,15 +122,35 @@ getCheckOutSummary = ->
 this.showCheckOut = ->
   $("#check-out-summary").show(300)
   getAccountInfo ->
+    accountName = ""
+    if this.account.type == 0
+      accountName = "Prepaid-Card User"
+    else if this.account.type == 1
+      accountName = "Student " + this.account['student']['name']
+    else if this.account.type == 2
+      accountName = "Faculty " + this.account['faculty']['name']
+    else if this.account.type == 3
+      accountName = "Staff " + this.account['staff']['name']
+    $(".account-name").html accountName
+    $(".account-balance").html this.account['balance']
     $("#check-out-dish-tbody").html("")
     orderItems = getOrderItems()
     rowTemplate = _.template $("#check-out-dish-template").html()
     for orderItem in orderItems
       $("#check-out-dish-tbody").append(rowTemplate(orderItem))
-    $("#check-out-subtotal").html getCheckOutSummary()['subtotal']
+    subtotal = getCheckOutSummary()['subtotal']
+    $("#check-out-subtotal").html subtotal
+    if subtotal > this.account['balance']
+      $(".success-buttons").hide()
+      $(".fail-buttons").show()
+    else
+      this.newBalance = this.account['balance'] - subtotal
+      $(".success-buttons").show()
+      $(".fail-buttons").hide()
     $("#check-out-summary").show(300)
 
 this.checkOut = ->
+  that = this
   postData = getCheckOutSummary()
   $.ajax
     url:      "/order/orders/add"
@@ -138,7 +158,11 @@ this.checkOut = ->
     dataType: "json"
     data:     postData
     success:  (data) ->
-      console.log data
+      $(".new-balance").html that.newBalance
+      if that.newBalance < 500
+        $('.top-up-suggest').show()
+      else
+        $('.top-up-suggest').hide()
       $("#check-out-success").show();
       refresh = ->
         location.reload()
@@ -168,4 +192,5 @@ getAccountInfo = (callback) ->
       accountString: accountString
     success: (data) ->
       that.account = data['account']
-      callback.call(that)
+      if that.account && that.account.hasOwnProperty("accountId")
+        callback.call(that)
