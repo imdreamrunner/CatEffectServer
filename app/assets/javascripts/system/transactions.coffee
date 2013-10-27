@@ -28,16 +28,17 @@ ajaxLoadData = ->
       console.log "error"
 
 ajaxLoadCanteenConstrain = ->
-  url:        "/public/canteens/getAll"
-  type:       "get"
-  dataType:   "json"
-  success:    (data) ->
-    if (!data['error'])
-      console.log("LoadedCanteen")
-      canteenConstrainList = data['canteens']
-      loadCanteenConstrain()
-  error:      () ->
-    console.log "error"
+  $.ajax
+    url:        "/public/canteens/getAll"
+    type:       "get"
+    dataType:   "json"
+    success:    (data) ->
+      if (!data['error'])
+        console.log("LoadedCanteen")
+        canteenConstrainList = data['canteens']
+        loadCanteenConstrain()
+    error:      () ->
+      console.log "error"
 
 this.loadTransaction = loadTransaction = () ->
   $("#transaction-tbody").html ""
