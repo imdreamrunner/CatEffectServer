@@ -1,5 +1,6 @@
 auth = this.auth
 transactionList = []
+orderList = []
 canteenConstrainList = []
 stallConstrainList = []
 
@@ -70,7 +71,7 @@ this.loadCanteenConstrain = loadCanteenConstrain = () ->
     $("#constrain-canteenlist").append(canteenConstrainTable(canteenConstrain))
 
 this.setCanteenConstrain = setCanteenConstrain = (canteenId,canteenName) ->
-  console.log("This is setCanteenConstrain (" + canteenId + ")")
+  #console.log("This is setCanteenConstrain (" + canteenId + ")")
   $("#selected-canteenconstrain").html canteenName + ' <span class="caret"></span>'
   constrain.canteen = canteenId
   constrain.stall = -1
@@ -78,7 +79,7 @@ this.setCanteenConstrain = setCanteenConstrain = (canteenId,canteenName) ->
   setStallConstrainList(canteenId)
 
 this.setStallConstrainList = setStallConstrainList = (canteenId) ->
-  console.log("This is setStallConstrainList (" + canteenId + ")")
+  #console.log("This is setStallConstrainList (" + canteenId + ")")
   $("#selected-stallconstrain").html "ALL <span class='caret'></span>"
   $("#constrain-stalllist").html ""
   $("#constrain-stalllist").append(stallConstrainTable({stallId: -1, name: "ALL"}))
@@ -89,11 +90,10 @@ this.setStallConstrainList = setStallConstrainList = (canteenId) ->
         $("#constrain-stalllist").append(stallConstrainTable(stallConstrain))
 
 this.setStallConstrain = setStallConstrain = (stallId,stallName) ->
-  console.log("This is setStallConstrain (" + stallId + ")")
+  #console.log("This is setStallConstrain (" + stallId + ")")
   $("#selected-stallconstrain").html stallName+ ' <span class="caret"></span>'
   constrain.stall = stallId
   loadTransaction()
-
 
 ###
 this.doAddPrepaidCard = ->

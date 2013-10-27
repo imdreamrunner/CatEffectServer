@@ -116,15 +116,6 @@ public class StallController extends Controller {
         return ok(result);
 
 	}
-	/*
-        private Integer categoryId;
-    	private String name;
-    	private Integer stallId;
-    	private Integer displayOption = 0;
-    	private Integer sort = 0;
-    */
-
-	//deleteCategory(categoryId)
 
 	public static Result addDish() {
 		ObjectNode result = Json.newObject();
@@ -211,8 +202,6 @@ public class StallController extends Controller {
 
 	//deleteDish
 
-
-
 	public static Result getOneOrder(Integer orderId) {
 		ObjectNode result = Json.newObject();
         Order order = Order.find.byId(orderId);
@@ -241,8 +230,34 @@ public class StallController extends Controller {
             result.put("message", e.getMessage());
         }
         return ok(result);
-
 	}
-	
 
+    public static Result editStatus() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        System.out.println("here");
+        try {
+            String strOrderId  = data.get("orderId");
+            String strNewStatus = data.get("newStatus");
+            int orderId;
+            int newStatus;
+            if (strOrderId != null) {
+                orderId = Integer.parseInt(strOrderId);
+            } else throw new CatException(5002,"Invalid order Id");
+            if (strNewStatus != null) {
+                newStatus = Integer.parseInt(strNewStatus);
+            } else throw new CatException(5001,"Invalid status");
+            Order order = Order.find.byId(orderId);
+            if (order == null ) throw new CatException(5003,"Order does not exit");
+            order.setStatus(newStatus);
+            System.out.println(orderId+" "+newStatus);
+            order.save();
+            result.put("error", 0);
+            result.put("order", Json.toJson(order));
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
 }

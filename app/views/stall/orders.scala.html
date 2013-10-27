@@ -26,10 +26,15 @@
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
                 <h3><%= orderId %></h3>
+                    <span id="current-status-row"></span>
                     <span class="button">
-                        <a href="javascript:" onclick="">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Change Status
+                        <a href="javascript:" onclick="toServed(<%= orderId %>)">
+                            Change to Served
+                        </a>
+                    </span>
+                    <span class="button">
+                        <a href="javascript:" onclick="toReady(<%= orderId %>)">
+                            Change to Ready
                         </a>
                     </span>
             </div>
@@ -50,75 +55,6 @@
         </div>
     </div>
 </script>
-
-<!--
-<script type="text/html" id="pop-up-new-stall">
-    <div class="widget">
-        <div class="title">
-            <span class="icon">
-                <span class="glyphicon glyphicon-cog"></span>
-            </span>
-            <h3>Add a New Stall</h3>
-            <span class="button">
-                <a href="javascript:" onclick="doAddStall()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                    Create
-                </a>
-            </span>
-            <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Cancel
-                </a>
-            </span>
-        </div>
-        <div class="content">
-            <form role="form">
-                <div class="form-group">
-                    <label for="inputStallName">Stall Name</label>
-                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
-                </div>
-            </form>
-        </div>
-    </div>
-</script>
-!-->
-
-<!--
-<script type="text/html" id="pop-up-confirm-delete">
-    <div class="widget">
-        <div class="title">
-            <span class="icon">
-                <span class="glyphicon glyphicon-cog"></span>
-            </span>
-            <h3>Delete Stall?</h3>
-            <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Cancel
-                </a>
-            </span>
-        </div>
-        <div class="content">
-            <p>Do you really want to delete the stall <strong><%= name %></strong>?</p>
-            <p>NOTE: This action cannot be undo!</p>
-            <p>
-                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteStall(<%= stallId %>)">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Confirm Delete
-                </a>
-            </p>
-        </div>
-    </div>
-</script>
-
-<script type="text/html" id="canteen-button">
-    <a href="javascript:"
-       id="canteen-button-<%= canteenId %>"
-       class="canteen-button"
-       onclick="loadStalls(<%= canteenId %>)"><%= name %></a>
-</script>
-!-->
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>

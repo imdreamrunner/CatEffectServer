@@ -39,46 +39,38 @@ this.loadOrder = loadOrder = () ->
     $("#order-list").append(table(order))
   $('#order-list').find('.content-loader').removeClass('content-loader');
 
-
-
-###
-this.doAddPrepaidCard = ->
-  that = this
-  postData =
-    auth_username: this.auth.getUsername()
-    auth_password: this.auth.getPassword()
+this.toReady = toReady = (orderId) ->
   $.ajax
-    url:      "/system/transaction/add"
-    type:     "post"
-    dataType: "json"
-    data:     postData
-    success:  (data) ->
-      console.log data['message']
-      ajaxLoadData()
-
-this.deletePrepaidCard = (prepaidCardId)->
-  PrepaidCard = getPrepaidCard(prepaidCardId)
-  this.showPopBox("#pop-up-confirm-delete", PrepaidCard, 400, 180)
-
-getPrepaidCard = (prepaidCardId) ->
-  for PrepaidCard in prepaidCardList
-    if PrepaidCard['prepaidCardId'] == prepaidCardId
-      return PrepaidCard
-
-this.confirmDeletePrepaidCard = (prepaidCardId) ->
-  that = this
-  $.ajax
-    url:      "/system/prepaidCards/delete/" + prepaidCardId
-    type:     "post"
-    dataType: "json"
+    url:        "/stall/orders/editStatus"
+    type:       "post"
+    dataType:   "json"
     data:
       auth_username: this.auth.getUsername()
       auth_password: this.auth.getPassword()
-    success: (data) ->
-      console.log data
+      orderId      : this.orderId
+      newStatus    : '2'
+    success:    (data) ->
       if (!data['error'])
-        ajaxLoadData()
-        that.closePopBox()
-    error: () ->
-      console.log "error!"
-###
+        doneToReady(orderId)
+    error:      () ->
+      console.log "error"
+
+this.toServed = toServed = (orderId) ->
+  $.ajax
+    url:        "/stall/orders/editStatus"
+    type:       "post"
+    dataType:   "json"
+    data:
+      auth_username: this.auth.getUsername()
+      auth_password: this.auth.getPassword()
+      orderId      : this.orderId
+      newStatus    : '3'
+    success:    (data) ->
+      console.log "served"
+    error:      () ->
+      console.log "error"
+
+this.doneToReady = doneToReady = (orderId) ->
+  $("#order-<%= orderId %>.current-status-row").html "Current Status: Ready"
+
+

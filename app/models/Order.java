@@ -38,7 +38,7 @@ public class Order extends Model {
 
     public Order() {
         createTime = new Date();
-        status = 0;
+        status = 1;
     }
 
     public Integer getOrderId() {return orderId;}
@@ -77,7 +77,4 @@ public class Order extends Model {
     }
     public void setStatus(Integer newStatus) {status = newStatus;}
     public void setServeTime(Date newServeTime) {serveTime = newServeTime;}
-
-
-
 }

@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Menu</title>
+    <title>Records</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/stall/settings.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <h1>Records</h1>
-<div id="tabs">
-    <a href="javascript:" class="current">Edit Dishes</a>
-    <a href="javascript:" onclick="addCategory()">New Category</a>
-</div>
 <div id="contents">
-    <div id="category-list" class="row">
+    <div id="record-list" class="row">
     </div>
 </div>
 <div id="copyright">
@@ -22,12 +17,45 @@
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
 
+
+<script type="text/html" id="order-template">
+    <div id="order-<%= orderId %>" class="col-xs-12">
+        <div class="widget">
+            <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                <h3><%= orderId %></h3>
+                    <span class="button">
+                        <a href="javascript:" onclick="">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Change Status
+                        </a>
+                    </span>
+            </div>
+            <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
+                <% _.each(orderItems, function(orderItems) { %>
+                <div class="order-item">
+                    <div class="image">
+                        <a href="javascript:" onclick="">
+                            <img src="/assets/uploads/<%= orderItems['dish']['image'] %>" alt="<%= orderItems['dish']['name'] %>" width=100>
+                        </a>
+                    </div>
+                    <div class="name">
+                        <%= orderItems['dish']['name'] %>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
-<script src="/assets/javascripts/jquery-ui-1.10.3.custom.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>
 <script src="/assets/javascripts/common.js"></script>
-<script src="/assets/javascripts/stall/common.js"></script>
 <script src="/assets/javascripts/stall/records.js"></script>
+<script src="/assets/javascripts/stall/common.js"></script>
 </body>
 </html>
