@@ -43,6 +43,20 @@ public class Transaction extends Model {
     public Integer getManagerId() {
         return manager != null ? manager.getManagerId() : null;
     }
+    public Integer getCanteenId() {
+        try {
+            return order.getStall().getCanteenId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public Integer getStallId() {
+        try {
+            return order.getStall().getStallId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     public String getStallName() {
         try {
             return order.getStall().getName();
