@@ -46,6 +46,14 @@ public class StallController extends Controller {
         return ok(orders.render());
     }
 
+    public static Result report() {
+        return ok(report.render());
+    }
+
+    public static Result records() {
+        return ok(records.render());
+    }
+
     public static Result settings() {
         return ok(settings.render());
     }
