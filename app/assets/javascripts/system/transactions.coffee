@@ -73,6 +73,7 @@ this.setCanteenConstrain = setCanteenConstrain = (canteenId,canteenName) ->
   console.log("This is setCanteenConstrain (" + canteenId + ")")
   $("#selected-canteenconstrain").html canteenName + ' <span class="caret"></span>'
   constrain.canteen = canteenId
+  constrain.stall = -1
   loadTransaction()
   setStallConstrainList(canteenId)
 
