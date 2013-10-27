@@ -69,6 +69,7 @@ public class Account extends Model {
     }
 
     public void setBalance(Integer b) {
+        // If balance is low, reminder shall be sent.
         balance = b;
     }
 
