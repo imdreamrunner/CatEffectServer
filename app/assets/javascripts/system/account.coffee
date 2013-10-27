@@ -38,3 +38,10 @@ loadAccount = ->
         loadTransaction()
     error: ->
       console.log "errer"
+
+this.amount = topUpAmount = 0
+
+this.setAmount = (amount) ->
+  topUpAmount = amount
+  $(".top-up-amount a").removeClass("btn-primary").addClass("btn-default")
+  $("#amount-" + amount).addClass("btn-primary")

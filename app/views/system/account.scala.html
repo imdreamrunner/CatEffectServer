@@ -31,11 +31,24 @@
                         <tr>
                             <td>Top-Up Amount</td>
                             <td>
-                                <a href="javascript:">
-                                    $50
-                                </a>
-                                <a href="javascript:">
-                                    $200
+                                <div class="btn-group top-up-amount">
+                                    <a id="amount-50" href="javascript:" class="btn btn-primary" onclick="setAmount(50)">
+                                        $50
+                                    </a>
+                                    <a id="amount-100" href="javascript:" class="btn btn-default" onclick="setAmount(100)">
+                                        $100
+                                    </a>
+                                    <a id="amount-200" href="javascript:" class="btn btn-default" onclick="setAmount(200)">
+                                        $200
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Confirm</td>
+                            <td>
+                                <a href="javascript:" class="btn btn-primary">
+                                    Top-Up
                                 </a>
                             </td>
                         </tr>
