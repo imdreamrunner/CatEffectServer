@@ -36,7 +36,8 @@ this.loadOrder = loadOrder = () ->
   for order in orderList
     console.log("order: ")
     console.log(order)
-    $("#order-list").append(table(order))
+    if (order['status'] < 3)
+      $("#order-list").append(table(order))
   $('#order-list').find('.content-loader').removeClass('content-loader');
 
 this.toReady = toReady = (orderId) ->
@@ -52,7 +53,8 @@ this.toReady = toReady = (orderId) ->
     success:    (data) ->
       if (!data['error'])
         console.log "ready"
-        doneToReady(orderId)
+        # doneToReady(orderId)
+        location.reload()
     error:      () ->
       console.log "error"
 
@@ -68,6 +70,7 @@ this.toServed = toServed = (orderId) ->
       newStatus    : '3'
     success:    (data) ->
       console.log "served"
+      location.reload()
     error:      () ->
       console.log "error"
 

@@ -27,16 +27,19 @@
                     </span>
                 <h3><%= orderId %></h3>
                     <span id="current-status-row"></span>
-                    <span class="button">
-                        <a href="javascript:" onclick="toServed(<%= orderId %>)">
-                            Change to Served
-                        </a>
-                    </span>
+                    <% if (status < 2) { %>
                     <span class="button">
                         <a href="javascript:" onclick="toReady(<%= orderId %>)">
                             Change to Ready
                         </a>
                     </span>
+                    <% } else { %>
+                    <span class="button">
+                        <a href="javascript:" onclick="toServed(<%= orderId %>)">
+                            Change to Served
+                        </a>
+                    </span>
+                    <% } %>
             </div>
             <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
                 <% _.each(orderItems, function(orderItems) { %>
