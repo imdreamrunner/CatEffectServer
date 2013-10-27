@@ -1,7 +1,9 @@
 auth = this.auth
 transactionList = []
+canteenConstrainList = []
 
 table = _.template $("#transaction-row").html()
+canteenConstrainTable = _.template $("canteenConstrain-row").html()
 
 ajaxLoadData = ->
   $.ajax
@@ -18,6 +20,17 @@ ajaxLoadData = ->
     error:      () ->
       console.log "error"
 
+ajaxLoadCanteenConstrain = ->
+  url:        "/public/canteens/getAll"
+  type:       "get"
+  dataType:   "json"
+  success:    (data) ->
+    if (!data['error'])
+      canteenConstrainList = data['canteens']
+      loadCanteenConstrain()
+  error:      () ->
+    console.log "error"
+
 this.loadTransaction = loadTransaction = () ->
   console.log(transactionList)
   $("#transaction-tbody").html ""
@@ -25,13 +38,18 @@ this.loadTransaction = loadTransaction = () ->
     $("#transaction-tbody").append(table(transaction))
   $('#transaction-list').find('.content-loader').removeClass('content-loader');
 
-
+this.loadCanteenConstrain = loadCanteenConstrain = () ->
+  console.log(canteenConstrainList)
+  $("#constrain-canteenlist").html ""
+  for canteenConstrain in canteenConstrainList
+    $("#constrain-canteenlist").append(canteenConstrainTable(canteenConstrain))
 
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(4)
   console.log("start")
   ajaxLoadData()
+  ajaxLoadCanteenConstrain()
 
 ###
 this.doAddPrepaidCard = ->
