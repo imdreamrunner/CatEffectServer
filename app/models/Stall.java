@@ -19,7 +19,7 @@ public class Stall extends Model {
     @JoinColumn(name="canteen_id")
     private Canteen canteen;
 
-    private Integer prepaidDiscount, studentDiscount, facutyDiscount, stallDiscount;
+    private Integer prepaidDiscount, studentDiscount, facutyDiscount, staffDiscount;
 
     @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)
     private List<Manager> managers;

@@ -96,7 +96,7 @@ create table stall (
   prepaid_discount          integer,
   student_discount          integer,
   facuty_discount           integer,
-  stall_discount            integer,
+  staff_discount            integer,
   constraint pk_stall primary key (stall_id))
 ;
 
