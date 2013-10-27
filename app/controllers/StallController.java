@@ -46,6 +46,10 @@ public class StallController extends Controller {
         return ok(orders.render());
     }
 
+    public static Result settings() {
+        return ok(settings.render());
+    }
+
     /*
      * JSON Methods.
      */

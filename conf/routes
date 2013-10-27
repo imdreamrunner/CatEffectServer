@@ -49,6 +49,7 @@ GET         /system/accounts                   controllers.SystemController.acco
 GET         /system/prepaidCards               controllers.SystemController.prepaidCards()
 GET         /system/matriculationCards         controllers.SystemController.matriculationCards()
 GET         /system/transactions               controllers.SystemController.transactions()
+GET         /system/settings                   controllers.SystemController.settings()
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()
@@ -86,6 +87,7 @@ GET         /stall/menu                        controllers.StallController.menu(
 GET         /stall/category                    controllers.StallController.category()
 GET         /stall/dish                        controllers.StallController.dish()
 GET         /stall/orders                      controllers.StallController.orders()
+GET         /stall/settings                    controllers.StallController.settings()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()
@@ -96,6 +98,7 @@ POST        /stall/dishes/edit/:id             controllers.StallController.editD
 
 # Manage Orders
 POST        /stall/orders/getAll              controllers.StallController.getAllOrders()
+
 ###################
 # OrderController #
 ###################
