@@ -78,6 +78,8 @@ POST        /system/accounts/getAllMatriculation controllers.SystemController.ge
 POST        /system/transactions/getAll        controllers.SystemController.getAllTransactions()
 POST        /system/transactions/getByAccount/:id  controllers.SystemController.getAllTransactionsByAccount(id: Int)
 
+POST        /system/topup                      controllers.SystemController.topup()
+
 ###################
 # StallController #
 ###################

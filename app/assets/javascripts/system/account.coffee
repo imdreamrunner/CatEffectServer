@@ -39,9 +39,24 @@ loadAccount = ->
     error: ->
       console.log "errer"
 
-this.amount = topUpAmount = 0
+this.amount = topUpAmount = 50
 
 this.setAmount = (amount) ->
   topUpAmount = amount
   $(".top-up-amount a").removeClass("btn-primary").addClass("btn-default")
   $("#amount-" + amount).addClass("btn-primary")
+
+this.doTopUp = ->
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+    amount:        topUpAmount * 100
+    accountId:     this.accountId
+  $.ajax
+    url: "/system/topup"
+    type: "post"
+    dataType: "json"
+    data: postData
+    success: (data) ->
+      if (!data["error"])
+        location.reload()

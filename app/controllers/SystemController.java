@@ -323,7 +323,6 @@ public class SystemController extends Controller {
 
     @Authentication(requireSystem = true)
     public static Result getAllTransactions() {
-        System.out.println("here");
         ObjectNode result = Json.newObject();
         List<Transaction> transactionList;
         transactionList = Transaction.find.all();
@@ -335,12 +334,31 @@ public class SystemController extends Controller {
 
     @Authentication(requireSystem = true)
     public static Result getAllTransactionsByAccount(Integer accountId) {
-        System.out.println("here");
         ObjectNode result = Json.newObject();
         List<Transaction> transactionList;
-        transactionList = Transaction.find.where("t0.account_id = " + accountId).findList();
+        transactionList = Transaction.find.where("t0.account_id = " + accountId).order("time DESC").findList();
         result.put("error", 0);
         result.put("transactions", Json.toJson(transactionList));
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result topup() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Integer accountId = Integer.parseInt(data.get("accountId"));
+            Integer amount = Integer.parseInt(data.get("amount"));
+            Transaction transaction = new Transaction();
+            transaction.setAccount(accountId);
+            transaction.setAmount(amount);
+            transaction.setType(0);
+            transaction.save();
+            result.put("error", 0);
+            result.put("transaction", Json.toJson(transaction));
+        } catch (NullPointerException ex) {
+            result.put("error", 1);
+        }
         return ok(result);
     }
 
