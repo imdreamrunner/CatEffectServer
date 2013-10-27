@@ -176,9 +176,29 @@ public class SystemController extends Controller {
     }
 
     @Authentication(requireSystem = true)
+    public static Result getAllAccounts() {
+        ObjectNode result = Json.newObject();
+        // DynamicForm data = Form.form().bindFromRequest();
+        List<Account> accounts = Account.find.all();
+        result.put("error", 0);
+        result.put("accounts", Json.toJson(accounts));
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result getOneAccounts(Integer accountId) {
+        ObjectNode result = Json.newObject();
+        // DynamicForm data = Form.form().bindFromRequest();
+        Account account = Account.find.byId(accountId);
+        result.put("error", 0);
+        result.put("account", Json.toJson(account));
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
     public static Result getAllMatriculationAccounts() {
         ObjectNode result = Json.newObject();
-        DynamicForm data = Form.form().bindFromRequest();
+        // DynamicForm data = Form.form().bindFromRequest();
         List<Account> accounts = Account.find.where("type > 0").findList();
         result.put("error", 0);
         result.put("accounts", Json.toJson(accounts));
@@ -309,6 +329,18 @@ public class SystemController extends Controller {
         transactionList = Transaction.find.all();
         result.put("error", 0);
         result.put("transaction", Json.toJson(transactionList));
+        // change this to transactions later.
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result getAllTransactionsByAccount(Integer accountId) {
+        System.out.println("here");
+        ObjectNode result = Json.newObject();
+        List<Transaction> transactionList;
+        transactionList = Transaction.find.where("t0.account_id = " + accountId).findList();
+        result.put("error", 0);
+        result.put("transactions", Json.toJson(transactionList));
         return ok(result);
     }
 

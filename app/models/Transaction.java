@@ -43,6 +43,13 @@ public class Transaction extends Model {
     public Integer getManagerId() {
         return manager != null ? manager.getManagerId() : null;
     }
+    public String getStallName() {
+        try {
+            return order.getStall().getName();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public void setAccount(Account newAccount) {account = newAccount;}
     public void setAccount(Integer newAccountId) {

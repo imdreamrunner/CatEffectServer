@@ -19,12 +19,32 @@
                     <h3>Top-Up</h3>
                 </div>
                 <div class="content">
-
+                    <table class="table">
+                        <tr>
+                            <td>Account Id</td>
+                            <td id="tAccountId"></td>
+                        </tr>
+                        <tr>
+                            <td>CurrentB alance</td>
+                            <td id="tBalance"></td>
+                        </tr>
+                        <tr>
+                            <td>Top-Up Amount</td>
+                            <td>
+                                <a href="javascript:">
+                                    $50
+                                </a>
+                                <a href="javascript:">
+                                    $200
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-xs-6">
-            <div id="manager-list" class="widget">
+            <div id="transaction-list" class="widget">
                 <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
@@ -35,11 +55,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <td>Username</td>
-                            <td>Operation</td>
+                            <td>Amount</td>
+                            <td>Type</td>
+                            <td>Date</td>
                         </tr>
                         </thead>
-                        <tbody id="managers-tbody">
+                        <tbody id="transactions-tbody">
                         </tbody>
                     </table>
                 </div>
@@ -56,15 +77,16 @@
 
 <script type="text/html" id="transaction-row">
     <tr>
-        <td><%= username %></td>
+        <td><%= amount %></td>
         <td>
-            <a href="javascript:" onclick="editManager(<%= managerId %>)">
-                <span class="glyphicon glyphicon-pencil"></span>Edit
-            </a>
-            <a href="javascript:" onclick="deleteManager(<%= managerId %>)">
-                <span class="glyphicon glyphicon-remove"></span>Delete
-            </a>
+            <% if (type == 0) {
+                print("Top-Up")
+            } else {
+                print(stallName)
+            }
+            %>
         </td>
+        <td><%= time %></td>
     </tr>
 </script>
 

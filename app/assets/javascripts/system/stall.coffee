@@ -46,7 +46,6 @@ this.editStall = ->
 
 this.pageLoad ->
   this.stallId = stallId = this.params['stallId']
-
   loadStall()
 
   $.ajax
