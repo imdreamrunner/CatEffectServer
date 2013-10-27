@@ -34,8 +34,7 @@
                             <td>Name</td>
                             <td>Card ID</td>
                             <td>Balance</td>
-                            <td>Top-Up</td>
-                            <td>History</td>
+                            <td>Operation</td>
                         </tr>
                         </thead>
                         <tbody id="matriculationcards-tbody">
@@ -50,33 +49,6 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
-
-<script type="text/html" id="pop-up-confirm-delete">
-    <div class="widget">
-        <div class="title">
-            <span class="icon">
-                <span class="glyphicon glyphicon-cog"></span>
-            </span>
-            <h3>Delete Prepaid Card?</h3>
-            <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Cancel
-                </a>
-            </span>
-        </div>
-        <div class="content">
-            <p>Do you really want to delete the prepaid card <strong><%= name %></strong>?</p>
-            <p>NOTE: This action cannot be undo!</p>
-            <p>
-                <a href="javascript:" class="btn btn-default" onclick="confirmDeleteStall(<%= stallId %>)">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Confirm Delete
-                </a>
-            </p>
-        </div>
-    </div>
-</script>
 
 <script type="text/html" id="matriculationcard-row">
     <tr>
@@ -108,48 +80,15 @@
             <%= balance %>
         </td>
         <td>
-            <a href="javascript:" onclick="deleteAccount(<%= accountId %>)">
+            <a href="javascript:" onclick="newWindow('/system/account#accountId=<%= accountId %>', 1000, 600)">
                 Top-Up
-            </a>
-        </td>
-        <td>
-            <a href="javascript:" onclick="deleteAccount(<%= accountId %>)">
+                &
                 View History
             </a>
         </td>
     </tr>
 </script>
 
-<script type="text/html" id="pop-up-new-matriculationcard">
-    <div class="widget">
-        <div class="title">
-            <span class="icon">
-                <span class="glyphicon glyphicon-cog"></span>
-            </span>
-            <h3>Add a New Prepaid Card</h3>
-            <span class="button">
-                <a href="javascript:" onclick="doAddStall()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                    Create
-                </a>
-            </span>
-            <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Cancel
-                </a>
-            </span>
-        </div>
-        <div class="content">
-            <form role="form">
-                <div class="form-group">
-                    <label for="inputStallName">Stall Name</label>
-                    <input class="form-control" id="inputStallName" name="stallName" placeholder="Stall Name">
-                </div>
-            </form>
-        </div>
-    </div>
-</script>
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
