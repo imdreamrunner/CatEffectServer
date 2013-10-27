@@ -1,16 +1,20 @@
 auth = this.auth
 transactionList = []
 canteenConstrainList = []
+stallConstrainList = []
 
 table = _.template $("#transaction-row").html()
 canteenConstrainTable = _.template $("#canteenConstrain-row").html()
+stallConstrainTable = _.template $("#stallConstrain-row").html()
+constrain = {canteen: -1, stall: -1}
 
 this.pageLoad ->
   if this.javaMode()
     this.java.setMenu(4)
   console.log("start")
-  ajaxLoadCanteenConstrain()
   ajaxLoadData()
+  ajaxLoadCanteenConstrain()
+  ajaxLoadStallConstrain()
 
 ajaxLoadData = ->
   $.ajax
@@ -40,18 +44,50 @@ ajaxLoadCanteenConstrain = ->
     error:      () ->
       console.log "error"
 
+ajaxLoadStallConstrain = ->
+  $.ajax
+    url:        "/public/stalls/getAll"
+    type:       "get"
+    dataType:   "json"
+    success:    (data) ->
+      if (!data['error'])
+        stallConstrainList = data['stalls']
+    error:      () ->
+      console.log "error"
+
 this.loadTransaction = loadTransaction = () ->
   $("#transaction-tbody").html ""
   for transaction in transactionList
+    #if (constrain.stall != -1 && transaction['order']!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     $("#transaction-tbody").append(table(transaction))
   $('#transaction-list').find('.content-loader').removeClass('content-loader');
 
 this.loadCanteenConstrain = loadCanteenConstrain = () ->
-  console.log("CanteenList:")
-  console.log(canteenConstrainList)
-  $("#constrain-canteenlist").html ""
   for canteenConstrain in canteenConstrainList
     $("#constrain-canteenlist").append(canteenConstrainTable(canteenConstrain))
+
+this.setCanteenConstrain = setCanteenConstrain = (canteenId,canteenName) ->
+  console.log("This is setCanteenConstrain (" + canteenId + ")")
+  $("#selected-canteenconstrain").html canteenName + ' <span class="caret"></span>'
+  constrain.canteen = canteenId
+  setStallConstrainList(canteenId)
+
+this.setStallConstrainList = setStallConstrainList = (canteenId) ->
+  console.log("This is setStallConstrainList (" + canteenId + ")")
+  $("#selected-stallconstrain").html "ALL <span class='caret'></span>"
+  $("#constrain-stalllist").html ""
+  $("#constrain-stalllist").append(stallConstrainTable({stallId: -1, name: "ALL"}))
+  if (canteenId != -1)
+    for stallConstrain in stallConstrainList
+      console.log(stallConstrain)
+      if (stallConstrain['canteenId'] == canteenId)
+        $("#constrain-stalllist").append(stallConstrainTable(stallConstrain))
+
+this.setStallConstrain = setStallConstrain = (stallId,stallName) ->
+  console.log("This is setStallConstrain (" + stallId + ")")
+  $("#selected-stallconstrain").html stallName+ ' <span class="caret"></span>'
+  constrain.stall = stallId
+
 
 ###
 this.doAddPrepaidCard = ->

@@ -12,19 +12,23 @@
     <span id="constrain-list"  class="col-xs-12">
         <span id="constrain-canteen" class="col-xs-2">Canteen
             <span class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        id="selected-canteenconstrain">
                     ALL <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" id="constrain-canteenlist">
+                    <li><a onclick="setCanteenConstrain(-1,'ALL')">ALL</a></li>
                 </ul>
             </span>
         </span>
         <span id="constrain-stall" class="col-xs-2">Stall
             <span class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        id="selected-stallconstrain">
                     ALL <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" id="constrain-stalllist">
+                    <li><a onclick="setStallConstrain(-1,'ALL')">ALL</a></li>
                 </ul>
             </span>
         </span>
@@ -92,7 +96,11 @@
 </script>
 
 <script type="text/html" id="canteenConstrain-row">
-    <li><a href="#"><%= name%></a></li>
+    <li><a onclick="setCanteenConstrain(<%= canteenId%>,'<%= name%>')"><%= name%></a></li>
+</script>
+
+<script type="text/html" id="stallConstrain-row">
+    <li><a onclick="setStallConstrain(<%= stallId%>,'<%= name%>')"><%= name%></a></li>
 </script>
 
 <!--
