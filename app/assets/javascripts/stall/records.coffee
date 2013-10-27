@@ -36,6 +36,7 @@ this.loadOrder = loadOrder = () ->
   for order in orderList
     console.log("order: ")
     console.log(order)
-    $("#record-list").append(table(order))
+    if (order['status'] == 3)
+      $("#record-list").append(table(order))
   $('#record-list').find('.content-loader').removeClass('content-loader');
 

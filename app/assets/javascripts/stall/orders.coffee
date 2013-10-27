@@ -47,10 +47,11 @@ this.toReady = toReady = (orderId) ->
     data:
       auth_username: this.auth.getUsername()
       auth_password: this.auth.getPassword()
-      orderId      : this.orderId
+      orderId      : orderId
       newStatus    : '2'
     success:    (data) ->
       if (!data['error'])
+        console.log "ready"
         doneToReady(orderId)
     error:      () ->
       console.log "error"
@@ -63,7 +64,7 @@ this.toServed = toServed = (orderId) ->
     data:
       auth_username: this.auth.getUsername()
       auth_password: this.auth.getPassword()
-      orderId      : this.orderId
+      orderId      : orderId
       newStatus    : '3'
     success:    (data) ->
       console.log "served"
@@ -71,6 +72,6 @@ this.toServed = toServed = (orderId) ->
       console.log "error"
 
 this.doneToReady = doneToReady = (orderId) ->
-  $("#order-<%= orderId %>.current-status-row").html "Current Status: Ready"
+  $("#current-status-row").html "Current Status: Ready"
 
 
