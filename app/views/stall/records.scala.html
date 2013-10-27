@@ -26,12 +26,6 @@
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
                 <h3><%= orderId %></h3>
-                    <span class="button">
-                        <a href="javascript:" onclick="">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Change Status
-                        </a>
-                    </span>
             </div>
             <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
                 <% _.each(orderItems, function(orderItems) { %>
