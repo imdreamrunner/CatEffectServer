@@ -191,6 +191,7 @@ getAccountInfo = (callback) ->
     data:
       accountString: accountString
     success: (data) ->
-      that.account = data['account']
-      if that.account && that.account.hasOwnProperty("accountId")
-        callback.call(that)
+      if data['error'] == 0
+        that.account = data['account']
+        if that.account && that.account.hasOwnProperty("accountId")
+          callback.call(that)
