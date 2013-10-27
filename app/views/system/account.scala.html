@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<h1>Account</h1>
+<div id="contents">
+    <div class="row">
+        <div class="col-xs-6">
+            <div id="stall-display" class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Information</h3>
+                    <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="editStall()">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            Edit
+                        </a>
+                    </span>
+                </div>
+                <div class="content ajax-loader">
+                    <table class="stall-table table table-striped">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div id="manager-list" class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Transactions</h3>
+                </div>
+                <div class="content content-loader">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>Username</td>
+                            <td>Operation</td>
+                        </tr>
+                        </thead>
+                        <tbody id="managers-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div id="copyright">
+    <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
+    <p class="small">* Information displayed in this page is only for authorized administrators.</p>
+</div>
+-->
+
+<script type="text/html" id="transaction-row">
+    <tr>
+        <td><%= username %></td>
+        <td>
+            <a href="javascript:" onclick="editManager(<%= managerId %>)">
+                <span class="glyphicon glyphicon-pencil"></span>Edit
+            </a>
+            <a href="javascript:" onclick="deleteManager(<%= managerId %>)">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </a>
+        </td>
+    </tr>
+</script>
+
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
+<script src="/assets/javascripts/system/account.js"></script>
+</body>
+</html>

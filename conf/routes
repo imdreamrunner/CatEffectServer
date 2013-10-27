@@ -46,6 +46,7 @@ GET         /system/managers                   controllers.SystemController.mana
 GET         /system/stalls                     controllers.SystemController.stalls()
 GET         /system/stall                      controllers.SystemController.stall()
 GET         /system/accounts                   controllers.SystemController.accounts()
+GET         /system/account                    controllers.SystemController.account()
 GET         /system/prepaidCards               controllers.SystemController.prepaidCards()
 GET         /system/matriculationCards         controllers.SystemController.matriculationCards()
 GET         /system/transactions               controllers.SystemController.transactions()
