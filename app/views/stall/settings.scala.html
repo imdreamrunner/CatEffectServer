@@ -10,20 +10,54 @@
 <body>
 <h1>Settings</h1>
 <div id="tabs">
-    <a href="javascript:" class="editSettings()">Edit Settings</a>
+    <a href="javascript:" class="current">Edit Settings</a>
 </div>
 <div id="contents">
-    <div id="setting-list" class="row">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Basic Info</h3>
+                    <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="save()">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            Save
+                        </a>
+                    </span>
+                </div>
+                <div class="content">
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input id="inputName" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrepaidDiscount">Pre-Paid Card Discount</label>
+                        <input id="inputPrepaidDiscount" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStudentDiscount">Student Discount</label>
+                        <input id="inputStudentDiscount" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFacultyDiscount">Faculty Discount</label>
+                        <input id="inputFacultyDiscount" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStaffDiscount">Staff Discount</label>
+                        <input id="inputStaffDiscount" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div id="copyright">
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
-
-<script type="text/html" id="matriccard-discount">
-    <span>Dicount for Matric Card Holders: <=% matricDiscount%></span>
-</script>
 
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
