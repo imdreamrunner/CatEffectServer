@@ -58,7 +58,10 @@ ajaxLoadStallConstrain = ->
 this.loadTransaction = loadTransaction = () ->
   $("#transaction-tbody").html ""
   for transaction in transactionList
-    #if (constrain.stall != -1 && transaction['order']!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (constrain.canteen != -1 && transaction['canteenId'] != constrain.canteen)
+      continue
+    if (constrain.stall != -1 && transaction['stallId'] != constrain.stall)
+      continue
     $("#transaction-tbody").append(table(transaction))
   $('#transaction-list').find('.content-loader').removeClass('content-loader');
 
@@ -70,6 +73,7 @@ this.setCanteenConstrain = setCanteenConstrain = (canteenId,canteenName) ->
   console.log("This is setCanteenConstrain (" + canteenId + ")")
   $("#selected-canteenconstrain").html canteenName + ' <span class="caret"></span>'
   constrain.canteen = canteenId
+  loadTransaction()
   setStallConstrainList(canteenId)
 
 this.setStallConstrainList = setStallConstrainList = (canteenId) ->
@@ -87,6 +91,7 @@ this.setStallConstrain = setStallConstrain = (stallId,stallName) ->
   console.log("This is setStallConstrain (" + stallId + ")")
   $("#selected-stallconstrain").html stallName+ ' <span class="caret"></span>'
   constrain.stall = stallId
+  loadTransaction()
 
 
 ###
