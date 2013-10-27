@@ -120,8 +120,8 @@ getCheckOutSummary = ->
   return postData
 
 this.showCheckOut = ->
-  $("#check-out-summary").show(300)
   getAccountInfo ->
+    $("#check-out-summary").show(300)
     accountName = ""
     if this.account.type == 0
       accountName = "Prepaid-Card User"
