@@ -37,6 +37,9 @@
                         <tr>
                             <td>Prepaid Card ID</td>
                             <td>Balance</td>
+                            <td>Operation</td>
+                            <td>QRCode</td>
+                            <td>Delete?</td>
                         </tr>
                         </thead>
                         <tbody id="prepaidcards-tbody">
@@ -90,13 +93,8 @@
         </td>
 
         <td>
-            <a href="javascript:" onclick="">
-                View History
-            </a>
-        </td>
-        <td>
-            <a href="javascript:" onclick="">
-                Top Up
+            <a href="javascript:" onclick="newWindow('/system/account#accountId=<%= prepaidCardId %>', 1000, 600)">
+                View History & Top-Up
             </a>
         </td>
         <td>

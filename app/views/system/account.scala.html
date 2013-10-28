@@ -25,7 +25,7 @@
                             <td id="tAccountId"></td>
                         </tr>
                         <tr>
-                            <td>CurrentB alance</td>
+                            <td>Current Balance</td>
                             <td id="tBalance"></td>
                         </tr>
                         <tr>
@@ -91,7 +91,7 @@
 
 <script type="text/html" id="transaction-row">
     <tr>
-        <td><%= amount %></td>
+        <td><%= displayMoney(amount) %></td>
         <td>
             <% if (type == 0) {
                 print("Top-Up")
@@ -100,7 +100,7 @@
             }
             %>
         </td>
-        <td><%= time %></td>
+        <td><%= displayTime(time) %></td>
     </tr>
 </script>
 

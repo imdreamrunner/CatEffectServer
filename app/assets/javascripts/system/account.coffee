@@ -34,7 +34,7 @@ loadAccount = ->
       if (!data['error'])
         that.account = account = data['account']
         $("#tAccountId").html account['accountId']
-        $("#tBalance").html account['balance']
+        $("#tBalance").html displayMoney(account['balance'])
         loadTransaction()
     error: ->
       console.log "errer"
