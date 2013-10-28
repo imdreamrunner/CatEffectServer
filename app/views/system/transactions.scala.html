@@ -55,7 +55,6 @@
                             <td>Type</td>
                             <td>Amount</td>
                             <td>Date & Time</td>
-                            <td>Operation</td>
                         </tr>
                         </thead>
                         <tbody id="transaction-tbody">
@@ -75,10 +74,9 @@
     <tr>
         <td><%= transactionId %></td>
         <td><%= accountId %></td>
-        <td><%= type %></td>
+        <td><%= type == 1 ? "Purchase" : "Top-Up" %></td>
         <td><%= amount %></td>
         <td><%= displayTime(time) %></td>
-        <td>View Order Details</td>
     </tr>
 </script>
 
