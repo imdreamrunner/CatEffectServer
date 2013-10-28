@@ -132,14 +132,14 @@ this.showCheckOut = ->
     else if this.account.type == 3
       accountName = "Staff " + this.account['staff']['name']
     $(".account-name").html accountName
-    $(".account-balance").html this.account['balance']
+    $(".account-balance").html displayMoney(this.account['balance'])
     $("#check-out-dish-tbody").html("")
     orderItems = getOrderItems()
     rowTemplate = _.template $("#check-out-dish-template").html()
     for orderItem in orderItems
       $("#check-out-dish-tbody").append(rowTemplate(orderItem))
     subtotal = getCheckOutSummary()['subtotal']
-    $("#check-out-subtotal").html subtotal
+    $("#check-out-subtotal").html displayMoney(subtotal)
     if subtotal > this.account['balance']
       $(".success-buttons").hide()
       $(".fail-buttons").show()
@@ -158,7 +158,7 @@ this.checkOut = ->
     dataType: "json"
     data:     postData
     success:  (data) ->
-      $(".new-balance").html that.newBalance
+      $(".new-balance").html displayDish(that.newBalance)
       if that.newBalance < 500
         $('.top-up-suggest').show()
       else

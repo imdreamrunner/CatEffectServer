@@ -37,7 +37,7 @@
             </tbody>
         </table>
         <div class="subtotal">
-            Subtotal: <span id="check-out-subtotal"><%= subtotal %></span>
+            Subtotal: <span id="check-out-subtotal"></span>
         </div>
         <div class="success-buttons">
             <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
@@ -82,7 +82,7 @@
                     <%= dish["name"] %>
                 </div>
                 <div class="price">
-                    $ <span><%= dish["finalPrice"] %></span>
+                    $ <span><%= displayMoney(dish["finalPrice"]) %></span>
                 </div>
             </div>
             <% }); %>
