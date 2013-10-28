@@ -67,7 +67,7 @@
                             <td>Type</td>
                             <td>Amount</td>
                             <td>Date & Time</td>
-                            <td>Manager ID</td>
+                            <td>Operation</td>
                         </tr>
                         </thead>
                         <tbody id="transaction-tbody">
@@ -85,13 +85,12 @@
 
 <script type="text/html" id="transaction-row">
     <tr>
-        <td><a href="javascript:" onclick=""><%= transactionId %> </a></td>
-        <td><a href="javascript:" onclick=""><%= accountId %> </a></td>
-        <td><a href="javascript:" onclick=""><%= type %> </a></td>
-        <td><a href="javascript:" onclick=""><%= amount %> </a></td>
-        <td><a href="javascript:" onclick=""><%= time %> </a></td>
-        <td><a href="javascript:" onclick=""><%= managerId %> </a></td>
-        <td><a>View Order Details</a></td>
+        <td><%= transactionId %></td>
+        <td><%= accountId %></td>
+        <td><%= type %></td>
+        <td><%= amount %></td>
+        <td><%= displayTime(time) %></td>
+        <td>View Order Details</td>
     </tr>
 </script>
 

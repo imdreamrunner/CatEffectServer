@@ -19,12 +19,12 @@ auth.getUsername = ->
   if javaMode()
     return java.getUsername()
   else
-    return "stall1"
+    return "admin"
 auth.getPassword = ->
   if javaMode()
     return java.getPassword()
   else
-    return "stall1"
+    return "admin"
 
 # Pop up
 
@@ -80,3 +80,17 @@ this.newWindow = (target, width, height) ->
       this.open(target + "#browser=true")
     else
       this.open(target + "&browser=true")
+
+this.displayTime = (timeStamp) ->
+  month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  if timeStamp == null || timeStamp == 0
+    return ""
+  Date date = new Date(timeStamp)
+  result = ""
+  result += " " + date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear() + " "
+  result += date.getHours() + ":"
+  if (date.getMinutes() < 10)
+    result += "0" + date.getMinutes()
+  else
+    result += date.getMinutes()
+  return result

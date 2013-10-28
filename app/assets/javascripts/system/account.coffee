@@ -59,4 +59,8 @@ this.doTopUp = ->
     data: postData
     success: (data) ->
       if (!data["error"])
-        location.reload()
+        $("#result").removeClass("hidden")
+        $("#top-up-button").hide()
+        reload = ->
+          location.reload()
+        setTimeout(reload, 1000)
