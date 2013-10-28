@@ -75,7 +75,7 @@
         <td><%= transactionId %></td>
         <td><%= accountId %></td>
         <td><%= type == 1 ? "Purchase" : "Top-Up" %></td>
-        <td><%= amount %></td>
+        <td><%= displayMoney(amount) %></td>
         <td><%= displayTime(time) %></td>
     </tr>
 </script>

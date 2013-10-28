@@ -94,3 +94,18 @@ this.displayTime = (timeStamp) ->
   else
     result += date.getMinutes()
   return result
+
+this.displayMoney = (money) ->
+  neg = ""
+  if money < 0
+    money = - money
+    neg = "-"
+  result = ""
+  result += Math.floor(money / 100)
+  result += "."
+  point = money % 100
+  if point < 10
+    result += "0" + point
+  else
+    result += point
+  return neg + result
