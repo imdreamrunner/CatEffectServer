@@ -329,7 +329,7 @@ public class SystemController extends Controller {
     public static Result getAllTransactions() {
         ObjectNode result = Json.newObject();
         List<Transaction> transactionList;
-        transactionList = Transaction.find.all();
+        transactionList = Transaction.find.order("transactionId DESC").findList();
         result.put("error", 0);
         result.put("transactions", Json.toJson(transactionList));
         return ok(result);
@@ -339,7 +339,7 @@ public class SystemController extends Controller {
     public static Result getAllTransactionsByAccount(Integer accountId) {
         ObjectNode result = Json.newObject();
         List<Transaction> transactionList;
-        transactionList = Transaction.find.where("t0.account_id = " + accountId).order("time DESC").findList();
+        transactionList = Transaction.find.where("t0.account_id = " + accountId).order("transactionId DESC").findList();
         result.put("error", 0);
         result.put("transactions", Json.toJson(transactionList));
         return ok(result);

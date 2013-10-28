@@ -9,44 +9,7 @@
 <body>
 <h1>Transaction</h1>
 <div id="search tabs">
-    <span id="constrain-list"  class="col-xs-12">
-        <span id="constrain-canteen" class="col-xs-2">Canteen
-            <span class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                        id="selected-canteenconstrain">
-                    ALL <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="constrain-canteenlist">
-                    <li><a onclick="setCanteenConstrain(-1,'ALL')">ALL</a></li>
-                </ul>
-            </span>
-        </span>
-        <span id="constrain-stall" class="col-xs-2">Stall
-            <span class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                        id="selected-stallconstrain">
-                    ALL <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="constrain-stalllist">
-                    <li><a onclick="setStallConstrain(-1,'ALL')">ALL</a></li>
-                </ul>
-            </span>
-        </span>
-        <span id="constrain-type" class="col-xs-2">Account Type
-            <span class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    ALL <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="constrain-typelist">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </span>
-        </span>
-    </span>
+
 </div>
 
 <div id="contents">
@@ -57,8 +20,33 @@
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
+                    <h3>Transactions</h3>
                 </div>
                 <div class="content content-loader">
+                        <span id="constrain-list"  class="col-xs-12">
+                            <span id="constrain-canteen" class="col-xs-2">Canteen
+                                <span class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            id="selected-canteenconstrain">
+                                        ALL <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" id="constrain-canteenlist">
+                                        <li><a onclick="setCanteenConstrain(-1,'ALL')">ALL</a></li>
+                                    </ul>
+                                </span>
+                            </span>
+                            <span id="constrain-stall" class="col-xs-2">Stall
+                                <span class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            id="selected-stallconstrain">
+                                        ALL <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" id="constrain-stalllist">
+                                        <li><a onclick="setStallConstrain(-1,'ALL')">ALL</a></li>
+                                    </ul>
+                                </span>
+                            </span>
+                        </span>
                     <table class="table table-striped">
                         <thead>
                         <tr>
