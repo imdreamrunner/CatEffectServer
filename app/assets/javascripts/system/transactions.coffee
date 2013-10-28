@@ -27,7 +27,7 @@ ajaxLoadData = ->
       auth_password: this.auth.getPassword()
     success:    (data) ->
       if (!data['error'])
-        transactionList = data['transaction']
+        transactionList = data['transactions']
         loadTransaction()
     error:      () ->
       console.log "error"

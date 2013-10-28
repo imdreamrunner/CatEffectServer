@@ -331,8 +331,7 @@ public class SystemController extends Controller {
         List<Transaction> transactionList;
         transactionList = Transaction.find.all();
         result.put("error", 0);
-        result.put("transaction", Json.toJson(transactionList));
-        // change this to transactions later.
+        result.put("transactions", Json.toJson(transactionList));
         return ok(result);
     }
 
