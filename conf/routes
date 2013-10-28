@@ -109,6 +109,9 @@ POST        /stall/dishes/edit/:id             controllers.StallController.editD
 POST        /stall/orders/getAll              controllers.StallController.getAllOrders()
 POST        /stall/orders/editStatus          controllers.StallController.editStatus()
 
+# Edit Stall
+POST        /stall/stalls/edit                controllers.StallController.editStall()
+
 ###################
 # OrderController #
 ###################

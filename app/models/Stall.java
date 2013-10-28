@@ -19,7 +19,7 @@ public class Stall extends Model {
     @JoinColumn(name="canteen_id")
     private Canteen canteen;
 
-    private Integer prepaidDiscount, studentDiscount, facutyDiscount, staffDiscount;
+    private Integer prepaidDiscount, studentDiscount, facultyDiscount, staffDiscount;
 
     @OneToMany(mappedBy = "stall", cascade = CascadeType.REMOVE)
     private List<Manager> managers;
@@ -43,6 +43,22 @@ public class Stall extends Model {
     @JsonIgnore
     public List<Manager> getManagers() { return managers; }
 
+    public Integer getPrepaidDiscount() {
+        return prepaidDiscount;
+    }
+
+    public Integer getStudentDiscount() {
+        return studentDiscount;
+    }
+
+    public Integer getFacultyDiscount() {
+        return facultyDiscount;
+    }
+
+    public Integer getStaffDiscount() {
+        return staffDiscount;
+    }
+
     public void setStallId(Integer theStallId) {stallId = theStallId;}
     public void setName(String n) { name = n; }
     public void setSort(Integer s) {sort = s;}
@@ -63,5 +79,17 @@ public class Stall extends Model {
         }
         Integer numberOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
         return (numberOfStalls == 0);
+    }
+    public void setPrepaidDiscount(Integer pd) {
+        prepaidDiscount = pd;
+    }
+    public void setStudentDiscount(Integer sd) {
+        studentDiscount = sd;
+    }
+    public void setFacultyDiscount(Integer fd) {
+        facultyDiscount = fd;
+    }
+    public void setStaffDiscount(Integer sd) {
+        staffDiscount = sd;
     }
 }

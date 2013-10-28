@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Category;
-import models.Dish;
-import models.Manager;
-import models.Order;
+import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -257,6 +254,33 @@ public class StallController extends Controller {
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    public static Result editStall() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Integer stallId = Integer.parseInt(data.get("stallId"));
+            String name = data.get("name");
+            String image = data.get("image");
+            Integer prepaidDiscount = Integer.parseInt("0" + data.get("prepaidDiscount"));
+            Integer studentDiscount = Integer.parseInt("0" + data.get("studentDiscount"));
+            Integer facultyDiscount = Integer.parseInt("0" + data.get("facultyDiscount"));
+            Integer staffDiscount = Integer.parseInt("0" + data.get("staffDiscount"));
+            Stall stall = Stall.find.byId(stallId);
+            stall.setName(name);
+            stall.setImage(image);
+            stall.setPrepaidDiscount(prepaidDiscount);
+            stall.setStudentDiscount(studentDiscount);
+            stall.setFacultyDiscount(facultyDiscount);
+            stall.setStaffDiscount(staffDiscount);
+            stall.save();
+            result.put("error", 0);
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", ex.getMessage());
         }
         return ok(result);
     }
