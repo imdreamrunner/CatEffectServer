@@ -52,6 +52,7 @@ GET         /system/matriculationCards         controllers.SystemController.matr
 GET         /system/transactions               controllers.SystemController.transactions()
 GET         /system/report                     controllers.SystemController.report()
 GET         /system/settings                   controllers.SystemController.settings()
+GET         /system/help                       controllers.SystemController.help()
 
 # Manage Managers
 POST        /system/managers/add               controllers.SystemController.addManager()
@@ -72,7 +73,6 @@ POST        /system/prepaidCards/delete/:id    controllers.SystemController.dele
 POST        /system/accounts/getAll            controllers.SystemController.getAllAccounts()
 POST        /system/accounts/getOne/:id        controllers.SystemController.getOneAccounts(id: Int)
 POST        /system/accounts/getAllMatriculation controllers.SystemController.getAllMatriculationAccounts()
-# POST        /testStudent                       controllers.SystemController.testStudent()
 
 # Manage Transaction
 POST        /system/transactions/getAll        controllers.SystemController.getAllTransactions()
@@ -97,6 +97,7 @@ GET         /stall/orders                      controllers.StallController.order
 GET         /stall/settings                    controllers.StallController.settings()
 GET         /stall/records                     controllers.StallController.records()
 GET         /stall/report                      controllers.StallController.report()
+GET         /stall/help                        controllers.StallController.help()
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()

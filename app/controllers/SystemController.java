@@ -72,6 +72,10 @@ public class SystemController extends Controller {
         return ok(report.render());
     }
 
+    public static Result help() {
+        return ok(help.render());
+    }
+
     /*
      * JSON Methods.
      */

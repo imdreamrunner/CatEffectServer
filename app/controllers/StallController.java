@@ -55,6 +55,10 @@ public class StallController extends Controller {
         return ok(settings.render());
     }
 
+    public static Result help() {
+        return ok(help.render());
+    }
+
     /*
      * JSON Methods.
      */
