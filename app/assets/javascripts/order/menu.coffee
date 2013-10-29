@@ -69,6 +69,11 @@ this.orderDish = (dishId) ->
   this.showDishOrdered()
 
 this.showDishOrdered = () ->
+  subtotal = 0
+  for orderItem in dishOrderedList
+    dish = findDish(orderItem['dishId'])
+    subtotal += dish['finalPrice'] * orderItem['quantity']
+  $(".current-subtotal").html displayMoney(subtotal)
   orderedDishTemplate = _.template $("#ordered-dish-template").html()
   $orderedList = $("#ordered-list")
   $orderedList.html ""
@@ -79,10 +84,12 @@ this.showDishOrdered = () ->
   if dishOrderedList.length == 0
     $("#ordered-list-placeholder").hide()
     $("#button-check-out").hide()
+    $("#button-cancel-all").hide()
     $orderedList.hide(300)
   else
     $("#ordered-list-placeholder").show()
     $("#button-check-out").delay(300).show(300)
+    $("#button-cancel-all").delay(300).show(300)
     $orderedList.show(300)
 
   for orderItem in dishOrderedList
@@ -111,6 +118,7 @@ getCheckOutSummary = ->
   orderItems = getOrderItems()
   subtotal = 0
   for orderItem in dishOrderedList
+    dish = findDish(orderItem['dishId'])
     subtotal += dish['finalPrice'] * orderItem['quantity']
   postData =
     accountId:  this.account['accountId']
