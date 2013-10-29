@@ -31,7 +31,7 @@
                 </span>
                 <h3><%= name %></h3>
                 <span class="button">
-                    <a href="javascript:" onclick="newWindow('/stall/category#categoryId=<%= categoryId %>', 500, 400)">
+                    <a href="javascript:" onclick="editCategory(<%= categoryId %>)">
                         <span class="glyphicon glyphicon-cog"></span>
                         Edit Category
                     </a>
@@ -116,8 +116,43 @@
             <form role="form">
                 <div class="form-group">
                     <label for="inputName">Category Name</label>
-                    <input class="form-control" id="inputName" name="name" placeholder="Dish Name">
+                    <input class="form-control" id="inputName" name="name" placeholder="Category Name">
                 </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pop-box-edit-category">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Edit Category</h3>
+            <span class="button">
+                <a href="javascript:" onclick="doEditCategory(<%= categoryId %>)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Edit
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputName">Category Name</label>
+                    <input class="form-control" id="inputName" name="name" placeholder="Dish Name" value="<%= name %>">
+                </div>
+                <a href="javascript:" class="btn btn-default" onclick="deleteCategory(<%= categoryId %>)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Delete Category
+                </a>
             </form>
         </div>
     </div>

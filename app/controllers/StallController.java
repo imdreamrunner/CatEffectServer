@@ -127,6 +127,23 @@ public class StallController extends Controller {
 	}
 
     @Authentication
+    public static Result deleteCategory(Integer categoryId) {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Category category = Category.find.byId(categoryId);
+            if (category.getDishes().size() != 0) {
+                throw new CatException(1001, "You must delete all dishes under the category.");
+            }
+            category.delete();
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication
     public static Result updateCategorySort() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();

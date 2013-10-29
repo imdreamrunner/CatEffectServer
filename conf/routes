@@ -105,6 +105,7 @@ GET         /stall/help                        controllers.StallController.help(
 POST        /stall/categories/add              controllers.StallController.addCategory()
 POST        /stall/categories/edit/:id         controllers.StallController.editCategory(id: Int)
 POST        /stall/categories/sort             controllers.StallController.updateCategorySort()
+POST        /stall/categories/delete/:id       controllers.StallController.deleteCategory(id: Int)
 
 # Manage Dishes
 POST        /stall/dishes/add                  controllers.StallController.addDish()

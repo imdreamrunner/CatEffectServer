@@ -4,6 +4,8 @@ this.pageLoad ->
     this.java.setMenu(3)
   this.getStallId(setStallId) # defined in stall/common.coffee
 
+this.categories = categories = []
+
 # The callback function of getStallId
 setStallId = (stallId) ->
   this.stallId = stallId
@@ -11,7 +13,7 @@ setStallId = (stallId) ->
 
 # Load data into web page
 loadMenu = () ->
-  displayMenu = (categories) ->
+  displayMenu = () ->
     categoryTemplate = _.template $("#category-template").html()
     $categoryList = $("#category-list")
     createObject = (category) ->
@@ -81,7 +83,8 @@ loadMenu = () ->
     dataType: "json"
     success:  (data) ->
       if (!data["error"])
-        displayMenu data["categories"]
+        categories = data["categories"]
+        displayMenu()
 
 this.addDish = (categoryId) ->
   this.showPopBox("#pop-box-new-dish", {categoryId: categoryId}, 400, 150)
@@ -122,3 +125,41 @@ this.doAddCategory = ->
     success: (data) ->
       if (!data["error"])
         location.reload()
+
+findCategory = (categoryId) ->
+  for category in categories
+    if category.categoryId == categoryId
+      return category
+
+this.editCategory = (categoryId) ->
+  this.showPopBox("#pop-box-edit-category", findCategory(categoryId), 400, 200)
+
+this.doEditCategory = (categoryId) ->
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+    name: $(".popbox").find("#inputName").val()
+
+  $.ajax
+    url:      "/stall/categories/edit/" + categoryId
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success: (data) ->
+      if (!data["error"])
+        location.reload()
+
+this.deleteCategory = (categoryId) ->
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+  $.ajax
+    url:      "/stall/categories/delete/" + categoryId
+    type:     "post"
+    dataType: "json"
+    data:     postData
+    success: (data) ->
+      if (!data["error"])
+        location.reload()
+      else
+        alert data['message']
