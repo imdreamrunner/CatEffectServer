@@ -10,7 +10,7 @@
 <h1>Accounts</h1>
 
 <div id="tabs">
-    <a href="/system/accounts">All Accounts</a>
+    <a href="/system/accounts">Scan</a>
     <a href="/system/prepaidCards" class="current">Pre-Paid Cards</a>
     <a href="/system/matriculationCards">Matriculation Cards</a>
 </div>
@@ -21,9 +21,9 @@
             <div id="prepardcard-list" class="widget">
                 <div class="title">
                     <span class="icon">
-                        <span class="glyphicon glyphicon-book"></span>
+                        <span class="glyphicon glyphicon-th-list"></span>
                     </span>
-                    <h3 id="canteen-name">Loading</h3>
+                    <h3 id="canteen-name">Prepaid Card List</h3>
                     <span class="button">
                         <a href="javascript:" onclick="doAddPrepaidCard()">
                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -103,7 +103,7 @@
             </a>
         </td>
         <td>
-            <a href="javascript:" onclick="newWindow('/system/qrcode#title=Prepaid+Card+<%= accountId %>&string=0+<%= token %>', 600, 600)">
+            <a href="javascript:" onclick="newWindow('/system/qrcode#title=Prepaid+Card+<%= accountId %>&string=0+<%= token %>', 600, 640)">
                 Generate
             </a>
         </td>
