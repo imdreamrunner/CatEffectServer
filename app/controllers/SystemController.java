@@ -64,6 +64,10 @@ public class SystemController extends Controller {
         return ok(account.render());
     }
 
+    public static Result qrcode() {
+        return ok(qrcode.render());
+    }
+
     public static Result settings() {
         return ok(settings.render());
     }

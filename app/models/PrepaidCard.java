@@ -34,6 +34,10 @@ public class PrepaidCard extends Model {
         return Account.getAccount(0, prepaidCardId);
     }
 
+    public Integer getAccountId() {
+        return getAccount().getAccountId();
+    }
+
     public Integer getBalance() {
         Account account = getAccount();
         return account != null ? account.getBalance() : null;
