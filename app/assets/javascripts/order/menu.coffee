@@ -158,7 +158,7 @@ this.checkOut = ->
     dataType: "json"
     data:     postData
     success:  (data) ->
-      $(".new-balance").html displayDish(that.newBalance)
+      $(".new-balance").html displayMoney(that.newBalance)
       if that.newBalance < 500
         $('.top-up-suggest').show()
       else
