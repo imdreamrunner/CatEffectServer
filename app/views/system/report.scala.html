@@ -4,7 +4,6 @@
     <title>Report</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/stall/settings.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <h1>Report Center</h1>
@@ -25,21 +24,13 @@
                     <div class="form-group">
                         <label for="canteen">Canteen</label>
                         <select class="form-control" id="canteen">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option>Loading...</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="stall">Stall</label>
                         <select class="form-control" id="stall" size="5">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option>Loading...</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -66,7 +57,7 @@
                         </select>
                     </div>
                     <div class="buttons">
-                        <a href="javascript:" onclick="" class="btn btn-primary">Generate Report</a>
+                        <a href="javascript:" onclick="generate()" class="btn btn-primary">Generate Report</a>
                     </div>
                 </div>
             </div>
@@ -77,6 +68,15 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
+
+<script type="text/html" id="canteen-option-template">
+    <option value="<%= canteenId %>"><%= name %></option>
+</script>
+
+
+<script type="text/html" id="stall-option-template">
+    <option value="<%= stallId %>"><%= name %></option>
+</script>
 
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/jquery-ui-1.10.3.custom.js"></script>
