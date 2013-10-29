@@ -162,7 +162,7 @@ public class SystemController extends Controller {
         if (strType != null) {
             Integer type = Integer.parseInt(strType);
             managerList = Manager.find.where("type = " + type).findList();
-        } if (strStallId != null) {
+        } else if (strStallId != null) {
             Integer stallId = Integer.parseInt(strStallId);
             managerList = Manager.find.where("stall_id = " + stallId).findList();
         } else {
