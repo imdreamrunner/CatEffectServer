@@ -28,8 +28,15 @@ loadMenu = () ->
     for category in categories
       createObject(category)
     sortUpdateHandler = ->
-      $("#category-list > div").each (id, categoryObject) ->
-        console.log categoryObject.categoryId
+      updateList = []
+      i = 0
+      $divs = $("#category-list > div")
+      for $div in $divs
+        updateList.push
+          categoryId: $div.categoryId
+          sort: i
+        i++
+      console.log updateList
     $("#category-list").sortable
       handle: ".icon"
     $("#category-list").bind('sortupdate', sortUpdateHandler)
