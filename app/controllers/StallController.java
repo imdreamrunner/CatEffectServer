@@ -60,6 +60,10 @@ public class StallController extends Controller {
         return ok(settings.render());
     }
 
+    public static Result reportpage() {
+        return ok(reportpage.render());
+    }
+
     public static Result help() {
         return ok(help.render());
     }
@@ -373,6 +377,7 @@ public class StallController extends Controller {
                     }
                 }
             }
+            result.put("error" , 0);
             result.put("totalOrder" , totalOrder);
             result.put("totalRevenue", totalRevenue);
             result.put("prepaid", String.format("%.2f", 100.0 * prepaidCount / totalOrder));

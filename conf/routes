@@ -98,6 +98,7 @@ GET         /stall/orders                      controllers.StallController.order
 GET         /stall/settings                    controllers.StallController.settings()
 GET         /stall/records                     controllers.StallController.records()
 GET         /stall/report                      controllers.StallController.report()
+GET         /stall/report/page                 controllers.StallController.reportpage()
 GET         /stall/help                        controllers.StallController.help()
 
 # Manage Categories

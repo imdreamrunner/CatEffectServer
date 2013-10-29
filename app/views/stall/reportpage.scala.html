@@ -1,9 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Stall Dashboard</title>
+    <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
-
+<h1>Monthly Revenue Report</h1>
+<div id="contents">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3>Basic Information</h3>
+                </div>
+                <div class="content">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Stall</td>
+                            <td id="stall-name"></td>
+                        </tr>
+                        <tr>
+                            <td>Month</td>
+                            <td id="month"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Revenue</td>
+                            <td id="revenue"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <h3>Customer Statistics</h3>
+                </div>
+                <div class="content">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Prepaid Card</td>
+                            <td id="prepaid"></td>
+                        </tr>
+                        <tr>
+                            <td>Student</td>
+                            <td id="student"></td>
+                        </tr>
+                        <tr>
+                            <td>Faculty</td>
+                            <td id="faculty"></td>
+                        </tr>
+                        <tr>
+                            <td>Staff</td>
+                            <td id="staff"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
+<script src="/assets/javascripts/bootstrap.min.js"></script>
+<script src="/assets/javascripts/underscore-min.js"></script>
+<script src="/assets/javascripts/common.js"></script>
+<script src="/assets/javascripts/stall/reportpage.js"></script>
 </body>
 </html>

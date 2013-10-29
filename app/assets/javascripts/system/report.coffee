@@ -50,18 +50,7 @@ loadStall = (canteenId) ->
   $("#stall").val($("#stall option:first").val());
 
 this.generate = ->
-  postData =
-    auth_username: this.auth.getUsername()
-    auth_password: this.auth.getPassword()
-    stallId: parseInt($("#stall").val())
-    year: parseInt($("#year").val())
-    month: parseInt($("#month").val())
-  console.log postData
-  $.ajax
-    url: "/stall/report/getData"
-    data: postData
-    type: "post"
-    dataType: "json"
-    success: (data) ->
-      if (!data['error'])
-        console.log data
+  stallId = parseInt($("#stall").val())
+  year = parseInt($("#year").val())
+  month = parseInt($("#month").val())
+  newWindow("/stall/report/page#stallId="+stallId+"&year="+year+"&month="+month, 700, 550)
