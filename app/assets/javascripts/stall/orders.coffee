@@ -34,7 +34,6 @@ this.loadOrder = loadOrder = () ->
   console.log(orderList)
   $("#order-list").html ""
   for order in orderList
-    console.log("order: ")
     console.log(order)
     if (order['status'] < 3)
       $("#order-list").append(table(order))

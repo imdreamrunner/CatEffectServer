@@ -48,6 +48,34 @@ public class Order extends Model {
     @JsonIgnore
     public Account getAccount() {return account;}
     public Integer getAccountId() { return account != null ? account.getAccountId() : null; }
+    public Integer getAccountType() { return account != null ? account.getType() : null; }
+    public String getAccountString() {
+        if (account == null) return null;
+        String id;
+        switch (account.getType()) {
+            case 0:
+                return "Prepaid Card " + account.getPrepaidCard().getPrepaidCardId().toString();
+            case 1:
+                id = account.getStudent().getCardId();
+                if (id.length() > 4) {
+                    id = id.substring(id.length() - 4);
+                }
+                return "Student " + id;
+            case 2:
+                id = account.getFaculty().getCardId();
+                if (id.length() > 4) {
+                    id = id.substring(id.length() - 4);
+                }
+                return "Faculty " + id;
+            case 3:
+                id = account.getStaff().getCardId();
+                if (id.length() > 4) {
+                    id = id.substring(id.length() - 4);
+                }
+                return "Staff" + id;
+        }
+        return null;
+    }
     public Integer getSubtotal() {return subtotal;}
     public Transaction getTransaction() {return transaction;}
     public Integer getStatus() {return status;}
