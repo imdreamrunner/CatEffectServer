@@ -33,13 +33,23 @@ loadAccount = ->
     success: (data) ->
       if (!data['error'])
         that.account = account = data['account']
+        infoString = ""
+        if account.type == 0
+          infoString = "PrepaidCard " + account.prepaidCard.prepaidCardId
+        else if account.type == 1
+          infoString = "Student " + account.student.name
+        else if account.type == 2
+          infoString = "Faculty " + account.faculty.name
+        else if account.type == 3
+          infoString = "Staff " + account.staff.name
         $("#tAccountId").html account['accountId']
+        $("#tInfo").html infoString
         $("#tBalance").html displayMoney(account['balance'])
         loadTransaction()
     error: ->
       console.log "errer"
 
-this.amount = topUpAmount = 50
+this.amount = topUpAmount = 10
 
 this.setAmount = (amount) ->
   topUpAmount = amount
