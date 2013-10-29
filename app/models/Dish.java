@@ -23,6 +23,7 @@ public class Dish extends Model {
     private Integer promotionalPrice;
     private Integer promotionStart, promotionEnd;
     private String options;
+    private Boolean deleted = false;
 
     public static Finder<Integer, Dish> find = new Finder<Integer, Dish>(
             Integer.class, Dish.class
@@ -65,6 +66,7 @@ public class Dish extends Model {
     public String getOptions() { return options; }
     public Integer getPromotionStart() {return promotionStart; }
     public Integer getPromotionEnd() {return promotionEnd; }
+    public Boolean getDeleted() {return deleted;}
 
     public void setName(String newName) { name = newName;}
     public void setImage(String newImage) { image = newImage;}
@@ -87,6 +89,9 @@ public class Dish extends Model {
         promotionStart = newPromotionStart;
         promotionEnd = newPromotionEnd;
         setPromotionalPrice(newPromotionalPrice);
+    }
+    public void setDeleted(Boolean theDeleted) {
+        deleted = theDeleted;
     }
 
 
