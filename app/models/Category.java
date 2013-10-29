@@ -1,5 +1,6 @@
 package models;
 
+import com.avaje.ebean.annotation.Where;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import utils.CatException;
@@ -18,6 +19,7 @@ public class Category extends Model {
     private Integer displayOption = 0;
     private Integer sort = 100000;
     @OneToMany(mappedBy = "category")
+    @Where(clause = "`deleted` is null or `deleted` < 1")
     @OrderBy("sort")
     private List<Dish> dishes;
 

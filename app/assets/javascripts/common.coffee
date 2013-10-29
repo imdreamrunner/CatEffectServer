@@ -19,12 +19,12 @@ auth.getUsername = ->
   if javaMode()
     return java.getUsername()
   else
-    return "test"
+    return "stall1"
 auth.getPassword = ->
   if javaMode()
     return java.getPassword()
   else
-    return "test123"
+    return "stall1"
 
 # Pop up
 

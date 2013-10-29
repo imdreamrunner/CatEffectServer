@@ -15,7 +15,7 @@ loadDish = (handler) ->
     dataType: "json"
     success:  (data) ->
       if (!data['error'])
-        dish =  data['dish']
+        this.dish = dish = data['dish']
         handler(dish)
 
 displayDish = ->
@@ -67,3 +67,21 @@ this.chooseImage = ->
         changeImg = ->
           $("#dish-edit").find("#imgImage").attr("src", "/assets/uploads/" + data['image'])
         setTimeout(changeImg, 1000)
+
+this.deleteDish = ->
+  this.showPopBox("#pop-up-confirm-delete", this.dish, 400, 180)
+
+this.doDelete = ->
+  that = this
+  $.ajax
+    url:      "/stall/dishes/delete/" + this.dishId
+    data:
+              auth_username: this.auth.getUsername()
+              auth_password: this.auth.getPassword()
+    dataType: "json"
+    type:     "post"
+    success:  (data) ->
+      if (!data['error'])
+        if that.javaMode()
+          that.java.refreshParent()
+          that.java.close()

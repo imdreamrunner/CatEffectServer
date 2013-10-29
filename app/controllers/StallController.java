@@ -267,7 +267,20 @@ public class StallController extends Controller {
         return ok(result);
     }
 
-	//deleteDish
+	public static Result deleteDish(Integer dishId) {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Dish dish = Dish.find.byId(dishId);
+            dish.setDeleted(true);
+            dish.save();
+            result.put("error", 0);
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", ex.getMessage());
+        }
+        return ok(result);
+    }
 
 	public static Result getOneOrder(Integer orderId) {
 		ObjectNode result = Json.newObject();

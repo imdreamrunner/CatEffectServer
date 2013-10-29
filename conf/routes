@@ -111,6 +111,7 @@ POST        /stall/categories/delete/:id       controllers.StallController.delet
 POST        /stall/dishes/add                  controllers.StallController.addDish()
 POST        /stall/dishes/edit/:id             controllers.StallController.editDish(id: Int)
 POST        /stall/dishes/sort                 controllers.StallController.updateDishSort()
+POST        /stall/dishes/delete/:id           controllers.StallController.deleteDish(id: Int)
 
 # Manage Orders
 POST        /stall/orders/getAll               controllers.StallController.getAllOrders()
