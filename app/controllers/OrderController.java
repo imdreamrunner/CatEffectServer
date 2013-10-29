@@ -50,11 +50,11 @@ public class OrderController extends Controller {
             JsonNode nodeOrderItems = Json.parse(strOrderItems);
             for (int i = 0; i < nodeOrderItems.size(); i++) {
                 JsonNode objectItem = nodeOrderItems.get(i);
-                Integer dishId = Integer.parseInt(objectItem.get("dishId").toString());
-                Integer quantity = Integer.parseInt(objectItem.get("quantity").toString());
-                Integer price = Integer.parseInt(objectItem.get("price").toString());
-                Integer listPrice = Integer.parseInt(objectItem.get("listPrice").toString());
-                String note = objectItem.get("note").toString();
+                Integer dishId = objectItem.get("dishId").getIntValue();
+                Integer quantity = objectItem.get("quantity").getIntValue();
+                Integer price = objectItem.get("price").getIntValue();
+                Integer listPrice = objectItem.get("listPrice").getIntValue();
+                String note = objectItem.get("note").getTextValue();
                 OrderItem orderItem = new OrderItem();
                 orderItem.setDish(dishId);
                 orderItem.setOrder(order);

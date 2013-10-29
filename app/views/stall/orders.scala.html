@@ -5,6 +5,11 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
+    <style>
+        .ready .title {
+            background: #B5E2CC;
+        }
+    </style>
 </head>
 <body>
 <h1>Orders</h1>
@@ -19,13 +24,13 @@
 
 
 <script type="text/html" id="order-template">
-    <div id="order-<%= orderId %>" class="col-xs-12">
+    <div id="order-<%= orderId %>" class="col-xs-12 <% if (status == 2) print('ready') %>">
         <div class="widget">
             <div class="title">
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                <h3><%= orderId %></h3>
+                <h3><%= orderId %>: <%= accountString %></h3>
                     <span id="current-status-row"></span>
                     <% if (status < 2) { %>
                     <span class="button">
@@ -42,18 +47,20 @@
                     <% } %>
             </div>
             <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
-                <% _.each(orderItems, function(orderItems) { %>
-                <div class="order-item">
-                    <div class="image">
-                        <a href="javascript:" onclick="">
-                            <img src="/assets/uploads/<%= orderItems['dish']['image'] %>" alt="<%= orderItems['dish']['name'] %>" width=100>
-                        </a>
-                    </div>
-                    <div class="name">
-                        <%= orderItems['dish']['name'] %>
-                    </div>
-                </div>
-                <% }); %>
+                <table class="table table-striped">
+                    <%
+                    _.each(orderItems, function(orderItem) {
+                        var dish = orderItem['dish'];
+                        if (typeof dish !== "undefined") {
+                    %>
+                    <tr>
+                        <td><%= dish['name'] %></td>
+                        <td><%= orderItem.note %></td>
+                        <td><%= orderItem.quantity %></td>
+                        <td>$<%= displayMoney(dish['finalPrice']) %></td>
+                    </tr>
+                    <% }}); %>
+                </table>
             </div>
         </div>
     </div>

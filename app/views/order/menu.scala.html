@@ -29,8 +29,9 @@
             <thead>
                 <tr>
                     <td>Item</td>
-                    <td>Quantity</td>
                     <td>Note</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
                 </tr>
             </thead>
             <tbody id="check-out-dish-tbody">
@@ -64,8 +65,9 @@
     <% dish = findDish(dishId); %>
     <tr>
         <td><%= dish['name'] %></td>
-        <td><%= quantity %></td>
         <td><%= note %></td>
+        <td><%= quantity %></td>
+        <td><%= displayMoney(dish['finalPrice']) %></td>
     </tr>
 </script>
 
