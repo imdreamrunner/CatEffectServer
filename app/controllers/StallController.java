@@ -12,6 +12,10 @@ import utils.Authentication;
 import utils.CatException;
 import views.html.stall.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class StallController extends Controller {
@@ -326,6 +330,58 @@ public class StallController extends Controller {
         } catch (Exception ex) {
             result.put("error", 1);
             result.put("message", ex.getMessage());
+        }
+        return ok(result);
+    }
+
+    public static Result getReportData() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Integer stallId = Integer.parseInt(data.get("stallId"));
+            Integer year = Integer.parseInt(data.get("year"));
+            Integer month = Integer.parseInt(data.get("month"));
+            DateFormat formatter = new SimpleDateFormat("yyyy-M-d");
+            Date startTime = formatter.parse("" + year + "-" + month + "-1");
+            Date endTime = formatter.parse("" + year + "-" + (month + 1) + "-1");
+            List<Order> orders = Order.find
+                    .where("stall_id = " + stallId)
+                    .findList();
+            System.out.println(startTime.getTime());
+            System.out.println(endTime.getTime());
+            int totalOrder = 0;
+            int totalRevenue = 0;
+            int prepaidCount = 0, studentCount = 0, facultyCount = 0, staffCount = 0;
+            for (Order order : orders) {
+                if (startTime.before(order.getCreateTime())
+                        && endTime.after(order.getCreateTime())) {
+                    totalOrder++;
+                    totalRevenue += order.getSubtotal();
+                    switch (order.getAccountType()) {
+                        case 0:
+                            prepaidCount++;
+                            break;
+                        case 1:
+                            studentCount++;
+                            break;
+                        case 2:
+                            facultyCount++;
+                            break;
+                        case 3:
+                            staffCount++;
+                            break;
+                    }
+                }
+            }
+            result.put("totalOrder" , totalOrder);
+            result.put("totalRevenue", totalRevenue);
+            result.put("prepaid", String.format("%.2f", 100.0 * prepaidCount / totalOrder));
+            result.put("student", String.format("%.2f", 100.0 * studentCount / totalOrder));
+            result.put("faculty", String.format("%.2f", 100.0 * facultyCount / totalOrder));
+            result.put("staff", String.format("%.2f", 100.0 * staffCount / totalOrder));
+        } catch (ParseException e) {
+            result.put("error", 2001);
+            result.put("message", e.getMessage());
         }
         return ok(result);
     }

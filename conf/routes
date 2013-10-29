@@ -117,9 +117,5 @@ POST        /stall/orders/editStatus           controllers.StallController.editS
 # Edit Stall
 POST        /stall/stalls/edit                controllers.StallController.editStall()
 
-###################
-# OrderController #
-###################
-
-# Feedback
-GET         /order/feedback                    controllers.OrderController.feedback()
+# Report
+POST        /stall/report/getData             controllers.StallController.getReportData()
