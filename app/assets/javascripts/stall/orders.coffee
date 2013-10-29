@@ -38,6 +38,7 @@ this.loadOrder = loadOrder = () ->
     if (order['status'] < 3)
       $("#order-list").append(table(order))
   $('#order-list').find('.content-loader').removeClass('content-loader');
+  setTimeout(ajaxLoadData, 5000)
 
 this.toReady = toReady = (orderId) ->
   $.ajax
@@ -53,7 +54,8 @@ this.toReady = toReady = (orderId) ->
       if (!data['error'])
         console.log "ready"
         # doneToReady(orderId)
-        location.reload()
+        # location.reload()
+        ajaxLoadData()
     error:      () ->
       console.log "error"
 
@@ -69,7 +71,8 @@ this.toServed = toServed = (orderId) ->
       newStatus    : '3'
     success:    (data) ->
       console.log "served"
-      location.reload()
+      # location.reload()
+      ajaxLoadData()
     error:      () ->
       console.log "error"
 
