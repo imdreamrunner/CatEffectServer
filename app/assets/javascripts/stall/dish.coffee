@@ -30,11 +30,19 @@ this.editDish = ->
   dishEditTemplate = _.template $("#dish-edit-template").html()
   editDishHandler = (dish) ->
     $("#dish-edit-form").html dishEditTemplate(dish)
+
+    $("#startHour").val Math.floor(dish['promotionStart'] / 60)
+    $("#startMinute").val dish['promotionStart'] % 60
+    $("#endHour").val Math.floor(dish['promotionEnd'] / 60)
+    $("#endMinute").val dish['promotionEnd'] % 60
+
     $("#dish-display").addClass "hidden"
     $("#dish-edit").removeClass "hidden"
   loadDish(editDishHandler)
 
 this.saveDish = ->
+  $("#inputPromotionStart").val parseInt($("#startHour").val()) * 60 + parseInt($("#startMinute").val())
+  $("#inputPromotionEnd").val parseInt($("#endHour").val()) * 60 + parseInt($("#endMinute").val())
   that = this
   postData = $("#dish-edit-form").serialize()
   postData += "&auth_username=" + this.auth.getUsername();

@@ -76,7 +76,9 @@
         <h3><%= name %></h3>
         <div id="dish-list-<%= categoryId%>" class="dish-list">
             <% _.each(dishes, function(dish) { %>
-            <div id="dish-item-<%= dish['dishId'] %>" class="dish-item" onclick="showDish(<%= dish['dishId'] %>)">
+            <div id="dish-item-<%= dish['dishId'] %>"
+                 class="dish-item <% if (dish.promotionActivated) print('promoting'); %>"
+                 onclick="showDish(<%= dish['dishId'] %>)">
                 <div class="image">
                     <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
                 </div>

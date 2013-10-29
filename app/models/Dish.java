@@ -44,7 +44,7 @@ public class Dish extends Model {
         return price;
     }
 
-    public boolean getPromitionActivated() {
+    public boolean getPromotionActivated() {
         if (promotionStart==null || promotionEnd==null) return false;
         Calendar now = Calendar.getInstance();
         int hour = now.get(Calendar.HOUR_OF_DAY);
@@ -57,7 +57,7 @@ public class Dish extends Model {
         
     }
     public Integer getFinalPrice() { 
-        if (getPromitionActivated())
+        if (getPromotionActivated())
             return promotionalPrice;
         else 
             return price; 

@@ -5,6 +5,23 @@
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/stall/menu.css" rel="stylesheet" media="screen">
+    <style>
+        select {
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+    </style>
 </head>
 <body>
 <h1>Dish</h1>
@@ -18,9 +35,15 @@
                     </span>
                     <h3>Information</h3>
                     <span class="stall-info-edit button">
+                        <a href="javascript:" onclick="deleteDish()">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            Delete
+                        </a>
+                    </span>
+                    <span class="stall-info-edit button">
                         <a href="javascript:" onclick="editDish()">
                             <span class="glyphicon glyphicon-cog"></span>
-                            Edit / Delete
+                            Edit
                         </a>
                     </span>
                 </div>
@@ -74,7 +97,13 @@
     </tr>
     <tr>
         <td>Promotional Price</td>
-        <td><%= promotionalPrice %></td>
+        <td>
+            <%= promotionalPrice %>
+            <span>
+                <% if (promotionActivated) print("(Promotion Activated!)");
+                   else print("(Promotion Not Activated.)"); %>
+            </span>
+        </td>
     </tr>
     <tr>
         <td>Promotion Start</td>
@@ -114,36 +143,53 @@
                   name="description" placeholder="Description"><%= description %></textarea>
     </div>
     <div class="form-group">
-        <label for="inputPrice">Price</label>
+        <label for="inputPrice">Price (Note: input 1234 for $12.34)</label>
         <input type="text" class="form-control" id="inputPrice" name="price"
                placeholder="List Price" value="<%= price %>">
     </div>
     <div class="form-group">
-        <label for="inputPromotionalPrice">Promotional Price</label>
+        <label for="inputPromotionalPrice">Promotional Price (Note: input 1234 for $12.34)</label>
         <input type="text" class="form-control" id="inputPromotionalPrice" name="promotionalPrice"
                placeholder="Promotional Price" value="<%= promotionalPrice %>">
     </div>
     <div class="form-group">
-        <label for="inputPromotionStart">Promotion Start</label>
+        <label>Promotion Period</label>
+        <div>
+            from
+            <select id="startHour">
+                <% for (var i = 0; i < 24; i++) { %>
+                <option value="<%- i %>"><%- i %></option>
+                <% } %>
+            </select>
+            <select id="startMinute">
+                <% for (var i = 0; i < 60; i++) { %>
+                <option value="<%- i %>"><%- i %></option>
+                <% } %>
+            </select>
+            to
+            <select id="endHour">
+                <% for (var i = 0; i < 24; i++) { %>
+                <option value="<%- i %>"><%- i %></option>
+                <% } %>
+            </select>
+            <select id="endMinute">
+                <% for (var i = 0; i < 60; i++) { %>
+                <option value="<%- i %>"><%- i %></option>
+                <% } %>
+            </select>
+        </div>
+    </div>
+    <div class="form-group hidden">
+        <label for="inputPromotionEnd">Promotion End</label>
         <input type="text" class="form-control" id="inputPromotionStart" name="promotionStart"
                placeholder="Promotion Start" value="<%= promotionStart %>">
-    </div>
-    <div class="form-group">
-        <label for="inputPromotionEnd">Promotion End</label>
         <input type="text" class="form-control" id="inputPromotionEnd" name="promotionEnd"
                placeholder="Promotion End" value="<%= promotionEnd %>">
     </div>
     <div class="form-group">
-        <label for="inputOptions">Options</label>
+        <label for="inputOptions">Options (Note: separated by |)</label>
         <input type="text" class="form-control" id="inputOptions" name="options"
                placeholder="Options" value="<%= options %>">
-    </div>
-    <div class="form-group">
-        <label for="delete">Delete?</label>
-        <a id="delete" href="javascript:" class="btn btn-default form-control" onclick="deleteDish()">
-            <span class="glyphicon glyphicon-trash"></span>
-            Delete Dish
-        </a>
     </div>
 </script>
 
