@@ -204,6 +204,19 @@ getAccountInfo = (callback) ->
         if that.account && that.account.hasOwnProperty("accountId")
           callback.call(that)
 
+this.plus = ->
+  org = parseInt($(".pop-box").find("input.quantity").val())
+  org++
+  $(".pop-box").find("input.quantity").val org
+
+
+this.minus = ->
+  org = parseInt($(".pop-box").find("input.quantity").val())
+  org--
+  if org < 1
+    org = 1
+  $(".pop-box").find("input.quantity").val org
+
 this.setOption = (option, id) ->
   $(".pop-box").find("input.note").val option
   $(".pop-box").find(".option-button").removeClass("btn-primary").addClass("btn-default")
