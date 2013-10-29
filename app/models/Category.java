@@ -16,8 +16,9 @@ public class Category extends Model {
     @JoinColumn(name="stall_id")
     private Stall stall;
     private Integer displayOption = 0;
-    private Integer sort = 0;
+    private Integer sort = 100000;
     @OneToMany(mappedBy = "category")
+    @OrderBy("sort")
     private List<Dish> dishes;
 
     public Integer getCategoryId() {

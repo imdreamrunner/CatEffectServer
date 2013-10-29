@@ -101,14 +101,17 @@ GET         /stall/help                        controllers.StallController.help(
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()
+POST        /stall/categories/edit/:id         controllers.StallController.editCategory(id: Int)
+POST        /stall/categories/sort             controllers.StallController.updateCategorySort()
 
 # Manage Dishes
 POST        /stall/dishes/add                  controllers.StallController.addDish()
 POST        /stall/dishes/edit/:id             controllers.StallController.editDish(id: Int)
+POST        /stall/dishes/sort                 controllers.StallController.updateDishSort()
 
 # Manage Orders
-POST        /stall/orders/getAll              controllers.StallController.getAllOrders()
-POST        /stall/orders/editStatus          controllers.StallController.editStatus()
+POST        /stall/orders/getAll               controllers.StallController.getAllOrders()
+POST        /stall/orders/editStatus           controllers.StallController.editStatus()
 
 # Edit Stall
 POST        /stall/stalls/edit                controllers.StallController.editStall()

@@ -50,7 +50,7 @@ public class PublicController extends Controller {
 
     public static Result getAllCategories(Integer stallId) {
         ObjectNode result = Json.newObject();
-        List<Category> categoryList = Category.find.where("stall_id="+stallId).findList();
+        List<Category> categoryList = Category.find.where("stall_id="+stallId).order("sort").findList();
         result.put("error", 0);
         result.put("categories", Json.toJson(categoryList));
         return ok(result);
@@ -66,7 +66,7 @@ public class PublicController extends Controller {
 
     public static Result getAllDishes(Integer categoryId) {
         ObjectNode result = Json.newObject();
-        List<Dish> dishList = Dish.find.where("category_id=" + categoryId).findList();
+        List<Dish> dishList = Dish.find.where("category_id=" + categoryId).order("sort").findList();
         result.put("error", 0);
         result.put("dishes", Json.toJson(dishList));
         return ok(result);

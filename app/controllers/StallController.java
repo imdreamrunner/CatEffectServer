@@ -1,6 +1,7 @@
 package controllers;
 
 import models.*;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -115,9 +116,29 @@ public class StallController extends Controller {
             result.put("message", e.getMessage());
         }
         return ok(result);
-
 	}
 
+    @Authentication
+    public static Result updateCategorySort() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            JsonNode updateList = Json.parse(data.get("updateList"));
+            for (int i = 0; i < updateList.size(); i++) {
+                JsonNode updateItem = updateList.get(i);
+                Category category = Category.find.byId(updateItem.get("categoryId").getIntValue());
+                category.setSort(updateItem.get("sort").getIntValue());
+                category.save();
+            }
+            result.put("error", 0);
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", ex.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication
 	public static Result addDish() {
 		ObjectNode result = Json.newObject();
     	DynamicForm data = Form.form().bindFromRequest();
@@ -197,6 +218,26 @@ public class StallController extends Controller {
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication
+    public static Result updateDishSort() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            JsonNode updateList = Json.parse(data.get("updateList"));
+            for (int i = 0; i < updateList.size(); i++) {
+                JsonNode updateItem = updateList.get(i);
+                Dish dish = Dish.find.byId(updateItem.get("dishId").getIntValue());
+                dish.setSort(updateItem.get("sort").getIntValue());
+                dish.save();
+            }
+            result.put("error", 0);
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", ex.getMessage());
         }
         return ok(result);
     }

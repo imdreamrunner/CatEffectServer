@@ -18,7 +18,7 @@ public class Dish extends Model {
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
-    private Integer sort = 0;
+    private Integer sort = 100000;
     private Integer price = 0;
     private Integer promotionalPrice;
     private Integer promotionStart, promotionEnd;

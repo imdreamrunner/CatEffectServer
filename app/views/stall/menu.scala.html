@@ -26,20 +26,26 @@
     <div id="category-<%= categoryId %>" class="col-xs-12">
         <div class="widget">
             <div class="title">
-                    <span class="icon">
-                        <span class="glyphicon glyphicon-book"></span>
-                    </span>
+                <span class="icon">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
                 <h3><%= name %></h3>
-                    <span class="button">
-                        <a href="javascript:" onclick="newWindow('/stall/category#categoryId=<%= categoryId %>', 500, 400)">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Edit Category
-                        </a>
-                    </span>
+                <span class="button">
+                    <a href="javascript:" onclick="newWindow('/stall/category#categoryId=<%= categoryId %>', 500, 400)">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        Edit Category
+                    </a>
+                </span>
+                <span class="button">
+                    <a href="javascript:" onclick="addDish(<%= categoryId%>)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add Dish
+                    </a>
+                </span>
             </div>
             <div id="dish-list-<%= categoryId %>" class="dish-list content">
                 <% _.each(dishes, function(dish) { %>
-                    <div class="dish-item">
+                    <div id="dish-<%= dish.dishId %>" class="dish-item">
                         <div class="image">
                             <a href="javascript:" onclick="newWindow('/stall/dish#dishId=<%= dish['dishId'] %>', 600, 600)">
                                 <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
@@ -50,11 +56,6 @@
                         </div>
                     </div>
                 <% }); %>
-                <div class="dish-item dish-new-item">
-                    <a href="javascript:" onclick="addDish(<%= categoryId%>)">
-                        Add Dish
-                    </a>
-                </div>
             </div>
         </div>
     </div>

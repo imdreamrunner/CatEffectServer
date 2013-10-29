@@ -86,6 +86,7 @@ this.doAddStall = ->
     success:  (data) ->
       if (!data['error'])
         that.newWindow('/system/stall#stallId=' + data['newStall']['stallId'], 1000, 600)
+        location.reload()
       else
         console.log data['message']
 

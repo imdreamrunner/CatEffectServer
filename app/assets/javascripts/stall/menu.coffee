@@ -24,9 +24,11 @@ loadMenu = () ->
         $("#category-"+categoryId).find(".icon .glyphicon").removeClass("glyphicon-move").addClass("glyphicon-book")
       $categoryObject.find(".icon").on("mouseenter", mouseEnterHandler)
       $categoryObject.find(".icon").on("mouseleave", mouseLeaveHandler)
+      $categoryObject.find(".dish-list").sortable()
       $categoryList.append($categoryObject)
     for category in categories
       createObject(category)
+    that = this
     sortUpdateHandler = ->
       updateList = []
       i = 0
@@ -37,6 +39,37 @@ loadMenu = () ->
           sort: i
         i++
       console.log updateList
+      $.ajax
+        url: "/stall/categories/sort"
+        data:
+          auth_username: that.auth.getUsername()
+          auth_password: that.auth.getPassword()
+          updateList: JSON.stringify(updateList)
+        dataType: "json"
+        type: "post"
+        success: (data) ->
+          console.log(data)
+      dishList = []
+      i = 0
+      $dishs = $(".dish-item")
+      for $dish in $dishs
+        id = $dish.id.split("-")[1]
+        dishList.push
+          dishId: parseInt(id)
+          sort: i
+        i++
+      console.log dishList
+      $.ajax
+        url: "/stall/dishes/sort"
+        data:
+          auth_username: that.auth.getUsername()
+          auth_password: that.auth.getPassword()
+          updateList: JSON.stringify(dishList)
+        dataType: "json"
+        type: "post"
+        success: (data) ->
+          console.log(data)
+
     $("#category-list").sortable
       handle: ".icon"
     $("#category-list").bind('sortupdate', sortUpdateHandler)
@@ -54,6 +87,7 @@ this.addDish = (categoryId) ->
   this.showPopBox("#pop-box-new-dish", {categoryId: categoryId}, 400, 150)
 
 this.doAddDish = (categoryId) ->
+  that = this
   postData =
     categoryId:    categoryId
     name:          $(".popbox").find("#inputName").val()
@@ -67,8 +101,8 @@ this.doAddDish = (categoryId) ->
     data:     postData
     success: (data) ->
       if (!data["error"])
+        that.newWindow('/stall/dish#dishId=' + data['newDish']['dishId'], 600, 600)
         location.reload()
-        console.log "success"
 
 this.addCategory =  ->
   this.showPopBox("#pop-box-new-category", {}, 400, 150)
