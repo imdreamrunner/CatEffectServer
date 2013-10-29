@@ -66,7 +66,7 @@ this.javaMode = javaMode = ->
   if _javamode == "undetected"
     _javamode = params['browser'] != "true"
     if _javamode
-      alert "enter java mode"
+      console.log "enter java mode"
     else
       console.log "enter browser mode"
   return _javamode
