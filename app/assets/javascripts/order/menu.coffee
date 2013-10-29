@@ -120,10 +120,20 @@ getCheckOutSummary = ->
   for orderItem in dishOrderedList
     dish = findDish(orderItem['dishId'])
     subtotal += dish['finalPrice'] * orderItem['quantity']
+  discount = 0
+  if this.account.type == 0
+    discount = this.stall.prepaidDiscount
+  else if this.account.type == 1
+    discount = this.stall.studentDiscount
+  else if this.account.type == 2
+    discount = this.stall.facultyDiscount
+  else if this.account.type == 3
+    discount = this.stall.staffDiscount
   postData =
     accountId:  this.account['accountId']
-    stallId:  this.stallId
-    subtotal: subtotal
+    stallId:    this.stallId
+    original:   subtotal
+    subtotal:   Math.floor(subtotal * (100 - discount) / 100)
     orderItems: JSON.stringify(orderItems)
   return postData
 
@@ -131,14 +141,19 @@ this.showCheckOut = ->
   getAccountInfo ->
     $("#check-out-summary").show(300)
     accountName = ""
+    discount = 0
     if this.account.type == 0
       accountName = "Prepaid-Card User"
+      discount = this.stall.prepaidDiscount
     else if this.account.type == 1
       accountName = "Student " + this.account['student']['name']
+      discount = this.stall.studentDiscount
     else if this.account.type == 2
       accountName = "Faculty " + this.account['faculty']['name']
+      discount = this.stall.facultyDiscount
     else if this.account.type == 3
       accountName = "Staff " + this.account['staff']['name']
+      discount = this.stall.staffDiscount
     $(".account-name").html accountName
     $(".account-balance").html displayMoney(this.account['balance'])
     $("#check-out-dish-tbody").html("")
@@ -146,7 +161,10 @@ this.showCheckOut = ->
     rowTemplate = _.template $("#check-out-dish-template").html()
     for orderItem in orderItems
       $("#check-out-dish-tbody").append(rowTemplate(orderItem))
+    original = getCheckOutSummary()['original']
     subtotal = getCheckOutSummary()['subtotal']
+    $("#check-out-discount").html discount
+    $("#check-out-original").html displayMoney(original)
     $("#check-out-subtotal").html displayMoney(subtotal)
     if subtotal > this.account['balance']
       $(".success-buttons").hide()

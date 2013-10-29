@@ -30,19 +30,21 @@
                 <tr>
                     <td>Item</td>
                     <td>Note</td>
-                    <td>Quantity</td>
                     <td>Price</td>
+                    <td>Quantity</td>
                 </tr>
             </thead>
             <tbody id="check-out-dish-tbody">
             </tbody>
         </table>
         <div class="subtotal">
-            Subtotal: <span id="check-out-subtotal"></span>
+            <p>Original Subtotal: <span id="check-out-original"></span></p>
+            <p>Discount: <span id="check-out-discount"></span></p>
+            <p>Subtotal: <span id="check-out-subtotal"></span></p>
         </div>
         <div class="success-buttons">
-            <a class="confirmCheckOut" href="javascript:" onclick="checkOut()">Confirm</a>
-            <a class="cancelCheckOut" href="javascript:" onclick="cancelOrder()">Cancel</a>
+            <a class="confirmCheckOut btn btn-primary btn-lg" href="javascript:" onclick="checkOut()">Confirm</a>
+            <a class="cancelCheckOut btn btn-default btn-lg" href="javascript:" onclick="cancelOrder()">Cancel</a>
         </div>
         <div class="fail-buttons">
             Insufficient balance! Please Top-Up your account at OFS.
@@ -66,8 +68,8 @@
     <tr>
         <td><%= dish['name'] %></td>
         <td><%= note %></td>
-        <td><%= quantity %></td>
         <td><%= displayMoney(dish['finalPrice']) %></td>
+        <td><%= quantity %></td>
     </tr>
 </script>
 
