@@ -39,8 +39,16 @@ h3 {
 }
 
 .dish-item.promoting {
-  .image {
-
+  .image-promotion {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: url("/assets/images/promotion.png");
+    margin-left: 160px;
+  }
+  .original-price {
+    display: inline !important;
+    color: #999;
   }
 }
 
@@ -77,6 +85,9 @@ h3 {
     span {
       color: #fa8e1c;
     }
+  }
+  .original-price {
+    display: none;
   }
 }
 
@@ -121,6 +132,25 @@ h3 {
       color-stop(0, rgba(255, 255, 255, 0.4)),
       color-stop(1, rgba(255, 255, 255, 1))
     );
+  }
+
+  .divQuantity {
+    width: 300px;
+    margin: 20px 100px;
+    input {
+      text-align: center;
+    }
+  }
+
+  .divNote {
+    text-align: center;
+    margin: 20px 0;
+
+  }
+
+  .divButtons {
+    margin: 20px 0;
+    text-align: center;
   }
 }
 

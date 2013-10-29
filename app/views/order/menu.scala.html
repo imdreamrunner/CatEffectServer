@@ -3,7 +3,6 @@
 <head>
     <title>Customer Order Mode</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/order/menu.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -79,6 +78,7 @@
             <div id="dish-item-<%= dish['dishId'] %>"
                  class="dish-item <% if (dish.promotionActivated) print('promoting'); %>"
                  onclick="showDish(<%= dish['dishId'] %>)">
+                <div class="image-promotion"></div>
                 <div class="image">
                     <img src="/assets/uploads/<%= dish['image'] %>" alt="<%= dish['name'] %>">
                 </div>
@@ -86,6 +86,7 @@
                     <%= dish["name"] %>
                 </div>
                 <div class="price">
+                    <span class="original-price"><del>$<%= displayMoney(dish["price"]) %></del></span>
                     $ <span><%= displayMoney(dish["finalPrice"]) %></span>
                 </div>
             </div>
@@ -105,15 +106,39 @@
         <div class="description">
             <%= description %>
         </div>
-        <div class="divQuantity">
-            <input name="quantity" class="quantity" value="1">
+        <div class="divQuantity input-group input-group-lg">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">-</button>
+            </span>
+            <input name="quantity" class="quantity form-control input-lg" value="1">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">+</button>
+            </span>
         </div>
+        <input name="note" class="note hidden" value="">
         <div class="divNote">
-            <input name="note" class="note" value="">
+            <% if (options.length) { %>
+            <div class="btn-group">
+                <%
+                optionList = options.split("|");
+                console.log(options);
+                var i = 0;
+                _.each(optionList, function(option) {
+                %>
+                <a id="option-<%- i %>" href="javascript:"
+                   class="btn btn-default option-button" onclick="setOption('<%= option %>', <%- i %>)">
+                    <%= option %>
+                </a>
+                <%
+                i++;
+                });
+                %>
+            </div>
+            <% } %>
         </div>
         <div class="divButtons">
-            <input type="button" value="Add!" onclick="orderDish(<%= dishId %>)">
-            <input type="button" value="Cancel" onclick="cancelDish()">
+            <input type="button" value="Add!" class="btn btn-primary btn-lg" onclick="orderDish(<%= dishId %>)">
+            <input type="button" value="Cancel" class="btn btn-default btn-lg" onclick="cancelDish()">
         </div>
     </div>
 </script>

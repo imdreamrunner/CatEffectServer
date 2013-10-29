@@ -195,3 +195,8 @@ getAccountInfo = (callback) ->
         that.account = data['account']
         if that.account && that.account.hasOwnProperty("accountId")
           callback.call(that)
+
+this.setOption = (option, id) ->
+  $(".pop-box").find("input.note").val option
+  $(".pop-box").find(".option-button").removeClass("btn-primary").addClass("btn-default")
+  $(".pop-box").find("#option-" + id).removeClass("btn-default").addClass("btn-primary")
