@@ -262,10 +262,6 @@ public class SystemController extends Controller {
     public static Result getAllPrepaidCards() {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
-        ///
-        String strPrepaidCardId = data.get("prepaidCardId");
-        String token = data.get("token");
-        ///no need？
         List<PrepaidCard> prepaidcardList;
         prepaidcardList = PrepaidCard.find.all();
         result.put("error", 0);
@@ -273,6 +269,65 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
+    @Authentication(requireSystem = true)
+    public static Result addCanteen() {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            String name = data.get("name");
+            if (name == null || name.equals("")) {
+                throw new CatException(1001, "Canteen name cannot be null.");
+            }
+            Canteen canteen = new Canteen();
+            canteen.setName(name);
+            canteen.save();
+            result.put("error", 0);
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result editCanteen(int canteenId) {
+        ObjectNode result = Json.newObject();
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Canteen canteen = Canteen.find.byId(canteenId);
+            if (canteen == null) {
+                throw new CatException(1001, "Canteen not found");
+            }
+            canteen.setName(data.get("name"));
+            canteen.setSort(Integer.parseInt(data.get("sort")));
+            canteen.save();
+            result.put("error", 0);
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    @Authentication(requireSystem = true)
+    public static Result deleteCanteen(int canteenId) {
+        ObjectNode result = Json.newObject();
+        try {
+            Canteen canteen = Canteen.find.byId(canteenId);
+            if (canteen.getStallNumber() != 0) {
+                throw new CatException(1003, "You must delete all stalls under the canteen.");
+            }
+            canteen.delete();
+            result.put("error", 0);
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        } catch (Exception e) {
+            result.put("error", 1111);
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
 
     @Authentication(requireSystem = true)
     public static Result addStall() {

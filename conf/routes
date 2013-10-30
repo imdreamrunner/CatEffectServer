@@ -62,6 +62,11 @@ POST        /system/managers/delete/:id        controllers.SystemController.dele
 POST        /system/managers/getOne/:id        controllers.SystemController.getOneManager(id: Int)
 POST        /system/managers/getAll            controllers.SystemController.getAllManagers()
 
+# Manage Canteens
+POST        /system/canteens/add               controllers.SystemController.addCanteen()
+POST        /system/canteens/edit/:id          controllers.SystemController.editCanteen(id: Int)
+POST        /system/canteens/delete/:id        controllers.SystemController.deleteCanteen(id: Int)
+
 # Manage Stalls
 POST        /system/stalls/add                 controllers.SystemController.addStall()
 POST        /system/stalls/edit/:id            controllers.SystemController.editStall(id: Int)
