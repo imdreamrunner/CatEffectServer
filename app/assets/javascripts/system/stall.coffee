@@ -106,7 +106,7 @@ this.deleteManager = (managerId) ->
   this.showPopBox("#pop-up-confirm-delete-manager", manager, 500, 180)
 
 this.newManager = () ->
-  this.showPopBox("#pop-up-new-manager", {}, 400, 270)
+  this.showPopBox("#pop-up-new-manager", {}, 400, 220)
 
 this.doAddManager = ->
   username = $(".popbox .username").val()
