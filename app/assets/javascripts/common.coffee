@@ -76,7 +76,7 @@ this.newWindow = (target, width, height) ->
     this.java.open(target, width, height)
   else
     urls = target.split("#")
-    if urls[2] == null
+    if urls.length < 2
       this.open(target + "#browser=true")
     else
       this.open(target + "&browser=true")
