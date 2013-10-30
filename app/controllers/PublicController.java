@@ -11,7 +11,6 @@ import play.mvc.Http;
 import play.mvc.Result;
 import utils.CatException;
 import utils.RandomString;
-import views.html.index;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -21,7 +20,7 @@ import java.util.List;
 public class PublicController extends Controller {
   
     public static Result index() {
-        return ok(index.render("Welcome to CaMS@BTU!"));
+        return ok("Server is running.");
     }
 
     public static Result getAllCanteens() {

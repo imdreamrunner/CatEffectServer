@@ -127,7 +127,23 @@ public class SystemController extends Controller {
     @Authentication(requireSystem = true)
     public static Result editManager(int managerId) {
         ObjectNode result = Json.newObject();
-        return ok("something");
+        DynamicForm data = Form.form().bindFromRequest();
+        try {
+            Manager manager = Manager.find.byId(managerId);
+            if (manager == null) {
+                throw new CatException(1001, "Manager not found.");
+            }
+            manager.setUsername(data.get("username"));
+            manager.setPassword(data.get("password"));
+            result.put("error", 0);
+        } catch (CatException e) {
+            result.put("error", e.getCode());
+            result.put("message", e.getMessage());
+        } catch (Exception e) {
+            result.put("error", 9001);
+            result.put("message", "Unknown error");
+        }
+        return ok(result);
     }
 
     @Authentication(requireSystem = true)
