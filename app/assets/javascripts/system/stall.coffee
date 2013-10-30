@@ -128,6 +128,24 @@ this.doAddManager = ->
       else
         alert data["message"]
 
+this.doEditManager = (managerId) ->
+  postData =
+    auth_username: this.auth.getUsername()
+    auth_password: this.auth.getPassword()
+    username: $(".popbox .username").val()
+    password: $(".popbox .password").val()
+  $.ajax
+    url: "/system/managers/edit/" + managerId
+    type: "post"
+    dataType: "json"
+    data: postData
+    success: (data) ->
+      if (!data['error'])
+        alert "Changes saved!"
+        location.reload()
+      else
+        alert data['message']
+
 this.confirmDeleteManager = (managerId) ->
   postData =
     auth_username: this.auth.getUsername()
