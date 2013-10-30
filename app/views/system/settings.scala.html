@@ -64,6 +64,73 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
+
+<script type="text/html" id="pop-up-add-canteen">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>New Canteen</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="doAddCanteen()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Add
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label >Canteen Name</label>
+                    <input class="form-control canteen-name" placeholder="Canteen Name">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pop-up-edit-canteen">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>Edit Canteen</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="doEditCanteen(<%= canteenId %>)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Save
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label >Canteen Name</label>
+                    <input class="form-control canteen-name" value="<%= name %>">
+                </div>
+                <div class="form-group">
+                    <label >Sort</label>
+                    <input class="form-control canteen-sort" value="<%= sort %>">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/jquery-ui-1.10.3.custom.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>

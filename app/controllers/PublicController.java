@@ -25,7 +25,7 @@ public class PublicController extends Controller {
 
     public static Result getAllCanteens() {
         ObjectNode result = Json.newObject();
-        List<Canteen> canteenList = Canteen.find.all();
+        List<Canteen> canteenList = Canteen.find.order("sort").findList();
         result.put("error", 0);
         result.put("canteens", Json.toJson(canteenList));
         return ok(result);

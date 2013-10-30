@@ -12,7 +12,7 @@ public class Canteen extends Model {
     @Id
     private Integer canteenId;
     private String name;
-    private Integer sort = 0;
+    private Integer sort = 9000;
     @OneToMany(mappedBy = "canteen")
     private List<Stall> stalls;
 
