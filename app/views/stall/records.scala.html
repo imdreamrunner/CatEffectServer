@@ -31,21 +31,23 @@
                     <span class="icon">
                         <span class="glyphicon glyphicon-book"></span>
                     </span>
-                <h3><%= orderId %></h3>
+                <h3><%= orderId %>: <%= accountString %></h3>
             </div>
             <div id="orderItem-list-<%= orderId %>" class="orderItem-list content">
-                <% _.each(orderItems, function(orderItems) { %>
-                <div class="order-item">
-                    <div class="image">
-                        <a href="javascript:" onclick="">
-                            <img src="/assets/uploads/<%= orderItems['dish']['image'] %>" alt="<%= orderItems['dish']['name'] %>" width=100>
-                        </a>
-                    </div>
-                    <div class="name">
-                        <%= orderItems['dish']['name'] %>
-                    </div>
-                </div>
-                <% }); %>
+                <table class="table table-striped">
+                    <%
+                    _.each(orderItems, function(orderItem) {
+                    var dish = orderItem['dish'];
+                    if (typeof dish !== "undefined") {
+                    %>
+                    <tr>
+                        <td><%= dish['name'] %></td>
+                        <td><%= orderItem.note %></td>
+                        <td><%= orderItem.quantity %></td>
+                        <td>$<%= displayMoney(dish['finalPrice']) %></td>
+                    </tr>
+                    <% }}); %>
+                </table>
             </div>
         </div>
     </div>
