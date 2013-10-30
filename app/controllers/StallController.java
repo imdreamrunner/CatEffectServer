@@ -64,6 +64,10 @@ public class StallController extends Controller {
         return ok(reportpage.render());
     }
 
+    public static Result managers() {
+        return ok(managers.render());
+    }
+
     public static Result help() {
         return ok(help.render());
     }
@@ -421,6 +425,19 @@ public class StallController extends Controller {
         } catch (ParseException e) {
             result.put("error", 2001);
             result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    public static Result getAllManagers(int stallId) {
+        ObjectNode result = Json.newObject();
+        try {
+            List<Manager> managers = Manager.find.where("stall_id = " + stallId).findList();
+            result.put("error", 0);
+            result.put("managers", Json.toJson(managers));
+        } catch (Exception ex) {
+            result.put("error", 1);
+            result.put("message", ex.getMessage());
         }
         return ok(result);
     }

@@ -105,7 +105,11 @@ GET         /stall/records                     controllers.StallController.recor
 GET         /stall/report                      controllers.StallController.report()
 GET         /stall/report/page                 controllers.StallController.reportpage()
 GET         /stall/help                        controllers.StallController.help()
+GET         /stall/managers                    controllers.StallController.managers()
 GET         /stall/orderStatus                 controllers.StallController.orderStatus()
+
+# Managers
+POST        /stall/managers/getAll/:id         controllers.StallController.getAllManagers(id: Int)
 
 # Manage Categories
 POST        /stall/categories/add              controllers.StallController.addCategory()

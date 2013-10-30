@@ -90,7 +90,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
-    @Authentication(requireSystem = true)
+    @Authentication
     public static Result addManager() {
         ObjectNode result = Json.newObject();
         try {
@@ -122,7 +122,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
-    @Authentication(requireSystem = true)
+    @Authentication
     public static Result editManager(int managerId) {
         ObjectNode result = Json.newObject();
         DynamicForm data = Form.form().bindFromRequest();
@@ -148,7 +148,7 @@ public class SystemController extends Controller {
         return ok(result);
     }
 
-    @Authentication(requireSystem = true)
+    @Authentication
     public static Result deleteManager(int managerId) {
         ObjectNode result = Json.newObject();
         try {
