@@ -47,3 +47,17 @@ this.save = ->
         reload = ->
           location.reload()
         setTimeout(reload, 1000)
+
+this.chooseImage = ->
+  oMyForm = new FormData()
+  oMyForm.append("image", $("#inputFile")[0].files[0])
+  $.ajax
+    url: "/public/upload/image"
+    data: oMyForm
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST'
+    success: (data) ->
+      if (!data['error'])
+        $("#inputImage").val(data['image'])
