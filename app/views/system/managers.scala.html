@@ -27,7 +27,7 @@
                     </span>
                     <h3>System Managers</h3>
                     <span class="button">
-                        <a href="javascript:" onclick="">
+                        <a href="javascript:" onclick="addManager()">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                             New Manager
                         </a>
@@ -54,6 +54,40 @@
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
+<script type="text/html" id="pop-up-add-manager">
+    <div class="widget">
+        <div class="title">
+            <span class="icon">
+                <span class="glyphicon glyphicon-cog"></span>
+            </span>
+            <h3>New Manager</h3>
+            <span class="button">
+                <a href="javascript:" onclick="closePopBox()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </span>
+            <span class="button">
+                <a href="javascript:" onclick="doAddManager()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Add
+                </a>
+            </span>
+        </div>
+        <div class="content">
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input class="form-control" id="inputUsername" placeholder="at least 3 character">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input class="form-control" id="inputPassword" placeholder="password">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
 <script type="text/html" id="pop-up-manager">
     <div class="widget">
         <div class="title">
@@ -68,7 +102,7 @@
                 </a>
             </span>
             <span class="button">
-                <a href="javascript:" onclick="closePopBox()">
+                <a href="javascript:" onclick="doEditManager(<%- managerId %>)">
                     <span class="glyphicon glyphicon-ok"></span>
                     Save
                 </a>
@@ -107,7 +141,6 @@
 <script src="/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/javascripts/underscore-min.js"></script>
 <script src="/assets/javascripts/common.js"></script>
-<script src="/assets/javascripts/main.js"></script>
 <script src="/assets/javascripts/system/managers.js"></script>
 </body>
 </html>

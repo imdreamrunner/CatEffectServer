@@ -41,7 +41,14 @@ public class Manager extends Model {
             throw new CatException(1, "Username must contain at least 3 characters.");
         }
         if (!checkUsername(newUsername)) {
-            throw new CatException(2, "Username has been taken.");
+            if (managerId == null) {
+                throw new CatException(2, "Username has been taken.");
+            } else {
+                Manager manager = Manager.find.where("username='" + newUsername + "'").findList().get(0);
+                if (manager.getManagerId() != managerId) {
+                    throw new CatException(2, "Username has been taken.");
+                }
+            }
         }
         username  = newUsername;
     }

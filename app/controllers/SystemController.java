@@ -1,11 +1,6 @@
 package controllers;
 
-import btu_models.Student;
-import models.Account;
-import models.Manager;
-import models.PrepaidCard;
-import models.Stall;
-import models.Transaction;
+import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -103,23 +98,26 @@ public class SystemController extends Controller {
             String username = data.get("username");
             String password = data.get("password");
             Integer type = null, stallId = null;
+            Manager newManager = new Manager();
             if (data.get("type") != null) {
                 type = Integer.parseInt(data.get("type"));
+                newManager.setType(type);
             }
             if (data.get("stallId") != null) {
                 stallId = Integer.parseInt(data.get("stallId"));
+                newManager.setStall(stallId);
             }
-            Manager newManager = new Manager();
             newManager.setUsername(username);
             newManager.setPassword(password);
-            newManager.setType(type);
-            newManager.setStall(stallId);
             newManager.save();
             result.put("error", 0);
             result.put("newManager", Json.toJson(newManager));
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());
+        }  catch (Exception e) {
+            result.put("error", 9001);
+            result.put("message", "Unknown error");
         }
         return ok(result);
     }
@@ -134,7 +132,11 @@ public class SystemController extends Controller {
                 throw new CatException(1001, "Manager not found.");
             }
             manager.setUsername(data.get("username"));
-            manager.setPassword(data.get("password"));
+            String password = data.get("password");
+            if (password != null && !password.equals("")) {
+                manager.setPassword(password);
+            }
+            manager.save();
             result.put("error", 0);
         } catch (CatException e) {
             result.put("error", e.getCode());
@@ -190,12 +192,6 @@ public class SystemController extends Controller {
         }
         result.put("error", 0);
         result.put("managers", Json.toJson(managerList));
-        return ok(result);
-    }
-
-    public static Result testStudent() {
-        ObjectNode result = Json.newObject();
-        result.put("students", Json.toJson(Student.find.all()));
         return ok(result);
     }
 
