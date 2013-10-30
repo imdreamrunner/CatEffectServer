@@ -43,4 +43,8 @@ public class Canteen extends Model {
     public void setSort(Integer newSort) {
         sort = newSort;
     }
+
+    public Integer getStallNumber() {
+        return stalls.size();
+    }
 }

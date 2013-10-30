@@ -3,9 +3,7 @@
 <head>
     <title>Menu</title>
     <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" media="screen">
-    <link href="/assets/stylesheets/stall/settings.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <h1>Settings</h1>
@@ -14,14 +12,58 @@
     <a href="/system/managers">System Managers</a>
 </div>
 <div id="contents">
-    <div id="category-list" class="row">
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="canteen-list" class="widget">
+                <div class="title">
+                    <span class="icon">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </span>
+                    <h3 id="canteen-name">Canteen List</h3>
+                    <span class="button">
+                        <a href="javascript:" onclick="newCanteen()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            New Canteen
+                        </a>
+                    </span>
+                </div>
+                <div class="content content-loader">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Number of Stalls</td>
+                            <td>Operation</td>
+                        </tr>
+                        </thead>
+                        <tbody id="canteens-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<script type="text/html" id="canteen-row">
+    <tr>
+        <td><%- canteenId %></td>
+        <td><%= name %></td>
+        <td><%- stallNumber %></td>
+        <td>
+            <a href="javascript:" onclick="editCanteen(<%= canteenId %>)">
+                <span class="glyphicon glyphicon-cog"></span>Edit
+            </a>
+            <a href="javascript:" onclick="deleteCanteen(<%= canteenId %>)">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </a>
+        </td>
+    </tr>
+</script>
 <div id="copyright">
     <p>&copy; 2013 CaMS@@BTU, powered by CatEffect</p>
     <p class="small">* Information displayed in this page is only for authorized administrators.</p>
 </div>
-
 <script src="/assets/javascripts/jquery-2.0.3.min.js"></script>
 <script src="/assets/javascripts/jquery-ui-1.10.3.custom.js"></script>
 <script src="/assets/javascripts/bootstrap.min.js"></script>
