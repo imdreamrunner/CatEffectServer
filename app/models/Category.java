@@ -19,9 +19,10 @@ public class Category extends Model {
     private Integer displayOption = 0;
     private Integer sort = 100000;
     @OneToMany(mappedBy = "category")
-    @Where(clause = "`deleted` is null or `deleted` < 1")
+    @Where(clause = "t1.`deleted` is null or t1.`deleted` < 1")
     @OrderBy("sort")
     private List<Dish> dishes;
+    private Boolean deleted;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -97,5 +98,13 @@ public class Category extends Model {
     	name = newName;
         setStall(newStallId);
         save();
+    }
+
+    public void setDeleted(boolean newDeleted) {
+        deleted = newDeleted;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
     }
 }

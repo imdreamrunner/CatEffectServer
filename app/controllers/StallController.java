@@ -143,7 +143,8 @@ public class StallController extends Controller {
             if (category.getDishes().size() != 0) {
                 throw new CatException(1001, "You must delete all dishes under the category.");
             }
-            category.delete();
+            category.setDeleted(true);
+            category.save();
         } catch (CatException e) {
             result.put("error", e.getCode());
             result.put("message", e.getMessage());

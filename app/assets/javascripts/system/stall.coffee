@@ -142,7 +142,7 @@ this.doEditManager = (managerId) ->
     success: (data) ->
       if (!data['error'])
         alert "Changes saved!"
-        location.reload()
+        location.re
       else
         alert data['message']
 

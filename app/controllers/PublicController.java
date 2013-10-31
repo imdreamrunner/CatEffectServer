@@ -49,7 +49,7 @@ public class PublicController extends Controller {
 
     public static Result getAllCategories(Integer stallId) {
         ObjectNode result = Json.newObject();
-        List<Category> categoryList = Category.find.where("stall_id="+stallId).order("sort").findList();
+        List<Category> categoryList = Category.find.where("stall_id="+stallId+" and (deleted is null or deleted < 1)").order("sort").findList();
         result.put("error", 0);
         result.put("categories", Json.toJson(categoryList));
         return ok(result);

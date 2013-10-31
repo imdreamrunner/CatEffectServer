@@ -21,7 +21,7 @@ public class Dish extends Model {
     private Integer sort = 100000;
     private Integer price = 0;
     private Integer promotionalPrice;
-    private Integer promotionStart, promotionEnd = 24*60 - 1;
+    private Integer promotionStart, promotionEnd;
     private String options;
     private Boolean deleted = false;
 
