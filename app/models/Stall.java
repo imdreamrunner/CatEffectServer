@@ -80,16 +80,28 @@ public class Stall extends Model {
         Integer numberOfStalls = find.where(String.format("name = '%s'", newStallName)).findRowCount();
         return (numberOfStalls == 0);
     }
-    public void setPrepaidDiscount(Integer pd) {
+    public void setPrepaidDiscount(Integer pd) throws CatException {
+        if (pd < 0 || pd > 100) {
+            throw new CatException(1001, "Discount out of range.");
+        }
         prepaidDiscount = pd;
     }
-    public void setStudentDiscount(Integer sd) {
+    public void setStudentDiscount(Integer sd) throws CatException {
+        if (sd < 0 || sd > 100) {
+            throw new CatException(1001, "Discount out of range.");
+        }
         studentDiscount = sd;
     }
-    public void setFacultyDiscount(Integer fd) {
+    public void setFacultyDiscount(Integer fd) throws CatException {
+        if (fd < 0 || fd > 100) {
+            throw new CatException(1001, "Discount out of range.");
+        }
         facultyDiscount = fd;
     }
-    public void setStaffDiscount(Integer sd) {
+    public void setStaffDiscount(Integer sd) throws CatException {
+        if (sd < 0 || sd > 100) {
+            throw new CatException(1001, "Discount out of range.");
+        }
         staffDiscount = sd;
     }
 }

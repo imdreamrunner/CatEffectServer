@@ -47,6 +47,8 @@ this.save = ->
         reload = ->
           location.reload()
         setTimeout(reload, 1000)
+      else
+        alert data['message']
 
 this.chooseImage = ->
   oMyForm = new FormData()
