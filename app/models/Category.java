@@ -22,7 +22,7 @@ public class Category extends Model {
     @Where(clause = "t1.`deleted` is null or t1.`deleted` < 1")
     @OrderBy("sort")
     private List<Dish> dishes;
-    private Boolean deleted;
+    private Boolean deleted = false;
 
     public Integer getCategoryId() {
         return categoryId;
