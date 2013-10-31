@@ -108,11 +108,25 @@
     </tr>
     <tr>
         <td>Promotion Start</td>
-        <td><%= promotionStart %></td>
+        <td><%
+            print(Math.floor(promotionStart/60));
+            print(":");
+            print(promotionStart%60<10?"0"+promotionStart%60:promotionStart%60);
+            %>
+        </td>
     </tr>
     <tr>
         <td>Promotion End</td>
-        <td><%= promotionEnd %></td>
+        <td>
+            <%
+            print(Math.floor(promotionEnd/60));
+            print(":");
+            print(promotionEnd%60<10?"0"+promotionEnd%60:promotionEnd%60);
+            if (promotionEnd < promotionStart) {
+                print(" (+1)");
+            }
+            %>
+        </td>
     </tr>
     <tr>
         <td>Options</td>
@@ -178,6 +192,7 @@
                 <option value="<%- i %>"><%- i %></option>
                 <% } %>
             </select>
+            <p>If the end time is before the start time, the system will treat the end time as in the next day.</p>
         </div>
     </div>
     <div class="form-group hidden">
