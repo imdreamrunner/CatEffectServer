@@ -52,27 +52,31 @@ public class Order extends Model {
     public String getAccountString() {
         if (account == null) return null;
         String id;
-        switch (account.getType()) {
-            case 0:
-                return "Prepaid Card " + account.getPrepaidCard().getPrepaidCardId().toString();
-            case 1:
-                id = account.getStudent().getCardId();
-                if (id.length() > 4) {
-                    id = id.substring(id.length() - 4);
-                }
-                return "Student " + id;
-            case 2:
-                id = account.getFaculty().getCardId();
-                if (id.length() > 4) {
-                    id = id.substring(id.length() - 4);
-                }
-                return "Faculty " + id;
-            case 3:
-                id = account.getStaff().getCardId();
-                if (id.length() > 4) {
-                    id = id.substring(id.length() - 4);
-                }
-                return "Staff" + id;
+        try {
+            switch (account.getType()) {
+                case 0:
+                    return "Prepaid Card " + account.getPrepaidCard().getPrepaidCardId().toString();
+                case 1:
+                    id = account.getStudent().getCardId();
+                    if (id.length() > 4) {
+                        id = id.substring(id.length() - 4);
+                    }
+                    return "Student " + id;
+                case 2:
+                    id = account.getFaculty().getCardId();
+                    if (id.length() > 4) {
+                        id = id.substring(id.length() - 4);
+                    }
+                    return "Faculty " + id;
+                case 3:
+                    id = account.getStaff().getCardId();
+                    if (id.length() > 4) {
+                        id = id.substring(id.length() - 4);
+                    }
+                    return "Staff" + id;
+            }
+        } catch (Exception ex) {
+            return "Deleted Account";
         }
         return null;
     }
