@@ -94,12 +94,12 @@
     </tr>
     <tr>
         <td>Price</td>
-        <td><%= price %></td>
+        <td><%= displayMoney(price) %></td>
     </tr>
     <tr>
         <td>Promotional Price</td>
         <td>
-            <%= promotionalPrice %>
+            <%= displayMoney(promotionalPrice) %>
             <span>
                 <% if (promotionActivated) print("(Promotion Activated!)");
                    else print("(Promotion Not Activated.)"); %>
