@@ -90,11 +90,13 @@ public class Category extends Model {
     	}
 
     	//check is this stall already has this category name
-    	//stallID && categoryName
+    	//stallID && categoryNam
+        /*
     	Boolean nonDuplicate = (find.where(String.format("stall_id = '%d' && name = '%s'", newStallId,newName)).findRowCount() == 0);
     	if (!nonDuplicate) {
     		throw new CatException(5003, "the stall already has this category");
     	}
+    	*/
     	name = newName;
         setStall(newStallId);
         save();
