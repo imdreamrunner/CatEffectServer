@@ -4,6 +4,7 @@ import btu_models.Faculty;
 import btu_models.Staff;
 import btu_models.Student;
 import play.db.ebean.Model;
+import utils.CatException;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -42,7 +43,10 @@ public class Account extends Model {
         return type;
     }
 
-    public void setType(Integer t) {
+    public void setType(Integer t) throws CatException {
+        if (t < 0 || t > 3) {
+            throw new CatException(2001, "Type out of range");
+        }
         type = t;
     }
 
@@ -93,9 +97,14 @@ public class Account extends Model {
         List<Account> accounts = find.where("type = " + type + " and relevant_id = " + relevantId).findList();
         if (accounts.size() < 1) {
             Account newAccount = new Account();
-            newAccount.setType(type);
-            newAccount.setRelevantId(relevantId);
-            newAccount.save();
+            try {
+                newAccount.setType(type);
+                newAccount.setRelevantId(relevantId);
+            } catch (CatException ignored) {
+
+            } finally {
+                newAccount.save();
+            }
             return newAccount;
         } else {
             return accounts.get(0);
