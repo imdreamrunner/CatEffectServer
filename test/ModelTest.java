@@ -1,4 +1,5 @@
-import models.Account;
+import models.*;
+import org.junit.Assert;
 import org.junit.Test;
 import utils.CatException;
 
@@ -38,5 +39,59 @@ public class ModelTest {
             fail("Invalid type.");
         } catch (CatException e) {
         }
+    }
+
+    @Test
+    public void canteen() {
+        Canteen canteen = new Canteen();
+        assertNotNull(canteen);
+    }
+
+    @Test
+    public void category() {
+        assertNotNull(Category.class);
+    }
+
+    @Test
+    public void dish() {
+        assertNotNull(Dish.class);
+        Dish dish = new Dish();
+        Assert.assertNotNull(dish);
+    }
+
+    @Test
+    public void manager() {
+        Manager manager = new Manager();
+        assertNotNull(manager);
+    }
+
+    @Test
+    public void order() {
+        Order order = new Order();
+        Assert.assertNotNull(order);
+    }
+
+    @Test
+    public void orderItem() {
+        OrderItem orderItem = new OrderItem();
+        Assert.assertNotNull(orderItem);
+    }
+
+    @Test
+    public void prepaidCard() throws CatException {
+        PrepaidCard prepaidCard = new PrepaidCard();
+        Assert.assertNotNull(prepaidCard);
+    }
+
+    @Test
+    public void stall() {
+        Stall stall = new Stall();
+        assertNotNull(stall);
+    }
+
+    @Test
+    public void transaction() {
+        Transaction transaction = new Transaction();
+        assertNotNull(transaction);
     }
 }
