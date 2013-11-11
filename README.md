@@ -10,6 +10,7 @@ app                 → Application sources
  └ btu_models       → Models in university database
  └ views            → Views typically in html files with scala
  └ controllers      → controllers
+test                → test cases
 ```
 
 
